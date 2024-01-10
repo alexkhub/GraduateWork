@@ -18,7 +18,7 @@ class Users(AbstractUser):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return self.username
+        return f"{self.first_name} {self.last_name}"
 
 
 class Group(models.Model):
@@ -49,16 +49,16 @@ class Subject(models.Model):
 
 
 class Lecturer(models.Model):
-    user = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='пользователь')
-    groups = SortedManyToManyField('Group', verbose_name='группы', blank=True)
-    subjects = SortedManyToManyField('Subject', verbose_name='предметы', blank=True)
+    user = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Пользователь')
+    groups = SortedManyToManyField('Group', verbose_name='Группы', blank=True)
+    subjects = SortedManyToManyField('Subject', verbose_name='Предметы', blank=True)
 
     class Meta:
         verbose_name = 'Преподаватель'
         verbose_name_plural = 'Преподаватели'
 
     def __str__(self):
-        return self.user
+        return str(self.user)
 
 
 class MeasurableTypesControl(models.Model):
