@@ -1,7 +1,7 @@
 import React from "react";
 import * as ReactDomClient from 'react-dom/client';
 import App from "./App";
-import './style.css';
+import './main.css';
 
 const app = ReactDomClient.createRoot(document.getElementById('app'));
 

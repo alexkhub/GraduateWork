@@ -5,13 +5,19 @@ class Header extends React.Component {
     render() {
         return (
             <header>
-                <p>{this.props.pageTitle}</p>
+                <a href="profile.html" class="logo">
+                    <i class="fas fa-book"></i>
+                    <p>Homework Manager</p>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="tasks.html">Задания</a></li>
+                        <li><a href="registration.html">Регистрация</a></li>
+                        <li><a href="">Выйти</a></li>
+                    </ul>
+                </nav>
             </header>
         )
-    }
-
-    inputClick() {
-        console.log('Clicked');
     }
 }
 
