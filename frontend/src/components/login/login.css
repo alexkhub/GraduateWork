@@ -27,9 +27,9 @@ form input {
     transition: .3s ease background-color, .7s ease transform;
 }
 
-form input, form button {
+/* form input, form button {
     transform: scale(0.001);
-}
+} */
 
 form input:hover {
     background-color: rgba(255, 255, 255, 0.5);

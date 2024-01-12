@@ -5,15 +5,15 @@ class Header extends React.Component {
     render() {
         return (
             <header>
-                <a href="profile.html" class="logo">
-                    <i class="fas fa-book"></i>
+                <button className="logo link-button">
+                    <i className="fas fa-book"></i>
                     <p>Homework Manager</p>
-                </a>
+                </button>
                 <nav>
                     <ul>
-                        <li><a href="tasks.html">Задания</a></li>
-                        <li><a href="registration.html">Регистрация</a></li>
-                        <li><a href="">Выйти</a></li>
+                        <li><button className="link-button">Задания</button></li>
+                        <li><button className="link-button">Регистрация</button></li>
+                        <li><button className="link-button">Выйти</button></li>
                     </ul>
                 </nav>
             </header>

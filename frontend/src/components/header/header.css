@@ -28,10 +28,12 @@ header ul li {
     list-style: none;
 }
 
-header ul li a {
+header ul li button {
+    padding: 5px 10px;
+    border-radius: 20px;
     transition: .3s ease color;
 }
 
-header ul li a:hover {
+header ul li button:hover {
     color: rgba(255, 255, 255, 0.5);
 }

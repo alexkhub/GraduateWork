@@ -5,9 +5,7 @@ import Login from "./components/login/login";
 function App() {
   return (
     <div>
-      <Header
-        pageTitle = "Electron"
-      />
+      <Header/>
       <Login />
     </div>
   )

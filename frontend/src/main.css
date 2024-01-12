@@ -16,3 +16,11 @@ a {
     background-color: #003425;
     height: calc(100vh - 57.6px);
 }
+
+.link-button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    color: white;
+}

@@ -4,23 +4,23 @@ import './login.css';
 class Login extends React.Component {
     render() {
         return (
-            <div class="content">
-                <form action="">
-                    <div class="login-title-container">
-                        <p class="login-title">Авторизация</p>
-                        <div class="login-title-line"></div>
+            <div className="content">
+                <form>
+                     <div className="login-title-container">
+                        <p className="login-title">Авторизация</p>
+                        <div className="login-title-line"></div>
                     </div>
-                    <div class="form-content">
+                    <div className="form-content">
                         <div>
-                            <input type="email" name="" id="login-input" placeholder="Логин" />
+                            <input type="email" id="login-input" placeholder="Логин" />
                         </div>
                         <div>
-                            <input type="password" name="" id="login-password" placeholder="Пароль" />
+                            <input type="password" id="login-password" placeholder="Пароль" />
                         </div>
                         <button>Войти</button>
-                        <div class="login-links">
-                            <a href="">Сбросить пароль</a>
-                            <a href="">Регистрация</a>
+                        <div className="login-links">
+                            <button className="link-button">Сбросить пароль</button>
+                            <button className="link-button">Регистрация</button>
                         </div>
                     </div>
                 </form>
