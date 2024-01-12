@@ -1,22 +1,23 @@
 import React from "react";
 import './header.css';
+import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
     render() {
         return (
-            <header>
-                <button className="logo link-button">
-                    <i className="fas fa-book"></i>
-                    <p>Homework Manager</p>
-                </button>
-                <nav>
-                    <ul>
-                        <li><button className="link-button">Задания</button></li>
-                        <li><button className="link-button">Регистрация</button></li>
-                        <li><button className="link-button">Выйти</button></li>
-                    </ul>
-                </nav>
-            </header>
+                <header>
+                    <Link to="/login" className="logo link-button">
+                        <i className="fas fa-book"></i>
+                        <p>Homework Manager</p>
+                    </Link>
+                    <nav>
+                        <ul>
+                            <li><Link to="/" className="link-button">Задания</Link></li>
+                            <li><Link to="/registration" className="link-button">Регистрация</Link></li>
+                            <li><Link to="/" className="link-button">Выйти</Link></li>
+                        </ul>
+                    </nav>
+                </header>
         )
     }
 }

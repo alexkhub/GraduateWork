@@ -1,47 +1,67 @@
-form {
+.registration-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #003425;
+    height: calc(100vh - 57.6px);
+}
+
+.registration-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 600px;
-    height: 400px;
+    height: 300px;
     border-radius: 30px;
-    padding: 0 0 40px 0;
+    padding: 0 0 200px 0;
     background: rgba(170, 170, 170, 0.10);
     box-shadow: 0px 0px 100px 2px rgba(0, 0, 0, 0.50);
 }
 
-form input {
+.registration-form input {
     padding: 15px 20px;
     background-color: white;
     border-radius: 15px;
     outline: none;
     border: none;
     color: black;
-
-    transition: .3s ease background-color;
+    margin-left: 10px;
 }
 
-.login-links button {
-    transition: .3s ease background-color;
+.registration-form-content {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    height: 200px;
 }
 
-form input:hover {
+.registration-login-links {
+    position: absolute;
+    top: 115%;
+}
+
+.registration-form-content button {
+    top: 95%;
+    position: absolute;
+}
+
+.registration-form input:hover {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-form input::placeholder {
+.registration-form input::placeholder {
     transition: .3s ease transform;
 }
 
-form input:focus::placeholder {
+.registration-form input:focus::placeholder {
     transform: translateY(-200%);
 }
 
-.login-title {
+.registration-title {
     font-size: 46px;
 }
 
-.form-content {
+.registration-form-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -50,7 +70,7 @@ form input:focus::placeholder {
     height: 100%;
 }
 
-.login-title-container {
+.registration-title-container {
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     padding: 25px 0;
@@ -60,7 +80,7 @@ form input:focus::placeholder {
     position: relative;
 }
 
-.login-title-line {
+.registration-title-line {
     position: absolute;
     height: 2px;
     width: 95%;
@@ -70,7 +90,7 @@ form input:focus::placeholder {
     background-color: white;
 }
 
-form button {
+.registration-links button {
     border-radius: 12px;
     border: none;
     outline: none;
@@ -80,27 +100,28 @@ form button {
     padding: 7px 15px;
     font-size: 14px;
     margin-top: 10px;
-    background-color: #D9D9D9;
-    color: #0C654C;
     font-weight: bold;
+    white-space: nowrap;
     font-size: 16px;
     cursor: pointer;
 
-    transition: .3s ease background-color, 1s ease transform;
+    transition: .3s ease background-color;
 }
 
-form button:hover, .login-links a:hover {
+.registration-form button:hover, .registration-links a:hover {
     background-color: #d9d9d982;
 }
 
-.login-links {
+.registration-links {
+    margin-top: 40px;
     display: flex;
     column-gap: 20px;
     justify-content: center;
     align-items: center;
+    width: 400px;
 }
 
-.login-links a {
+.registration-links a {
     border-radius: 10px;
     padding: 7px 15px;
     transition: .3s ease background-color;

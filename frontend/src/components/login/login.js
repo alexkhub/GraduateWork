@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import './login.css';
 
 class Login extends React.Component {
@@ -6,7 +7,7 @@ class Login extends React.Component {
         return (
             <div className="content">
                 <form>
-                     <div className="login-title-container">
+                    <div className="login-title-container">
                         <p className="login-title">Авторизация</p>
                         <div className="login-title-line"></div>
                     </div>
@@ -19,8 +20,8 @@ class Login extends React.Component {
                         </div>
                         <button>Войти</button>
                         <div className="login-links">
-                            <button type="button" className="link-button">Сбросить пароль</button>
-                            <button className="link-button">Регистрация</button>
+                            <Link to="/" type="button" className="link-button">Сбросить пароль</Link>
+                            <Link to="/registration" className="link-button">Регистрация</Link>
                         </div>
                     </div>
                 </form>
