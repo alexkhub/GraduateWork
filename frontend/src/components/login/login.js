@@ -19,7 +19,7 @@ class Login extends React.Component {
                         </div>
                         <button>Войти</button>
                         <div className="login-links">
-                            <button className="link-button">Сбросить пароль</button>
+                            <button type="button" className="link-button">Сбросить пароль</button>
                             <button className="link-button">Регистрация</button>
                         </div>
                     </div>
