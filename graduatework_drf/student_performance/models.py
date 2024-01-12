@@ -95,18 +95,5 @@ class OtherMeasurableTypesControl(models.Model):
         return f"{self.student}-{self.subject}-{self.date}"
 
 
-class Exam(models.Model):
-    group = models.ForeignKey('Group', on_delete=models.CASCADE, verbose_name='Группа')
-    subject = models.ForeignKey('Subject', on_delete=models.CASCADE, verbose_name='Дисциплина')
-    lecturer = models.ForeignKey('Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель')
-    start_date = models.DateTimeField(verbose_name='Начало экзамена')
-    end_date = models.DateTimeField(verbose_name='Конец экзамена')
-    classroom = models.CharField(max_length=10, verbose_name='Аудитория', blank=True, null=True)
 
-    class Meta:
-        verbose_name = 'Экзамен'
-        verbose_name_plural = 'Экзамены'
-
-    def __str__(self):
-        return f"Экз {self.subject}-{self.group}"
 
