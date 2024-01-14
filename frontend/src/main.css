@@ -13,7 +13,6 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #003425;
     height: calc(100vh - 57.6px);
 }
 
@@ -23,4 +22,8 @@ a {
     outline: none;
     cursor: pointer;
     color: white;
+}
+
+#app {
+    background-color: #006045;
 }

@@ -3,8 +3,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #114032;
-    box-shadow: 0px 4px 10px 2px rgb(240, 0, 0);
+    background: rgba(170, 170, 170, 0.10);
 }
 
 .logo {
