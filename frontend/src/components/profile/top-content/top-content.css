@@ -134,6 +134,7 @@
 }
 
 .task-done {
+    top: 0;
     color: #00DA23;
 }
 

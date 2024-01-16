@@ -5,6 +5,7 @@ import Header from './components/header/header';
 import Login from "./components/login/login";
 import Registration from "./components/registration/registration";
 import Profile from "./components/profile/profile";
+import Tasks from "./components/tasks/tasks";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/registration" element={<Registration />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/tasks" element={<Tasks />} />
           <Route path="/" element={<Login />} />
         </Routes>
       </BrowserRouter>
