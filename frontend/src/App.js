@@ -7,6 +7,7 @@ import Registration from "./components/registration/registration";
 import Profile from "./components/profile/profile";
 import Tasks from "./components/tasks/tasks";
 import AccountVerified from "./components/account-verified/account-verified";
+import NotFound from "./components/not-found/not-found";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/account-verified" element={<AccountVerified />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
