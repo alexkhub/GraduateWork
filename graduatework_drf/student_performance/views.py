@@ -13,7 +13,7 @@ class StudentPerformance(ListAPIView):
     queryset = MeasurableTypesControl.objects.all()
     serializer_class = MeasurableTypesControlSerializer
     authentication_classes = (JWTAuthentication,)
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
 
