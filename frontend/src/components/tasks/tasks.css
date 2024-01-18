@@ -14,7 +14,7 @@
     background: rgba(170, 170, 170, 0.10);
     color: white;
     font-size: 18px;
-    padding: 20px 35px;
+    padding: 30px 25px;
     box-sizing: content-box;
     
     transition: .3s ease box-shadow, .3s ease height;
@@ -48,6 +48,13 @@
     top: 110px;
     transform: translateY(-50%);
     cursor: pointer;
+    padding: 13px;
+    background-color: rgba(12, 101, 76, 0.50);
+    border-radius: 10px;
+    background: rgba(170, 170, 170, 0.10);
+    color: white;
+    outline: none;
+    border: none;
 }
 
 .expand i {
@@ -57,13 +64,6 @@
 .expand-task-opened {
     transform: rotate(-90deg);
     transition: .3s ease transform;
-}
-
-.task div i {
-    padding: 13px;
-    background-color: rgba(12, 101, 76, 0.50);
-    border-radius: 10px;
-    background: rgba(170, 170, 170, 0.10);
 }
 
 .task-description p {

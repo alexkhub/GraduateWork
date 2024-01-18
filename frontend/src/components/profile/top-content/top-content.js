@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import './top-content.css';
+import TaskItem from './last-week-task-item/last-week-task-item';
 
 function ProfileTopContent() {
     return (
@@ -16,24 +16,18 @@ function ProfileTopContent() {
                 <div className="last-weeks-tasks">
                     <p className="last-weeks-tasks-title">Последние задания</p>
                     <div className="last-weeks-tasks-content">
-                        <Link to="/" className="last-weeks-tasks-item">
-                            <p className="last-weeks-tasks-item__teacher">Гагиева В. Л.</p>
-                            <div>
-                                <p className="last-weeks-tasks-item__subject">ПМ 01</p>
-                                <p className="last-weeks-tasks-item__status task-done">Сдано</p>
-                            </div>
-                        </Link>
-                        <Link to="/" className="last-weeks-tasks-item">
-                            <p className="last-weeks-tasks-item__teacher">Гагиева В. Л.</p>
-                            <div>
-                                <p className="last-weeks-tasks-item__subject">ПМ 01</p>
-                                <p className="last-weeks-tasks-item__status task-failed">Просрочено</p>
-                            </div>
-                        </Link>
-                        <Link to="/" className="last-weeks-tasks-item"></Link>
-                        <Link to="/" className="last-weeks-tasks-item"></Link>
-                        <Link to="/" className="last-weeks-tasks-item"></Link>
-                        <Link to="/" className="last-weeks-tasks-item"></Link>
+                        
+                        <TaskItem 
+                            teacherName = 'Гагиева В.Л.'
+                            subjectName = 'ПМ 01'
+                            taskStatus = 'Сдано'
+                        />
+                        <TaskItem 
+                            teacherName = 'Гагиева В.Л.'
+                            subjectName = 'ПМ 01'
+                            taskStatus = 'Просрочено'
+                        />
+        
                     </div>
                 </div>
             </div>
