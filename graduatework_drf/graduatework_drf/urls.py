@@ -25,6 +25,7 @@ urlpatterns = [
     # path('api-auth/', include('rest_framework.urls')),
     path('auth/', include('djoser.urls')),
     re_path('auth/', include('djoser.urls.jwt')),
+    path("__debug__/", include("debug_toolbar.urls")),
     path('', include('student_performance.urls'))
 
 ]
