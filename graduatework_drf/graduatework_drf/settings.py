@@ -13,10 +13,15 @@ import os
 from datetime import timedelta
 from pathlib import Path
 from .juzmin import JAZZMIN_SETTINGS
+import mimetypes
 
+mimetypes.add_type("application/javascript", ".js", True)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
+}
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -39,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    "debug_toolbar",
     'djoser',
     # 'rest_framework.authtoken',
     'corsheaders',
@@ -50,6 +56,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
@@ -58,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 
 ]
 
@@ -86,12 +94,17 @@ REST_FRAMEWORK = {
     ),
     # 'DEFAULT_PERMISSION_CLASSES': (
     #     'rest_framework.permissions.IsAuthenticated',
-    #     # 'rest_framework.permissions.AllowAny', # Up to you to decide, depends on your project. Both IsAuthenticated and AllowAny work fine
+
     # )
 }
 REST_USE_JWT = True
 
-
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    "localhost",
+    # ...
+]
 
 
 SIMPLE_JWT = {
@@ -205,3 +218,13 @@ AUTH_USER_MODEL = 'student_performance.Users'
 
 # расширение админки
 JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+
+
+# подключение почты
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'aleksandrkhubaevwork@gmail.com'
+EMAIL_HOST_PASSWORD = 'qdfgbwcyublqpler'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
