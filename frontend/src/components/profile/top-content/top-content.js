@@ -2,6 +2,7 @@ import './top-content.css';
 import TaskItem from './last-week-task-item/last-week-task-item';
 
 function ProfileTopContent() {
+
     return (
             <div className="top-content">
                 <div className="student-info">
