@@ -1,5 +1,5 @@
 import Pair from "../daily-schedule/pair/pair";
-import DoublePair from "../daily-schedule/secondPair/secondPair";
+import DoublePair from "./doublePair/doublePair";
 
 
 function DailySchedule() {
