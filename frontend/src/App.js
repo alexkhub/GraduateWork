@@ -6,9 +6,9 @@ import Login from "./components/login/login";
 import Registration from "./components/registration/registration";
 import Profile from "./components/profile/profile";
 import Tasks from "./components/tasks/tasks";
-import AccountVerified from "./components/account-verified/account-verified";
+import AccountVerified from "./components/accountVerified/accountVerified";
 import Schedule from "./components/schedule/schedule";
-import NotFound from "./components/not-found/not-found";
+import NotFound from "./components/notFound/notFound";
 
 function App() {
   return (
