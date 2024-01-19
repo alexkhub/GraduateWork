@@ -7,6 +7,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .models import *
 from .serializers import *
+from django.db.models import Q, Prefetch
 
 
 class StudentPerformance(ListAPIView):
