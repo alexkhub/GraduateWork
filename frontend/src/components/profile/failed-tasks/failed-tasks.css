@@ -59,12 +59,13 @@
 }
 
 .failed-tasks-item {
-    transition: .3s ease transform, .3s ease box-shadow;
+    transition: .3s ease transform, .3s ease box-shadow, .3s ease background-color;
 }
 
 .failed-tasks-item:hover {
     transform: scale(1.03);
     box-shadow: 0px 4px 20px 2px rgba(0, 0, 0, 0.25);
+    background-color: #006e51;
 }
 
 .failed-tasks-item .task-data {
