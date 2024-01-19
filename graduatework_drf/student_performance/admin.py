@@ -30,27 +30,35 @@ class LecturerAdmin(admin.ModelAdmin):
 
 
 class MeasurableTypesControlAdmin(admin.ModelAdmin):
-    list_display = ('student', 'subject', 'lecturer', 'cause', 'points', 'date')
-    list_display_links = ('student', 'subject', 'lecturer')
+    list_display = ('id', 'student', 'subject', 'lecturer', 'cause', 'points', 'date')
+    list_display_links = ('id', 'student', 'subject', 'lecturer')
     search_fields = ('student__username', 'subject__subject_name', 'lecturer__user')
     list_filter = ('subject__subject_name', 'lecturer__user', 'points', 'date')
     list_editable = ('points',)
 
 
 class OtherMeasurableTypesControlAdmin(admin.ModelAdmin):
-    list_display = ('student', 'subject', 'lecturer', 'cause', 'points', 'date')
-    list_display_links = ('student', 'subject', 'lecturer')
+    list_display = ('id', 'student', 'subject', 'lecturer', 'cause', 'points', 'date')
+    list_display_links = ('id', 'student', 'subject', 'lecturer')
     search_fields = ('student', 'subject', 'lecturer')
     list_filter = ('student', 'subject', 'lecturer', 'points', 'date')
     list_editable = ('points',)
 
 
 class ExamAdmin(admin.ModelAdmin):
-    list_display = ('group', 'subject', 'lecturer', 'start_date', 'end_date', 'classroom')
-    list_display_links = ('group', 'subject', 'lecturer')
+    list_display = ('id', 'group', 'subject', 'lecturer', 'start_date', 'end_date', 'classroom')
+    list_display_links = ('id', 'group', 'subject', 'lecturer')
     search_fields = ('group', 'subject__subject_name', 'lecturer__user')
     list_filter = ('group', 'subject__subject_name', 'lecturer__user', 'start_date', 'classroom')
     list_editable = ('start_date', 'end_date', 'classroom')
+
+
+class Exam_GradesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'exam', 'points')
+
+
+class Overall_PerformanceAdmin(admin.ModelAdmin):
+    list_display = ('id', 'student', 'subject', 'exam_grades', 'overall_points')
 
 
 admin.site.register(Users, UsersAdmin)
@@ -59,3 +67,5 @@ admin.site.register(Subject, SubjectAdmin)
 admin.site.register(Lecturer, LecturerAdmin)
 admin.site.register(MeasurableTypesControl, MeasurableTypesControlAdmin)
 admin.site.register(OtherMeasurableTypesControl, OtherMeasurableTypesControlAdmin)
+admin.site.register(Exam_Grades, Exam_GradesAdmin)
+admin.site.register(Overall_Performance, Overall_PerformanceAdmin)

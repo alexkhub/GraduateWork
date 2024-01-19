@@ -95,5 +95,25 @@ class OtherMeasurableTypesControl(models.Model):
         return f"{self.student}-{self.subject}-{self.date}"
 
 
+class Exam_Grades(models.Model):
+    user = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Студент')
+    exam = models.ForeignKey('timetable.Exam', on_delete=models.PROTECT, verbose_name='Экзамен')
+    points = models.PositiveIntegerField(verbose_name='Баллы', default=0)
+
+    class Meta:
+        verbose_name = 'Баллы за экзамены'
+        verbose_name_plural = 'Баллы за экзамены'
 
 
+class Overall_Performance(models.Model):
+    student = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Студент')
+    subject = models.ForeignKey('Subject', on_delete=models.PROTECT, verbose_name='Предмет')
+    measurable_types_control = SortedManyToManyField('MeasurableTypesControl', verbose_name='Измеримые виды контроля')
+    other_measurable_types_control = SortedManyToManyField('OtherMeasurableTypesControl',
+                                                           verbose_name='Иные измеримые виды контроля')
+    exam_grades = models.ForeignKey('Exam_Grades', on_delete=models.CASCADE, verbose_name='Экзамен')
+    overall_points = models.PositiveIntegerField(verbose_name='Общее число баллов', default=0)
+
+    class Meta:
+        verbose_name = 'Общая успеваемость'
+        verbose_name_plural = 'Общая успеваемость'
