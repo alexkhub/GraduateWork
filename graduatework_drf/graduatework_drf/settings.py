@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     "debug_toolbar",
     'djoser',
+    'django_filters',
     # 'rest_framework.authtoken',
     'corsheaders',
     'sortedm2m',
@@ -79,23 +80,23 @@ CORS_ORIGIN_ALLOW_ALL = True
 # настройка djoser
 
 DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': '/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {},
 }
 
 # настройка drf
 REST_FRAMEWORK = {
-'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',  # OAuth2, JWT
     ),
     # 'DEFAULT_PERMISSION_CLASSES': (
     #     'rest_framework.permissions.IsAuthenticated',
-
     # )
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 REST_USE_JWT = True
 
@@ -105,7 +106,6 @@ INTERNAL_IPS = [
     "localhost",
     # ...
 ]
-
 
 SIMPLE_JWT = {
     # Устанавливаем срок жизни токена
@@ -127,7 +127,7 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': (
         'rest_framework_simplejwt.tokens.AccessToken',
         # 'SocialDjango.token.CustomJWTToken'
-        ),
+    ),
     'TOKEN_TYPE_CLAIM': 'token_type',
 
     'JTI_CLAIM': 'jti',
@@ -136,6 +136,16 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+#хэширование паролей
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+
+]
 
 
 
@@ -219,7 +229,6 @@ AUTH_USER_MODEL = 'student_performance.Users'
 # расширение админки
 JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 
-
 # подключение почты
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
@@ -227,4 +236,3 @@ EMAIL_HOST_USER = 'aleksandrkhubaevwork@gmail.com'
 EMAIL_HOST_PASSWORD = 'qdfgbwcyublqpler'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
