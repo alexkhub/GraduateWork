@@ -1,5 +1,5 @@
 import Pair from "../pair/pair";
-import DoublePair from "../doublePair/doublePair";
+// import DoublePair from "../doublePair/doublePair";
 
 
 function DailySchedule(props) {

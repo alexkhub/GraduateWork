@@ -6,7 +6,6 @@ function Task(props) {
     const [taskClassName, setTaskClassName] = useState(true);
     const [taskStatus] = useState(props.taskStatus);
 
-
     function openTaskHandler() {
         setTaskClassName(!taskClassName);
     }

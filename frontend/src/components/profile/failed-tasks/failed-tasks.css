@@ -25,7 +25,6 @@
     display: flex;
     column-gap: 30px;
     margin-top: 10px;
-    left: 20px;
 
     transition: .3s ease left;
 }
