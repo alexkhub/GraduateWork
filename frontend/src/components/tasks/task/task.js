@@ -14,7 +14,7 @@ function Task(props) {
     return (
         <div className={taskClassName ? 'task task-close' : 'task'}>
             <p className="teacher-name">{props.teacherName}</p>
-            <p className="subject">{props.subjectName}</p>
+            <p className="subject-name">{props.subjectName}</p>
             <p className="task-name">{props.taskName}</p>
             {/* Дата, когда задание загружено */}
             <p className="task-date">{props.taskDate}</p>

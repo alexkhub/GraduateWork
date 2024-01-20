@@ -22,7 +22,8 @@ function App() {
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/account-verified" element={<AccountVerified />} />
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/" element={<NotFound />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="/" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
