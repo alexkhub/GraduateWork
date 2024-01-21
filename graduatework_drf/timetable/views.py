@@ -16,3 +16,17 @@ class TimetableListView(ListAPIView):
     )
     serializer_class = TimetableSerializer
     permission_classes = (AllowAny,)
+
+
+
+class ExamListView(ListAPIView):
+    queryset = Exam.objects.all().prefetch_related(
+        Prefetch('subject', queryset=Subject.objects.all()),
+        Prefetch('group', queryset=Group.objects.all()),
+        Prefetch('lecturer', queryset=Lecturer.objects.all())
+    )
+    serializer_class = ExamSerializer
+
+    def get_queryset(self):
+        self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
+        return self.queryset

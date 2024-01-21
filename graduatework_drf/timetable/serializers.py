@@ -16,8 +16,10 @@ class TimetableSerializer(serializers.ModelSerializer):
 
 
 class ExamSerializer(serializers.ModelSerializer):
+    group = serializers.SlugRelatedField('name', read_only=True)
+    subject = serializers.SlugRelatedField(slug_field='subject_name', read_only=True)
+    lecturer = LecturerInformationSerializer(read_only=True)
+
     class Meta:
         model = Exam
-        fields = (
-            'id', 'group', 'subject', 'lecturer',
-        )
+        fields = ('id', 'group', 'subject', 'lecturer', 'start_time', 'end_time', 'date', 'classroom')
