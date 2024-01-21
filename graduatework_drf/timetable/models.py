@@ -10,8 +10,9 @@ class Exam(models.Model):
                                 related_name='exam_subject')
     lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель',
                                  related_name='exam_lecturer')
-    start_date = models.DateTimeField(verbose_name='Начало экзамена')
-    end_date = models.DateTimeField(verbose_name='Конец экзамена')
+    start_time = models.TimeField(verbose_name='Начало экзамена')
+    end_time = models.TimeField(verbose_name='Конец экзамена')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
     classroom = models.CharField(max_length=10, verbose_name='Аудитория', blank=True, null=True)
 
     class Meta:
@@ -33,7 +34,7 @@ class TimetableOfClasses(models.Model):
     lesson_number = models.PositiveIntegerField(verbose_name='Номер пары', default=1)
     start_time = models.TimeField(verbose_name='Начало пары')
     end_time = models.TimeField(verbose_name='Конец пары')
-    evenness = models.CharField(max_length=10 ,verbose_name='Четность недели', default='обе')
+    evenness = models.CharField(max_length=10, verbose_name='Четность недели', default='обе')
     day_of_the_week = models.CharField(max_length=15, verbose_name='День недели', )
     classroom = models.CharField(max_length=10, verbose_name='Аудитория', blank=True, null=True)
 
