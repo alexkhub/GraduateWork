@@ -13,7 +13,7 @@ function Header() {
                     <li><Link to="/tasks" className="link-button">Задания</Link></li>
                     <li><Link to="/registration" className="link-button">Регистрация</Link></li>
                     <li><Link to="/schedule" className="link-button">Расписание</Link></li>
-                    <li><Link to="/" className="link-button">Выйти</Link></li>
+                    <li><Link to="/login" className="link-button">Выйти</Link></li>
                 </ul>
             </nav>
         </header>
