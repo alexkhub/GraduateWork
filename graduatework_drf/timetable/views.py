@@ -18,7 +18,6 @@ class TimetableListView(ListAPIView):
     permission_classes = (AllowAny,)
 
 
-
 class ExamListView(ListAPIView):
     queryset = Exam.objects.all().prefetch_related(
         Prefetch('subject', queryset=Subject.objects.all()),

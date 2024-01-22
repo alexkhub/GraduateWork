@@ -27,7 +27,8 @@ urlpatterns = [
     re_path('auth/', include('djoser.urls.jwt')),
     path("__debug__/", include("debug_toolbar.urls")),
     path('api-student_performance/', include('student_performance.urls')),
-    path('api-timetable/' , include('timetable.urls'))
+    path('api-timetable/', include('timetable.urls')),
+    path('api-student_work/', include('student_work.urls'))
 
 ]
 
