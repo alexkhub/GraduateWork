@@ -18,7 +18,7 @@ class Users(AbstractUser):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.username}"
 
 
 class Group(models.Model):

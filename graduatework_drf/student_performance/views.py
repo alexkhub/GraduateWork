@@ -16,7 +16,7 @@ class StudentPerformanceListView(ListAPIView):
         Prefetch('subject', queryset=Subject.objects.all()),
         Prefetch('student', queryset=Users.objects.all()),
         Prefetch('lecturer', queryset=Lecturer.objects.all())
-    )
+    ).order_by('-date')
     serializer_class = MeasurableTypesControlSerializer
     authentication_classes = (JWTAuthentication,)
     # permission_classes = [IsAuthenticated]

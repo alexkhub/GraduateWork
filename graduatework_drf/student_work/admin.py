@@ -9,6 +9,7 @@ class QuestAdmin(admin.ModelAdmin):
     search_fields = ('id', 'subject', 'description')
 
 
+
 class UserQuestAdmin(admin.ModelAdmin):
     list_display = ('id', 'status', 'quest', 'user', 'comment', 'date_added')
     list_display_links = ('id', 'user')
