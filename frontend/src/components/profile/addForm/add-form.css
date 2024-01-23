@@ -1,0 +1,86 @@
+.add-form {
+    padding: 20px;
+    height: auto;
+    width: 430px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background: rgba(170, 170, 170, 0.15);
+    margin-top: 50px;
+}
+
+.add-form > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+.add-form div:nth-child(2) {
+    margin-left: 10px;
+}
+
+.add-form textarea {
+    resize: none;
+    height: 50px;
+    width: 200px;
+    border-radius: 20px;
+    padding: 10px;
+    outline: none;
+    color: white;
+    background: rgba(170, 170, 170, 0.10);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.add-form textarea::placeholder {
+    transition: .3s ease transform;
+}
+
+.add-form textarea:focus::placeholder {
+    transform: translateY(-200%);
+}
+
+textarea::placeholder {
+    color: white;
+}
+
+#add-form-file-input {
+    display: none;
+}
+
+#add-form-file-input + label {
+    color: white;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    transition: .3s ease background-color;
+}
+
+#add-form-file-input + label:hover {
+    background-color: rgba(255, 255, 255, 0.382);
+}
+
+.add-form select {
+    font-size: 16px;
+    width: 150px;
+    text-align: center;
+    margin-left: 50px;
+    background: rgba(170, 170, 170, 0.15);
+    color: white;
+    padding: 5px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.add-form select option {
+    color: black;
+    padding: 3px;
+}
+
+#send-button {
+    margin-left: 50px;
+    margin-top: 50px;
+}
