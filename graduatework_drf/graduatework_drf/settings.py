@@ -15,6 +15,7 @@ from pathlib import Path
 from .juzmin import JAZZMIN_SETTINGS
 import mimetypes
 
+
 mimetypes.add_type("application/javascript", ".js", True)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -137,7 +138,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-#хэширование паролей
+# хэширование паролей
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
@@ -146,8 +147,6 @@ PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.ScryptPasswordHasher",
 
 ]
-
-
 
 ROOT_URLCONF = 'graduatework_drf.urls'
 

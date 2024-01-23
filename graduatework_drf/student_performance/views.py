@@ -19,7 +19,7 @@ class StudentPerformanceListView(ListAPIView):
     ).order_by('-date')
     serializer_class = MeasurableTypesControlSerializer
     authentication_classes = (JWTAuthentication,)
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
     filterset_class = MeasurableTypesControlFilter
 
