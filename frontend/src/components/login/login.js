@@ -4,7 +4,7 @@ import './login.css';
 function Login() {
     return (
         <div className="content">
-            <form>
+            <form className='login-form'>
                 <div className="login-title-container">
                     <p className="login-title">Авторизация</p>
                     <div className="login-title-line"></div>

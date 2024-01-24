@@ -1,0 +1,63 @@
+.student-settings-background {
+    position: absolute;
+    height: 100svh;
+    width: 100svw;
+    background-color: rgba(0, 0, 0, 0.4);
+    top: -88px;
+    left: -30px;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.student-settings-background__hidden {
+    display: none;
+}
+
+.student-settings-background__show {
+    display: flex;
+}
+
+
+.student-settings {
+    width: 700px;
+    height: 350px;
+    padding: 30px;
+    box-sizing: border-box;
+    background-color: #003425;
+    border-radius: 20px;
+    border: 2px solid white;
+}
+
+.settings-title {
+    font-size: 32px;
+    text-align: center;
+    color: white;
+}
+
+.settings-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.settings-form div {
+    display: flex;
+    column-gap: 30px;
+}
+
+.settings-buttons {
+    margin-top: 40px;
+}
+
+.settings-buttons a {
+    color: #006e51;
+}
+
+.student-settings i {
+    position: absolute;
+    left: 1050px;
+    font-size: 24px;
+}

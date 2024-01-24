@@ -7,8 +7,8 @@ function Profile() {
     return (
         <div className='profile-content'>
             <ProfileTopContent />
-            {/* <FailedTasks /> */}
-            <AddFrom />
+            <FailedTasks />
+            {/* <AddFrom /> */}
         </div>
     )
 }

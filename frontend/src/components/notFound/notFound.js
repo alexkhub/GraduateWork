@@ -8,7 +8,7 @@ function NotFound() {
                 <p>Ошибка <span className='error-code'>404</span></p>
                 <p className='error-reason'>Эта страница не найдена</p>
             </div>
-            <Link to="/profile">На главную</Link>
+            <Link to="/login">На главную</Link>
         </div>
     )
 }

@@ -6,7 +6,7 @@ function Header() {
         <header>
             <Link to="/profile" className="logo link-button">
                 <i className="fas fa-book"></i>
-                <p>Homework Manager</p>
+                <p>Fin Manager</p>
             </Link>
             <nav>
                 <ul>
