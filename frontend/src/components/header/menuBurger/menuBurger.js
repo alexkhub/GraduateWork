@@ -8,12 +8,7 @@ function MenuBurger() {
     }
     return (
         <nav>
-            <Link to='/login'>Выйти</Link>
-            <div onClick={menuToggle} className='menu-burger-icon'>
-                <div className='menu-burger-stick'></div>
-                <div className='menu-burger-stick'></div>
-                <div className='menu-burger-stick'></div>
-            </div>
+
             <div className={isOpen ? 'menu-burger' : 'menu-burger menu-burger__hidden'}>
                 <ul>
                     <li><Link to='/404'>Успеваемость</Link></li>
@@ -24,6 +19,12 @@ function MenuBurger() {
                     <li><Link to='/404'>Замены</Link></li>
                 </ul>
             </div>
+            <div onClick={menuToggle} className='menu-burger-icon'>
+                <div className={isOpen ? 'menu-burger-stick menu-burger-arrow-1' : 'menu-burger-stick'}></div>
+                <div className={isOpen ? 'menu-burger-stick menu-burger-arrow-2' : 'menu-burger-stick'}></div>
+                <div className={isOpen ? 'menu-burger-stick menu-burger-arrow-3' : 'menu-burger-stick'}></div>
+            </div>
+            <Link to='/login'>Выйти</Link>
         </nav>
     )
 }
