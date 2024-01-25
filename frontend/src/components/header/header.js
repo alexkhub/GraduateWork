@@ -1,21 +1,22 @@
 import './header.css';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import MenuBurger from './menuBurger/menuBurger';
 
 function Header() {
+
+    const [isOpen, openMenu] = useState(false);
+    function menuToggle() {
+        openMenu(!isOpen);
+    }
+
     return (
         <header>
             <Link to="/profile" className="logo link-button">
                 <i className="fas fa-book"></i>
                 <p>Fin Manager</p>
             </Link>
-            <nav>
-                <ul>
-                    <li><Link to="/tasks" className="link-button">Задания</Link></li>
-                    <li><Link to="/registration" className="link-button">Регистрация</Link></li>
-                    <li><Link to="/schedule" className="link-button">Расписание</Link></li>
-                    <li><Link to="/login" className="link-button">Выйти</Link></li>
-                </ul>
-            </nav>
+            <MenuBurger />
         </header>
     )
 }
