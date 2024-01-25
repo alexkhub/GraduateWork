@@ -6,6 +6,20 @@ header {
     background: rgba(170, 170, 170, 0.10);
 }
 
+nav {
+    display: flex;
+    align-items: center;
+    column-gap: 25px;
+}
+
+nav a {
+    transition: .3s ease color;
+}
+
+nav a:hover {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -16,23 +30,4 @@ header {
 .logo p {
     margin-left: 15px;
     font-weight: 700;
-}
-
-header ul {
-    display: flex;
-    column-gap: 25px;
-}
-
-header ul li {
-    list-style: none;
-}
-
-header ul li a {
-    padding: 5px 10px;
-    border-radius: 20px;
-    transition: .3s ease color;
-}
-
-header ul li a:hover {
-    color: rgba(255, 255, 255, 0.5);
 }
