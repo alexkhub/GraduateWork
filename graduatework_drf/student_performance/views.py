@@ -24,7 +24,7 @@ class StudentPerformanceListView(ListAPIView):
     filterset_class = MeasurableTypesControlFilter
 
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.filter_queryset(self.get_queryset().filter(student=request.user))
         measurable_types_control_serializer = self.serializer_class(queryset, many=True)
         return Response(
             {
