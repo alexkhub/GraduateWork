@@ -3,7 +3,7 @@ from .models import *
 
 
 class LecturerInformationSerializer(serializers.ModelSerializer):
-    user = serializers.SlugRelatedField(slug_field='username', read_only=True)
+    user = serializers.SlugRelatedField(slug_field='username', queryset=Users.objects.all())
 
     class Meta:
         model = Lecturer

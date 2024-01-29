@@ -57,7 +57,7 @@ class Subject(models.Model):
 
 
 class Lecturer(models.Model):
-    user = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Пользователь')
+    user = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Пользователь', related_name='lecturer_user')
     groups = SortedManyToManyField('Group', verbose_name='Группы', blank=True)
     subjects = SortedManyToManyField('Subject', verbose_name='Предметы', blank=True)
 
