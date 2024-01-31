@@ -29,7 +29,7 @@ class LecturerAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'user')
 
 
-class MeasurableTypesControlAdmin(admin.ModelAdmin):
+class Student_ScoresAdmin(admin.ModelAdmin):
     list_display = ('id', 'student', 'subject', 'lecturer', 'cause', 'points', 'date')
     list_display_links = ('id', 'student', 'subject', 'lecturer')
     search_fields = ('student__username', 'subject__subject_name', 'lecturer__user')
@@ -37,12 +37,7 @@ class MeasurableTypesControlAdmin(admin.ModelAdmin):
     list_editable = ('points',)
 
 
-class OtherMeasurableTypesControlAdmin(admin.ModelAdmin):
-    list_display = ('id', 'student', 'subject', 'lecturer', 'cause', 'points', 'date')
-    list_display_links = ('id', 'student', 'subject', 'lecturer')
-    search_fields = ('student', 'subject', 'lecturer')
-    list_filter = ('student', 'subject', 'lecturer', 'points', 'date')
-    list_editable = ('points',)
+
 
 
 class ExamAdmin(admin.ModelAdmin):
@@ -65,7 +60,6 @@ admin.site.register(Users, UsersAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(Lecturer, LecturerAdmin)
-admin.site.register(MeasurableTypesControl, MeasurableTypesControlAdmin)
-admin.site.register(OtherMeasurableTypesControl, OtherMeasurableTypesControlAdmin)
+admin.site.register(Student_Scores, Student_ScoresAdmin)
 admin.site.register(Exam_Grades, Exam_GradesAdmin)
 admin.site.register(Overall_Performance, Overall_PerformanceAdmin)

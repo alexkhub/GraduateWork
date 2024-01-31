@@ -12,7 +12,7 @@ class MeasurableTypesControlFilter(filters.FilterSet):
     date = filters.DateFilter(field_name='date', lookup_expr='gte')
 
     class Meta:
-        model = MeasurableTypesControl
+        model = Student_Scores
         fields = ['subject', 'date']
 
 

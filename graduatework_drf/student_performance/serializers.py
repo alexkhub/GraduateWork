@@ -11,13 +11,13 @@ class LecturerInformationSerializer(serializers.ModelSerializer):
         read_only = ('owner.username',)
 
 
-class MeasurableTypesControlSerializer(serializers.ModelSerializer):
+class Student_ScoresSerializer(serializers.ModelSerializer):
     student = serializers.SlugRelatedField(slug_field='username', read_only=True)
     subject = serializers.SlugRelatedField(slug_field='subject_name', read_only=True)
     lecturer = LecturerInformationSerializer(read_only=True)
 
     class Meta:
-        model = MeasurableTypesControl
+        model = Student_Scores
         exclude = ('description',)
 
         read_only = ('owner.username',)
