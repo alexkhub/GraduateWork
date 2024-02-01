@@ -8,7 +8,7 @@ class LecturerInformationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lecturer
         fields = ('user',)
-        read_only = ('owner.username',)
+        # read_only = ('owner.username',)
 
 
 class Student_ScoresSerializer(serializers.ModelSerializer):

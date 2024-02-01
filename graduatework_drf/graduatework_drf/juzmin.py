@@ -1,12 +1,12 @@
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Electron Admin",
+    "site_title": "Fin Admin",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Electron",
+    "site_header": "Fin",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Electron",
+    "site_brand": "Fin",
 
     # # Logo to use for your site, must be present in static files, used for brand on top left
     # "site_logo": "books/img/logo.png",
@@ -24,14 +24,14 @@ JAZZMIN_SETTINGS = {
     # "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "Welcome to the Electron",
+    "welcome_sign": "Если есть куница, значит есть и миньетица",
 
     # # Copyright on the footer
     # "copyright": "Acme Library Ltd",
 
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string
-    "search_model": ["shop.Users"],
+    "search_model": ["student_performance.Users"],
 
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
     "user_avatar": None,
@@ -51,10 +51,10 @@ JAZZMIN_SETTINGS = {
         {"name": "Доп функции", "url": "additional_admin_features", "new_window": True},
         {"name": 'Flower' , "url": 'http://127.0.0.1:5555/',"new_window": True },
         # model admin to link to (Permissions checked against model)
-        {"model": "shop.Users"},
+        {"model": "student_performance.Users"},
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
-        {"app": "shop"},
+        {"app": "student_performance"},
     ],
 
     #############
@@ -64,7 +64,7 @@ JAZZMIN_SETTINGS = {
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
         {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
-        {"model": "shop.Users"},
+        {"model": "student_performance.Users"},
         {"name": "Additional_functions", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True}
     ],
 
@@ -138,7 +138,7 @@ JAZZMIN_SETTINGS = {
     # - carousel
     "changeform_format": "horizontal_tabs",
     # override change forms on a per modeladmin basis
-    "changeform_format_overrides": {"shop.Users": "collapsible", "auth.group": "vertical_tabs"},
+    "changeform_format_overrides": {"student_performance.Users": "collapsible", "auth.group": "vertical_tabs"},
     # # Add a language dropdown into the admin
     # "language_chooser": True,
 }

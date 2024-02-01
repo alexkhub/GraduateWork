@@ -18,8 +18,7 @@ class DetailStudentQuestPermission(permissions.BasePermission):
 class GroupQuestPermission(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
-        if request.methode in permissions.SAFE_METHODS:
+        if request.methode in permissions.SAFE_METHODS or request.user.is_staff:
             return True
-        elif request.user.is_staff:
-            return True
+
         return False

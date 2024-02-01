@@ -18,7 +18,7 @@ class GroupQuestListCreateView(ListCreateAPIView):
     queryset = Quest.objects.all().prefetch_related(
         Prefetch('subject', queryset=Subject.objects.all()),
         Prefetch('group', queryset=Group.objects.all()),
-        Prefetch('lecturer', queryset=Lecturer.objects.all())
+        Prefetch('lecturer', queryset=Lecturer.objects.all().prefetch_related('user'))
     )
     serializer_class = GroupQuestSerializer
     # permission_classes = (DetailStudentQuestPermission, IsAuthenticated)
@@ -31,10 +31,7 @@ class GroupQuestListCreateView(ListCreateAPIView):
         return self.queryset
 
     def create(self, request, *args, **kwargs):
-        
-
         serializer = self.get_serializer(data=request.data)
-
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
