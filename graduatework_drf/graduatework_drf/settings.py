@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     # 'rest_framework.authtoken',
     'corsheaders',
     'sortedm2m',
+    'django_celery_results',
+    'django_celery_beat',
 
     'student_performance.apps.StudentPerformanceConfig',
     'student_work.apps.StudentWorkConfig',
@@ -235,3 +237,15 @@ EMAIL_HOST_USER = 'aleksandrkhubaevwork@gmail.com'
 EMAIL_HOST_PASSWORD = 'qdfgbwcyublqpler'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+# Celery
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = '6379'
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKEN_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'django-db'
+# CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
