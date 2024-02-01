@@ -40,12 +40,30 @@ class GroupQuestListCreateView(ListCreateAPIView):
 
 class DetailStudentQuestRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     queryset = UserQuest.objects.all()
-    serializer_class = DetailStudentQuestSerializer
+    serializer_class = StudentQuestSerializer
     lookup_field = 'id'
-    permission_classes = (DetailStudentQuestPermission, IsAuthenticated)
+    # permission_classes = (DetailStudentQuestPermission, IsAuthenticated)
     authentication_classes = (JWTAuthentication,)
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class CreateStudentQuestCreateView(CreateAPIView):
     queryset = UserQuest.objects.all()
-    serializer_class = DetailStudentQuestSerializer
+    serializer_class = StudentQuestSerializer
+
+    # permission_classes = (IsAuthenticated,)
+    # authentication_classes = (JWTAuthentication,)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

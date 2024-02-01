@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from .models import *
+from .service import *
 from student_performance.serializers import LecturerInformationSerializer
 
-from student_performance.models import Group, Subject, Lecturer
+from student_performance.models import Group, Subject, Lecturer, Users
 
 
 class GroupQuestSerializer(serializers.ModelSerializer):
@@ -24,10 +25,18 @@ class GroupQuestSerializer(serializers.ModelSerializer):
         return Quest.objects.create(lecturer=lecturer_instance, **validated_data)
 
 
-class DetailStudentQuestSerializer(serializers.ModelSerializer):
+class StudentQuestSerializer(serializers.ModelSerializer):
+    quest = serializers.SlugRelatedField('quest_name', read_only=True)
+    user = serializers.SlugRelatedField('username', read_only=True)
+
     class Meta:
         model = UserQuest
-        fields = '__all__'
+        fields = ('status', 'comment', 'file_link', 'date_added', 'quest', 'user')
 
-    def create(self, validated_data):
-        return UserQuest.objects.create(**validated_data)
+    def update(self, instance, validated_data):
+        instance.comment = validated_data.get('comment', instance.comment)
+        instance.file_link = validated_data.get('file_link', instance.file_link)
+        instance.date_added = get_date()
+
+        instance.save()
+        return instance
