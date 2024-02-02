@@ -12,6 +12,9 @@ from .serializers import *
 from student_performance.models import Subject, Group, Lecturer
 from .permissions import *
 from .utils import *
+from .service import *
+from .tasks import *
+from student_performance.models import Users
 
 
 class GroupQuestListCreateView(ListCreateAPIView):
@@ -35,6 +38,8 @@ class GroupQuestListCreateView(ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
+        send_quests.delay(group=request.data['group'], subject=request.data['subject'],
+                          quest_name=request.data['quest_name'])
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 

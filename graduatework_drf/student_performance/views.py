@@ -1,4 +1,3 @@
-
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListAPIView
@@ -9,6 +8,7 @@ from .models import *
 from .serializers import *
 from django.db.models import Q, Prefetch
 from .utils import *
+from .tasks import *
 
 
 class StudentPerformanceListView(ListAPIView):
@@ -25,10 +25,14 @@ class StudentPerformanceListView(ListAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
+
         measurable_types_control_serializer = self.serializer_class(queryset, many=True)
+
         return Response(
             {
                 'measurable_types_control': measurable_types_control_serializer.data,
             },
             status=status.HTTP_200_OK
         )
+
+
