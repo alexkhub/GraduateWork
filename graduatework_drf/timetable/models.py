@@ -2,6 +2,14 @@ from django.db import models
 
 
 # Create your models here.
+class ClassRoom(models.Model):
+    room_number = models.PositiveIntegerField(verbose_name='Номер аудитории')
+    floor = models.PositiveSmallIntegerField(verbose_name='Этаж')
+    number_of_seats = models.PositiveIntegerField(verbose_name='Количество посадочных мест')
+    number_of_computers = models.PositiveIntegerField(verbose_name='Количество компьютеров')
+
+    def __str__(self):
+        return f"{self.floor}-{self.room_number}"
 
 class Exam(models.Model):
     group = models.ForeignKey('student_performance.Group', on_delete=models.CASCADE, verbose_name='Группа',

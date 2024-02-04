@@ -13,6 +13,7 @@ class Users(AbstractUser):
     birthday = models.DateField(verbose_name='Дата рождения', blank=True, null=True)
     address = models.CharField(max_length=150, blank=True, verbose_name='Адрес', null=True)
     user_photo = models.ImageField(upload_to='user_photo/%Y/%m/%d/', verbose_name='Аватарка', blank=True, null=True)
+    term = models.PositiveSmallIntegerField(verbose_name='Семестр', default=1)
 
     class Meta:
         verbose_name = 'Пользователь'

@@ -40,3 +40,11 @@ class StudentQuestSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
+
+class CreateStudentQuestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserQuest
+        fields = '__all__'
+
+

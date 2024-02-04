@@ -61,7 +61,7 @@ class DetailStudentQuestRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 
 class CreateStudentQuestCreateView(CreateAPIView):
     queryset = UserQuest.objects.all()
-    serializer_class = StudentQuestSerializer
+    serializer_class = CreateStudentQuestSerializer
 
     # permission_classes = (IsAuthenticated,)
     # authentication_classes = (JWTAuthentication,)
