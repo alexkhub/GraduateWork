@@ -29,6 +29,14 @@ class TimetableChangesAdmin(admin.ModelAdmin):
     list_editable = ('start_time', 'end_time', 'classroom')
 
 
+class ClassRoomAdmin(admin.ModelAdmin):
+    list_display = ('id', 'slug', 'campus', 'number_of_seats', 'number_of_computers')
+    list_display_links = ('slug',)
+    search_fields = ('slug',)
+    list_filter = ('campus',)
+
+
 admin.site.register(Exam, ExamAdmin)
 admin.site.register(TimetableOfClasses, TimetableOfClasseAdmin)
 admin.site.register(TimetableChanges, TimetableChangesAdmin)
+admin.site.register(ClassRoom, ClassRoomAdmin)

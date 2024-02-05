@@ -1,4 +1,5 @@
 from django.db import models
+from autoslug import AutoSlugField
 
 
 # Create your models here.
@@ -7,9 +8,22 @@ class ClassRoom(models.Model):
     floor = models.PositiveSmallIntegerField(verbose_name='Этаж')
     number_of_seats = models.PositiveIntegerField(verbose_name='Количество посадочных мест')
     number_of_computers = models.PositiveIntegerField(verbose_name='Количество компьютеров')
+    campus = models.PositiveSmallIntegerField(verbose_name='Номер корпуса', default=1)
+    slug = AutoSlugField(populate_from='get_url', unique=True, verbose_name='URL', max_length=50)
+
+    class Meta:
+        verbose_name = 'Аудитория'
+        verbose_name_plural = 'Аудитории'
 
     def __str__(self):
         return f"{self.floor}-{self.room_number}"
+
+    def get_url(self):
+        return f"{self.floor}-{self.room_number}"
+
+
+
+
 
 class Exam(models.Model):
     group = models.ForeignKey('student_performance.Group', on_delete=models.CASCADE, verbose_name='Группа',
