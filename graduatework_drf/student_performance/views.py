@@ -13,10 +13,9 @@ from .tasks import *
 
 class StudentPerformanceListView(ListAPIView):
     queryset = Student_Scores.objects.all().prefetch_related(
-        Prefetch('subject', queryset=Subject.objects.all()),
-        Prefetch('student', queryset=Users.objects.all()),
+
         Prefetch('lecturer', queryset=Lecturer.objects.all())
-    ).order_by('-date')
+    ).order_by('-date').select_related('student', 'subject')
     serializer_class = Student_ScoresSerializer
     authentication_classes = (JWTAuthentication,)
     # permission_classes = [IsAuthenticated]

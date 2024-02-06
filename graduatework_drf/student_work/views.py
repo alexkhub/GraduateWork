@@ -9,20 +9,19 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
-from student_performance.models import Subject, Group, Lecturer
+from student_performance.models import Subject, Group, Lecturer, Users
 from .permissions import *
 from .utils import *
 from .service import *
 from .tasks import *
-from student_performance.models import Users
+
 
 
 class GroupQuestListCreateView(ListCreateAPIView):
     queryset = Quest.objects.all().prefetch_related(
-        Prefetch('subject', queryset=Subject.objects.all()),
-        Prefetch('group', queryset=Group.objects.all()),
         Prefetch('lecturer', queryset=Lecturer.objects.all().prefetch_related('user'))
-    )
+    ).select_related('subject', 'group')
+
     serializer_class = GroupQuestSerializer
     # permission_classes = (DetailStudentQuestPermission, IsAuthenticated)
     authentication_classes = (JWTAuthentication,)
@@ -72,3 +71,10 @@ class CreateStudentQuestCreateView(CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class StudentQuestListView(ListAPIView):
+    queryset = queryset = UserQuest.objects.filter(date_added__gte=date_filter_sq()).select_related('quest', 'user')
+    serializer_class = StudentQuestSerializer
+
+
