@@ -1,6 +1,21 @@
 from django.db import models
 from autoslug import AutoSlugField
 
+DAYS_OF_THE_WEEK_CHOICES = (
+    ('пн', 'понедельник'),
+    ('вт', 'вторник'),
+    ('ср', 'среда'),
+    ('чт', 'четверг'),
+    ('пт', 'пятница'),
+    ('сб', 'суббота')
+)
+
+EVENNESS_OF_THE_WEEK = (
+    ('четная', 'четная'),
+    ('нечетная', 'нечетная'),
+    ('совмещенная', 'совмещенная')
+)
+
 
 # Create your models here.
 class ClassRoom(models.Model):
@@ -20,9 +35,6 @@ class ClassRoom(models.Model):
 
     def get_url(self):
         return f"{self.floor}-{self.room_number}"
-
-
-
 
 
 class Exam(models.Model):
@@ -52,12 +64,12 @@ class TimetableOfClasses(models.Model):
                                 related_name='timetable_subject')
     lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель',
                                  related_name='timetable_lecturer')
-
     lesson_number = models.PositiveIntegerField(verbose_name='Номер пары', default=1)
     start_time = models.TimeField(verbose_name='Начало пары')
     end_time = models.TimeField(verbose_name='Конец пары')
-    evenness = models.CharField(max_length=10, verbose_name='Четность недели', default='обе')
-    day_of_the_week = models.CharField(max_length=15, verbose_name='День недели', )
+    evenness = models.CharField(max_length=10, verbose_name='Четность недели', default='совмещенная',
+                                choices=EVENNESS_OF_THE_WEEK)
+    day_of_the_week = models.CharField(max_length=30, verbose_name='День недели', choices=DAYS_OF_THE_WEEK_CHOICES)
     classroom = models.CharField(max_length=10, verbose_name='Аудитория', blank=True, null=True)
 
     def __str__(self):
@@ -75,11 +87,9 @@ class TimetableChanges(models.Model):
                                 related_name='changes_subject')
     lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель',
                                  related_name='changes_lecturer')
-
     lesson_number = models.PositiveIntegerField(verbose_name='Номер пары', default=1)
     start_time = models.TimeField(verbose_name='Начало пары')
     end_time = models.TimeField(verbose_name='Конец пары')
-    day_of_the_week = models.CharField(max_length=15, verbose_name='День недели', )
     classroom = models.CharField(max_length=10, verbose_name='Аудитория', blank=True, null=True)
     date = models.DateField(verbose_name='Дата', blank=True, null=True)
 
