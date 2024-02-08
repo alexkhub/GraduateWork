@@ -67,7 +67,7 @@ class TimetableOfClasses(models.Model):
     lesson_number = models.PositiveIntegerField(verbose_name='Номер пары', default=1)
     start_time = models.TimeField(verbose_name='Начало пары')
     end_time = models.TimeField(verbose_name='Конец пары')
-    evenness = models.CharField(max_length=10, verbose_name='Четность недели', default='совмещенная',
+    evenness = models.CharField(max_length=30, verbose_name='Четность недели', default='совмещенная',
                                 choices=EVENNESS_OF_THE_WEEK)
     day_of_the_week = models.CharField(max_length=30, verbose_name='День недели', choices=DAYS_OF_THE_WEEK_CHOICES)
     classroom = models.CharField(max_length=10, verbose_name='Аудитория', blank=True, null=True)

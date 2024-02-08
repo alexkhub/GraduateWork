@@ -22,10 +22,9 @@ class TimetableOfClasseAdmin(admin.ModelAdmin):
 
 class TimetableChangesAdmin(admin.ModelAdmin):
     list_display = (
-        'group', 'subject', 'lecturer', 'lesson_number', 'start_time', 'end_time', 'date', 'day_of_the_week',
-        'classroom')
+        'group', 'subject', 'lecturer', 'lesson_number', 'start_time', 'end_time', 'date', 'classroom')
     search_fields = ('group', 'subject__subject_name', 'lecturer__user')
-    list_filter = ('group', 'subject__subject_name', 'lecturer__user', 'day_of_the_week', 'classroom')
+    list_filter = ('group', 'subject__subject_name', 'lecturer__user', 'classroom')
     list_editable = ('start_time', 'end_time', 'classroom')
 
 
