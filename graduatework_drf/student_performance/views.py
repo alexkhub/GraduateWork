@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django_filters.rest_framework import DjangoFilterBackend
@@ -33,5 +33,11 @@ class StudentPerformanceListView(ListAPIView):
             },
             status=status.HTTP_200_OK
         )
+
+
+class StudentProfile(RetrieveDestroyAPIView):
+    queryset = Users.objects.all()
+    serializer_class = StudentProfileSerializer
+    lookup_field = 'slug'
 
 

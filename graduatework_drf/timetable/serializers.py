@@ -7,6 +7,7 @@ class TimetableSerializer(serializers.ModelSerializer):
     group = serializers.SlugRelatedField('name', read_only=True)
     subject = serializers.SlugRelatedField(slug_field='subject_name', read_only=True)
     lecturer = LecturerInformationSerializer(read_only=True)
+    classroom = serializers.SlugRelatedField('slug', read_only=True)
 
     class Meta:
         model = TimetableOfClasses
@@ -19,6 +20,7 @@ class ExamSerializer(serializers.ModelSerializer):
     group = serializers.SlugRelatedField('name', read_only=True)
     subject = serializers.SlugRelatedField(slug_field='subject_name', read_only=True)
     lecturer = LecturerInformationSerializer(read_only=True)
+    classroom = serializers.SlugRelatedField('slug', read_only=True)
 
     class Meta:
         model = Exam
@@ -29,6 +31,7 @@ class TimetableChangesSerializer(serializers.ModelSerializer):
     group = serializers.SlugRelatedField('name', read_only=True)
     subject = serializers.SlugRelatedField(slug_field='subject_name', read_only=True)
     lecturer = LecturerInformationSerializer(read_only=True)
+    classroom = serializers.SlugRelatedField('slug', read_only=True)
 
     class Meta:
         model = TimetableChanges

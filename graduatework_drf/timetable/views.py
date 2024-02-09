@@ -6,14 +6,13 @@ from .service import *
 from .models import *
 from .serializers import *
 from student_performance.models import Subject, Lecturer, Group
-from rest_framework.status import HTTP_200_OK
 
 
 class TimetableListView(ListAPIView):
     queryset = TimetableOfClasses.objects.all().order_by('group', 'lesson_number').prefetch_related(
 
-        Prefetch('lecturer', queryset=Lecturer.objects.all())
-    ).select_related('subject', 'group')
+        Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user'))
+    ).select_related('subject', 'group', 'classroom')
     serializer_class = TimetableSerializer
 
 
@@ -43,4 +42,4 @@ class LectorTimeTableListView(ListAPIView):
     serializer_class = TimetableSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(lecturer__user__slug='users')
+        return self.queryset.filter(lecturer__user__slug=self.request.user.slug)
