@@ -23,9 +23,11 @@ class Student_ScoresSerializer(serializers.ModelSerializer):
         read_only = ('owner.username',)
 
 
+
+
 class StudentProfileSerializer(serializers.ModelSerializer):
     group = serializers.SlugRelatedField(slug_field='name', read_only=True)
 
     class Meta:
         model = Users
-        fields = '__all__'
+        fields = ('group', 'username', 'first_name', 'email', 'term', 'phone', 'last_name')

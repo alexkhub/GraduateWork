@@ -36,8 +36,13 @@ class StudentPerformanceListView(ListAPIView):
 
 
 class StudentProfile(RetrieveDestroyAPIView):
-    queryset = Users.objects.all()
+    queryset = Users.objects.all().select_related('group').only('group', 'username', 'first_name', 'last_name', 'email',
+                                                                'term', 'phone')
     serializer_class = StudentProfileSerializer
     lookup_field = 'slug'
 
-
+    def retrieve(self, request, *args, **kwargs):
+        profile_serializer = self.serializer_class(self.get_object())
+        return Response({
+            'profile': profile_serializer.data
+        })
