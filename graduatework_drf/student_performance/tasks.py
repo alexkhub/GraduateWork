@@ -13,3 +13,8 @@ def send_email():
 def update_student_tern():
     Users.objects.filter(is_staff=False).update(term=F('term') + 1)
     return None
+
+
+@app.task
+def send_destroy_email(email_body, user_email):
+    destroy_email(email_body, user_email)

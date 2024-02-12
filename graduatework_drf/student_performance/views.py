@@ -1,4 +1,3 @@
-import jwt
 from django.contrib.sites.shortcuts import get_current_site
 
 from rest_framework.response import Response
@@ -16,6 +15,8 @@ from .serializers import *
 from django.db.models import Q, Prefetch
 from .utils import *
 from .tasks import *
+from jwt import decode, ExpiredSignatureError
+from jwt.exceptions import DecodeError
 
 
 class StudentPerformanceListView(ListAPIView):
@@ -56,33 +57,27 @@ class StudentProfile(RetrieveDestroyAPIView):
         })
 
     def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
         user = request.user
         current_site = get_current_site(request).domain
         relativeLink = reverse('email-verify')
         token = RefreshToken.for_user(user).access_token
-        absurl = 'http://' + current_site + relativeLink + "?token=" + str(token)
-        email_body = 'Hi ' + user.username + 'user the link below to verify your email \n' + absurl
-
-        verify_send(email_body=email_body, user_email=user.email)
-        return Response(status=status.HTTP_200_OK)
+        url = 'http://' + current_site + relativeLink + "?token=" + str(token)
+        email_body = f'Добрый день, ' + user.username + ' перейдите по ссылке для удаления аккаунта  \n' + url
+        send_destroy_email.delay(email_body=email_body, user_email=user.email)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class VerifyEmail(APIView):
     def get(self, request):
         token = request.GET.get('token')
         try:
-            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+            payload = decode(token, settings.SECRET_KEY, algorithms=['HS256'])
             user = Users.objects.get(id=payload['user_id'])
-            user.is_verified = True
-            # user.is_authenticated = True
-            user.is_active = True
-            # if not user.is_verified:
             user.delete()
             return Response({'email': 'successfuly activated'}, status=status.HTTP_204_NO_CONTENT)
         # except jwt.ExpiredSignatureError as identifier:
-        except jwt.ExpiredSignatureError:
+        except ExpiredSignatureError:
             return Response({'error': 'Activation Expired expired'}, status=status.HTTP_400_BAD_REQUEST)
         # except jwt.exceptions.DecodeError as identifier:
-        except jwt.exceptions.DecodeError:
+        except DecodeError:
             return Response({'error': 'invalid token'}, status=status.HTTP_400_BAD_REQUEST)

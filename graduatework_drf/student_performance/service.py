@@ -11,7 +11,7 @@ def send():
     )
 
 
-def verify_send(email_body, user_email, ):
+def destroy_email(email_body, user_email, ):
     send_mail(
         'Добро пожаловать',
         email_body,
