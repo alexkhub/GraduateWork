@@ -9,3 +9,13 @@ def send():
         ['aleksandrkhubaev04@gmail.com'],
         fail_silently=False
     )
+
+
+def verify_send(email_body, user_email, ):
+    send_mail(
+        'Добро пожаловать',
+        email_body,
+        'aleksandrkhubaevwork@gmail.com',
+        [user_email],
+        fail_silently=False
+    )
