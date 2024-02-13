@@ -99,3 +99,5 @@ class TimetableChanges(models.Model):
 
     def __str__(self):
         return f"{self.group}-{self.subject}-{self.lesson_number}"
+
+

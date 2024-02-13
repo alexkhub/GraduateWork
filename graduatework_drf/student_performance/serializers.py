@@ -19,10 +19,7 @@ class Student_ScoresSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student_Scores
         exclude = ('description',)
-
         read_only = ('owner.username',)
-
-
 
 
 class StudentProfileSerializer(serializers.ModelSerializer):
@@ -31,3 +28,9 @@ class StudentProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ('group', 'username', 'first_name', 'email', 'term', 'phone', 'last_name')
+
+
+class MyGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = ('username', )
