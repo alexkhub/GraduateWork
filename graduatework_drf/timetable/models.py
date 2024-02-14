@@ -1,5 +1,7 @@
 from django.db import models
 from autoslug import AutoSlugField
+from sortedm2m.fields import SortedManyToManyField
+
 
 DAYS_OF_THE_WEEK_CHOICES = (
     ('пн', 'понедельник'),
@@ -100,4 +102,25 @@ class TimetableChanges(models.Model):
     def __str__(self):
         return f"{self.group}-{self.subject}-{self.lesson_number}"
 
+
+class Lesson(models.Model):
+    lesson_topic = models.CharField(max_length=200, verbose_name='Тема занятия', blank=True, null=True)
+    lesson_number = models.PositiveIntegerField(verbose_name='Порядковый номер пары' )
+    group = models.ForeignKey('student_performance.Group', on_delete=models.CASCADE, verbose_name='Группа',
+                              related_name='lesson_group')
+    subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
+                                related_name='lesson_subject')
+    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель',
+                                 related_name='lesson_lecturer')
+    classroom = models.ForeignKey('ClassRoom', on_delete=models.PROTECT, verbose_name='Аудитория', blank=True,
+                                  null=True)
+    date = models.DateField(verbose_name='Дата', auto_now_add=True)
+    student_passes = SortedManyToManyField('student_performance.Users')
+
+    class Meta:
+        verbose_name = 'Пара'
+        verbose_name_plural = 'Пары'
+
+    def __str__(self):
+        return f'{self.group}-{self.lesson_topic}-{self.date}'
 
