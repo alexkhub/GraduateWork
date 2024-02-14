@@ -19,6 +19,9 @@ from jwt import decode, ExpiredSignatureError
 from jwt.exceptions import DecodeError
 
 from .permissions import *
+from student_work.models import Quest, UserQuest
+
+from student_work.serializers import ProfileStudentUserQuestSerializer, ProfileStudentQuestSerializer
 
 
 class StudentPerformanceListView(ListAPIView):
@@ -46,17 +49,31 @@ class StudentPerformanceListView(ListAPIView):
 
 
 class StudentProfileRetrieveDestroyView(RetrieveDestroyAPIView):
-    queryset = Users.objects.all().select_related('group').only('group', 'username', 'first_name', 'last_name', 'email',
-                                                                'term', 'phone')
+    queryset = Users.objects.all().select_related('group').only('group__name', 'username', 'first_name', 'last_name',
+                                                                'email', 'term', 'phone')
     serializer_class = StudentProfileSerializer
     lookup_field = 'slug'
-    permission_classes = [DeleteUserPermissions]
+
+    # permission_classes = [IsAuthenticated, DeleteUserPermissions]
 
     def retrieve(self, request, *args, **kwargs):
-        profile_serializer = self.serializer_class(self.get_object())
+        obj = self.get_object()
+        profile_serializer = self.serializer_class(obj)
+        user_quests = UserQuest.objects.filter(user=obj).select_related('quest', 'user').only('status', 'date_added',
+                                                                                              'quest__quest_name',
+                                                                                              'user__username').order_by(
+            '-date_added')[:10]
+        user_quests_serializer = ProfileStudentUserQuestSerializer(user_quests, many=True)
+        quests = Quest.objects.filter(group=obj.group).prefetch_related(
+            Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
+        ).select_related('subject', 'group').only('quest_name',  'date_added',  'slug', 'group__name', 'subject__subject_name', 'lecturer').order_by('-date_added')[:10]
+        quests_serializer = ProfileStudentQuestSerializer(quests, many=True)
+
         return Response({
-            'profile': profile_serializer.data
-        })
+            'profile': profile_serializer.data,
+            'user_quests': user_quests_serializer.data,
+            'quests': quests_serializer.data,
+        }, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
         user = request.user
