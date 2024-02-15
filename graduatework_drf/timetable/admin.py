@@ -40,9 +40,16 @@ class LessonAdmin(admin.ModelAdmin):
     list_filter = ('group', 'subject__subject_name', 'lecturer__user', 'classroom')
     list_editable = ('classroom', )
 
+class JournalAdmin(admin.ModelAdmin):
+    list_display = ('id', 'group', 'subject', 'lecturer', 'number_of_lesson')
+    search_fields = ('group', 'subject__subject_name', 'lecturer__user')
+    list_filter = ('group', 'subject__subject_name', 'lecturer__user')
+    list_editable = ('number_of_lesson',)
+
 
 admin.site.register(Exam, ExamAdmin)
 admin.site.register(TimetableOfClasses, TimetableOfClasseAdmin)
 admin.site.register(TimetableChanges, TimetableChangesAdmin)
 admin.site.register(ClassRoom, ClassRoomAdmin)
 admin.site.register(Lesson, LessonAdmin)
+admin.site.register(Journal, JournalAdmin)

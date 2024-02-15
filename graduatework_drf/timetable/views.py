@@ -1,5 +1,5 @@
 from django.db.models import Prefetch
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .service import *
@@ -43,3 +43,11 @@ class LectorTimeTableListView(ListAPIView):
 
     def get_queryset(self):
         return self.queryset.filter(lecturer__user__slug=self.request.user.slug)
+
+
+class JournalRetrieveView(RetrieveAPIView):
+    queryset = Journal.objects.all().prefetch_related(
+        Prefetch('lecturer', queryset=Lecturer.objects.all())
+    ).select_related('subject', 'group')
+    serializer_class = JournalSerializer
+    lookup_field = 'id'

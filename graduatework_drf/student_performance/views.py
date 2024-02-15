@@ -2,7 +2,7 @@ from django.contrib.sites.shortcuts import get_current_site
 
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.generics import ListAPIView, RetrieveDestroyAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
@@ -35,6 +35,8 @@ class StudentPerformanceListView(ListAPIView):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = MeasurableTypesControlFilter
 
+
+
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
@@ -48,11 +50,12 @@ class StudentPerformanceListView(ListAPIView):
         )
 
 
-class StudentProfileRetrieveDestroyView(RetrieveDestroyAPIView):
+class StudentProfileRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = Users.objects.all().select_related('group').only('group__name', 'username', 'first_name', 'last_name',
                                                                 'email', 'term', 'phone')
     serializer_class = StudentProfileSerializer
     lookup_field = 'slug'
+    http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options', 'trace']
 
     # permission_classes = [IsAuthenticated, DeleteUserPermissions]
 
@@ -66,7 +69,8 @@ class StudentProfileRetrieveDestroyView(RetrieveDestroyAPIView):
         user_quests_serializer = ProfileStudentUserQuestSerializer(user_quests, many=True)
         quests = Quest.objects.filter(group=obj.group).prefetch_related(
             Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
-        ).select_related('subject', 'group').only('quest_name',  'date_added',  'slug', 'group__name', 'subject__subject_name', 'lecturer').order_by('-date_added')[:10]
+        ).select_related('subject', 'group').only('quest_name', 'date_added', 'slug', 'group__name',
+                                                  'subject__subject_name', 'lecturer').order_by('-date_added')[:10]
         quests_serializer = ProfileStudentQuestSerializer(quests, many=True)
 
         return Response({
@@ -74,6 +78,9 @@ class StudentProfileRetrieveDestroyView(RetrieveDestroyAPIView):
             'user_quests': user_quests_serializer.data,
             'quests': quests_serializer.data,
         }, status=status.HTTP_200_OK)
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
 
     def destroy(self, request, *args, **kwargs):
         user = request.user
@@ -104,7 +111,7 @@ class DeleteEmailView(APIView):
 
 class MyGroupView(ListAPIView):
     queryset = Users.objects.all()
-    serializer_class = MyGroupSerializer
+    serializer_class = UsernameSerializer
 
     def get_queryset(self):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['slug'])

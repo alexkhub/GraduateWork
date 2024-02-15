@@ -29,8 +29,17 @@ class StudentProfileSerializer(serializers.ModelSerializer):
         model = Users
         fields = ('group', 'username', 'first_name', 'email', 'term', 'phone', 'last_name')
 
+    def update(self, instance, validated_data):
+        instance.phone = validated_data.get('phone', instance.phone)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.save()
+        return instance
 
-class MyGroupSerializer(serializers.ModelSerializer):
+
+class UsernameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ('username', )
+        fields = ('username',)
+
+
