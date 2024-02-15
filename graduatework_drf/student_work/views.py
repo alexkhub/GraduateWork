@@ -16,10 +16,9 @@ from .service import *
 from .tasks import *
 
 
-
 class GroupQuestListCreateView(ListCreateAPIView):
     queryset = Quest.objects.all().prefetch_related(
-        Prefetch('lecturer', queryset=Lecturer.objects.all().prefetch_related('user'))
+        Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
     ).select_related('subject', 'group')
 
     serializer_class = GroupQuestSerializer
@@ -76,5 +75,3 @@ class CreateStudentQuestCreateView(CreateAPIView):
 class StudentQuestListView(ListAPIView):
     queryset = queryset = UserQuest.objects.filter(date_added__gte=date_filter_sq()).select_related('quest', 'user')
     serializer_class = StudentQuestSerializer
-
-

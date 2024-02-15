@@ -5,20 +5,20 @@ from rest_framework.response import Response
 from .service import *
 from .models import *
 from .serializers import *
-from student_performance.models import Subject, Lecturer, Group
+from student_performance.models import Subject, Lecturer, Group, Users
 
 
 class TimetableListView(ListAPIView):
     queryset = TimetableOfClasses.objects.all().order_by('group', 'lesson_number').prefetch_related(
 
-        Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user'))
+        Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
     ).select_related('subject', 'group', 'classroom')
     serializer_class = TimetableSerializer
 
 
 class ExamListView(ListAPIView):
     queryset = Exam.objects.all().prefetch_related(
-        Prefetch('lecturer', queryset=Lecturer.objects.all())
+        Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
     ).select_related('subject', 'group')
     serializer_class = ExamSerializer
 
@@ -37,7 +37,7 @@ class TimetableChangesListView(ListAPIView):
 class LectorTimeTableListView(ListAPIView):
     queryset = TimetableOfClasses.objects.all().order_by('group', 'lesson_number').prefetch_related(
 
-        Prefetch('lecturer', queryset=Lecturer.objects.all())
+        Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
     ).select_related('subject', 'group')
     serializer_class = TimetableSerializer
 
@@ -46,8 +46,13 @@ class LectorTimeTableListView(ListAPIView):
 
 
 class JournalRetrieveView(RetrieveAPIView):
-    queryset = Journal.objects.all().prefetch_related(
-        Prefetch('lecturer', queryset=Lecturer.objects.all())
-    ).select_related('subject', 'group')
+    queryset = Journal.objects.all().select_related('subject', 'group',).prefetch_related(
+        Prefetch('lessons', queryset=Lesson.objects.all().select_related('quest').prefetch_related(
+            Prefetch('student_passes', queryset=Users.objects.all().only('username'))).only(
+             'quest__quest_name', 'lesson_topic', 'lesson_number', 'date',)),
+        Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
+
+    ).only(
+        'subject__subject_name', 'group__name', 'lecturer',  'lessons', 'date', 'number_of_lesson')
     serializer_class = JournalSerializer
     lookup_field = 'id'
