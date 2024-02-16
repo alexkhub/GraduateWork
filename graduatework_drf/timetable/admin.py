@@ -20,7 +20,8 @@ class TimetableOfClasseAdmin(admin.ModelAdmin):
 
 
 class TimetableChangesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'group', 'subject', 'lecturer', 'lesson_number', 'start_time', 'end_time', 'date', 'classroom')
+    list_display = (
+    'id', 'group', 'subject', 'lecturer', 'lesson_number', 'start_time', 'end_time', 'date', 'classroom')
     search_fields = ('group', 'subject__subject_name', 'lecturer__user')
     list_filter = ('group', 'subject__subject_name', 'lecturer__user', 'classroom')
     list_editable = ('start_time', 'end_time', 'classroom')
@@ -34,14 +35,16 @@ class ClassRoomAdmin(admin.ModelAdmin):
 
 
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ('lesson_number', 'lesson_topic', 'group', 'subject', 'lecturer',  'date', 'classroom')
+    list_display = ('lesson_number', 'lesson_topic', 'group', 'subject', 'lecturer', 'date', 'classroom')
     list_display_links = ('lesson_number', 'lesson_topic',)
     search_fields = ('group', 'subject__subject_name', 'lecturer__user', 'lesson_topic')
     list_filter = ('group', 'subject__subject_name', 'lecturer__user', 'classroom')
-    list_editable = ('classroom', )
+    list_editable = ('classroom',)
+
 
 class JournalAdmin(admin.ModelAdmin):
-    list_display = ('id', 'group', 'subject', 'lecturer', 'number_of_lesson')
+    list_display = ('id', 'slug', 'group', 'subject', 'lecturer', 'number_of_lesson',)
+    list_display_links = ('id', 'slug')
     search_fields = ('group', 'subject__subject_name', 'lecturer__user')
     list_filter = ('group', 'subject__subject_name', 'lecturer__user')
     list_editable = ('number_of_lesson',)

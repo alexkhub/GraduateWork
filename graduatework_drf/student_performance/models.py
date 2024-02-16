@@ -53,7 +53,7 @@ class Subject(models.Model):
         verbose_name_plural = 'Предметы'
 
     def __str__(self):
-        return f"{self.subject_name}-{self.subject_code}"
+        return f"{self.subject_name}"
 
 
 class Lecturer(models.Model):

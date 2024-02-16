@@ -17,6 +17,13 @@ EVENNESS_OF_THE_WEEK = (
     ('совмещенная', 'совмещенная')
 )
 
+TYPE_OF_LESSON = (
+    ('пз', 'практическое занятие'),
+    ('лк', 'лекционное занятие '),
+    ('с', 'семинар'),
+
+)
+
 
 # Create your models here.
 class ClassRoom(models.Model):
@@ -116,6 +123,7 @@ class Lesson(models.Model):
                                  related_name='lesson_lecturer')
     classroom = models.ForeignKey('ClassRoom', on_delete=models.PROTECT, verbose_name='Аудитория', blank=True,
                                   null=True)
+    type_of_lesson = models.CharField(max_length=50, verbose_name='Тип занятия', default='лк', choices=TYPE_OF_LESSON)
     date = models.DateField(verbose_name='Дата', auto_now_add=True)
     student_passes = SortedManyToManyField('student_performance.Users', verbose_name='Пропуски')
     quest = models.ForeignKey('student_work.Quest', on_delete=models.PROTECT, verbose_name='Задания', blank=True,
@@ -139,9 +147,13 @@ class Journal(models.Model):
     date = models.DateField(verbose_name='Дата', auto_now_add=True)
     number_of_lesson = models.PositiveIntegerField(verbose_name='Общее число пар')
     lessons = SortedManyToManyField('Lesson', verbose_name='Пары')
+    slug = AutoSlugField(populate_from='get_url', unique=True, verbose_name='URL', max_length=50, blank=True, null=True)
 
     def __str__(self):
         return f'{self.subject}-{self.group}-{self.date}'
+
+    def get_url(self):
+        return f'{self.subject}-{self.group.name}-{self.group.curs}'
 
     class Meta:
         verbose_name = 'Журнал'

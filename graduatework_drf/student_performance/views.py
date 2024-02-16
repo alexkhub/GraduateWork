@@ -1,4 +1,6 @@
 from django.contrib.sites.shortcuts import get_current_site
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -35,8 +37,6 @@ class StudentPerformanceListView(ListAPIView):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = MeasurableTypesControlFilter
 
-
-
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
@@ -58,7 +58,7 @@ class StudentProfileRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options', 'trace']
 
     # permission_classes = [IsAuthenticated, DeleteUserPermissions]
-
+    @method_decorator(cache_page(60 * 60 * 2, key_prefix='profile'), )
     def retrieve(self, request, *args, **kwargs):
         obj = self.get_object()
         profile_serializer = self.serializer_class(obj)
