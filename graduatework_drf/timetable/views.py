@@ -1,11 +1,13 @@
 from django.db.models import Prefetch
-from rest_framework.generics import ListAPIView
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .service import *
 from .models import *
 from .serializers import *
-from student_performance.models import Subject, Lecturer, Group
+from student_performance.models import Subject, Lecturer, Group, Users
 
 
 class TimetableListView(ListAPIView):
