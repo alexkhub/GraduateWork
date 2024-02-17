@@ -27,7 +27,7 @@ function FailedTasks() {
     return (
         <div className="failed-tasks">
             <p className="failed-tasks-title">Просроченные задания</p>
-            <i onClick={offsetSliderLeft} className="fas fa-chevron-left"></i>
+            <i onClick={offsetSliderRight} className="fas fa-chevron-left"></i>
             <div style={{ left: left }} className="failed-tasks-slider-line">
 
                 <SliderItem
@@ -55,7 +55,7 @@ function FailedTasks() {
                 <div className="failed-tasks-item"></div>
                 <div className="failed-tasks-item"></div>
             </div>
-            <i onClick={offsetSliderRight} className="fas fa-chevron-right"></i>
+            <i onClick={offsetSliderLeft} className="fas fa-chevron-right"></i>
         </div>
     )
 }

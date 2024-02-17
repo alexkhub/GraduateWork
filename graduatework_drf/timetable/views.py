@@ -1,12 +1,13 @@
 from django.db.models import Prefetch
 from rest_framework.generics import ListAPIView
-from rest_framework.permissions import AllowAny
+# from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .models import *
 from .serializers import *
 from student_performance.models import Subject, Lecturer, Group
-
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class TimetableListView(ListAPIView):
     queryset = TimetableOfClasses.objects.all().order_by('-group', 'lesson_number').prefetch_related(
@@ -15,7 +16,8 @@ class TimetableListView(ListAPIView):
         Prefetch('lecturer', queryset=Lecturer.objects.all())
     )
     serializer_class = TimetableSerializer
-    permission_classes = (AllowAny,)
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
 
 class ExamListView(ListAPIView):

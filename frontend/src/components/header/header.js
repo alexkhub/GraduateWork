@@ -1,14 +1,8 @@
 import './header.css';
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MenuBurger from './menuBurger/menuBurger';
 
 function Header() {
-
-    const [isOpen, openMenu] = useState(false);
-    function menuToggle() {
-        openMenu(!isOpen);
-    }
 
     return (
         <header>
