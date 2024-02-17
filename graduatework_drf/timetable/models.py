@@ -19,7 +19,7 @@ EVENNESS_OF_THE_WEEK = (
 
 TYPE_OF_LESSON = (
     ('пз', 'практическое занятие'),
-    ('лк', 'лекционное занятие '),
+    ('лк', 'лекционное занятие'),
     ('с', 'семинар'),
 
 )
@@ -153,7 +153,7 @@ class Journal(models.Model):
         return f'{self.subject}-{self.group}-{self.date}'
 
     def get_url(self):
-        return f'{self.subject}-{self.group.name}-{self.group.curs}'
+        return f'{self.subject}-{self.group.slug}-{self.group.curs}'
 
     class Meta:
         verbose_name = 'Журнал'
