@@ -1,13 +1,11 @@
 from django.db.models import Prefetch
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .service import *
 from .models import *
 from .serializers import *
-from student_performance.models import Subject, Lecturer, Group, Users
+from student_performance.models import Subject, Lecturer, Group
 
 
 class TimetableListView(ListAPIView):
@@ -17,12 +15,7 @@ class TimetableListView(ListAPIView):
         Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
     ).select_related('subject', 'group', 'classroom')
     serializer_class = TimetableSerializer
-
-    @method_decorator(cache_page(60 * 60 * 2, key_prefix='timetable' ))
-    def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+    permission_classes = (AllowAny,)
 
 
 class ExamListView(ListAPIView):
