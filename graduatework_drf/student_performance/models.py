@@ -7,13 +7,13 @@ from autoslug import AutoSlugField
 
 
 class Users(AbstractUser):
-
     phone = models.CharField(max_length=20, verbose_name="Телефон", blank=True)
     group = models.ForeignKey('Group', on_delete=models.PROTECT, verbose_name='Группа', blank=True, null=True)
     slug = AutoSlugField(populate_from='username', unique=True, db_index=True, verbose_name='URL', )
     birthday = models.DateField(verbose_name='Дата рождения', blank=True, null=True)
     address = models.CharField(max_length=150, blank=True, verbose_name='Адрес', null=True)
     user_photo = models.ImageField(upload_to='user_photo/%Y/%m/%d/', verbose_name='Аватарка', blank=True, null=True)
+    term = models.PositiveSmallIntegerField(verbose_name='Семестр', default=1)
 
     class Meta:
         verbose_name = 'Пользователь'
@@ -53,11 +53,12 @@ class Subject(models.Model):
         verbose_name_plural = 'Предметы'
 
     def __str__(self):
-        return f"{self.subject_name}-{self.subject_code}"
+        return f"{self.subject_name}"
 
 
 class Lecturer(models.Model):
-    user = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Пользователь')
+    user = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Пользователь',
+                             related_name='lecturer_user')
     groups = SortedManyToManyField('Group', verbose_name='Группы', blank=True)
     subjects = SortedManyToManyField('Subject', verbose_name='Предметы', blank=True)
 
@@ -69,7 +70,7 @@ class Lecturer(models.Model):
         return str(self.user)
 
 
-class MeasurableTypesControl(models.Model):
+class Student_Scores(models.Model):
     student = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Студент')
     subject = models.ForeignKey('Subject', on_delete=models.PROTECT, verbose_name='Предмет')
     lecturer = models.ForeignKey('Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель')
@@ -79,25 +80,8 @@ class MeasurableTypesControl(models.Model):
     date = models.DateField(auto_now_add=True, verbose_name="Дата")
 
     class Meta:
-        verbose_name = 'Измеримые виды контроля'
-        verbose_name_plural = 'Измеримые виды контроля'
-
-    def __str__(self):
-        return f"{self.student}-{self.subject}-{self.date}"
-
-
-class OtherMeasurableTypesControl(models.Model):
-    student = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Студент')
-    subject = models.ForeignKey('Subject', on_delete=models.PROTECT, verbose_name='Предмет')
-    lecturer = models.ForeignKey('Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель')
-    cause = models.CharField(max_length=70, verbose_name='Причина', )
-    points = models.PositiveIntegerField(verbose_name='Баллы', default=0)
-    description = models.TextField(verbose_name='Описание', blank=True, null=True)
-    date = models.DateField(auto_now_add=True, verbose_name="Дата")
-
-    class Meta:
-        verbose_name = 'Иные измеримые виды контроля'
-        verbose_name_plural = 'Иные измеримые виды контроля'
+        verbose_name = 'Баллы студента'
+        verbose_name_plural = 'Баллы студентов'
 
     def __str__(self):
         return f"{self.student}-{self.subject}-{self.date}"
@@ -116,9 +100,7 @@ class Exam_Grades(models.Model):
 class Overall_Performance(models.Model):
     student = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Студент')
     subject = models.ForeignKey('Subject', on_delete=models.PROTECT, verbose_name='Предмет')
-    measurable_types_control = SortedManyToManyField('MeasurableTypesControl', verbose_name='Измеримые виды контроля')
-    other_measurable_types_control = SortedManyToManyField('OtherMeasurableTypesControl',
-                                                           verbose_name='Иные измеримые виды контроля')
+    student_scores = SortedManyToManyField('Student_Scores', verbose_name='Баллы студентов')
     exam_grades = models.ForeignKey('Exam_Grades', on_delete=models.CASCADE, verbose_name='Экзамен')
     overall_points = models.PositiveIntegerField(verbose_name='Общее число баллов', default=0)
 

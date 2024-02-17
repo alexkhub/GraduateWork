@@ -10,6 +10,7 @@ class CharFilterInFilter(filters.BaseInFilter, filters.CharFilter):
 class QuestFilter(filters.FilterSet):
     subject = CharFilterInFilter(field_name='subject__subject_name', lookup_expr='in')
     date = filters.DateFilter(field_name='date', lookup_expr='gte')
+
     class Meta:
         model = Quest
         fields = ['subject', 'date']
