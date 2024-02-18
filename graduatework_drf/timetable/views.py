@@ -1,4 +1,4 @@
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from rest_framework.generics import ListAPIView, RetrieveAPIView
@@ -22,6 +22,7 @@ class TimetableListView(ListAPIView):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
         return self.queryset
 
+
 class ExamListView(ListAPIView):
     queryset = Exam.objects.all().prefetch_related(
         Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
@@ -31,6 +32,7 @@ class ExamListView(ListAPIView):
     def get_queryset(self):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
         return self.queryset
+
 
 class TimetableChangesListView(ListAPIView):
     queryset = TimetableChanges.objects.filter(date__gte=get_date()).prefetch_related(
@@ -62,7 +64,7 @@ class JournalRetrieveView(RetrieveAPIView):
     serializer_class = JournalSerializer
     lookup_field = 'id'
 
-    @method_decorator(cache_page(60 * 60 * 2, key_prefix='journal'),)
+    @method_decorator(cache_page(60 * 60 * 2, key_prefix='journal'), )
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)

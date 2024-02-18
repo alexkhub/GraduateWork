@@ -114,7 +114,7 @@ class TimetableChanges(models.Model):
 
 class Lesson(models.Model):
     lesson_topic = models.CharField(max_length=200, verbose_name='Тема занятия', blank=True, null=True)
-    lesson_number = models.PositiveIntegerField(verbose_name='Порядковый номер пары')
+    lesson_number = models.PositiveIntegerField(verbose_name='Порядковый номер пары', blank=True, null=True)
     group = models.ForeignKey('student_performance.Group', on_delete=models.CASCADE, verbose_name='Группа',
                               related_name='lesson_group')
     subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
@@ -146,7 +146,7 @@ class Journal(models.Model):
                                  related_name='journal_lecturer')
     date = models.DateField(verbose_name='Дата', auto_now_add=True)
     number_of_lesson = models.PositiveIntegerField(verbose_name='Общее число пар')
-    lessons = SortedManyToManyField('Lesson', verbose_name='Пары')
+    lessons = SortedManyToManyField('Lesson', verbose_name='Пары', blank=True, null=True)
     slug = AutoSlugField(populate_from='get_url', unique=True, verbose_name='URL', max_length=50, blank=True, null=True)
 
     def __str__(self):

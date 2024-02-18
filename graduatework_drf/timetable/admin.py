@@ -35,8 +35,8 @@ class ClassRoomAdmin(admin.ModelAdmin):
 
 
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ('lesson_number', 'lesson_topic', 'group', 'subject', 'lecturer', 'date', 'classroom')
-    list_display_links = ('lesson_number', 'lesson_topic',)
+    list_display = ('id','lesson_number', 'lesson_topic', 'group', 'subject', 'lecturer', 'date', 'classroom')
+    list_display_links = ('id', 'lesson_number', 'lesson_topic',)
     search_fields = ('group', 'subject__subject_name', 'lecturer__user', 'lesson_topic')
     list_filter = ('group', 'subject__subject_name', 'lecturer__user', 'classroom')
     list_editable = ('classroom',)
