@@ -146,7 +146,7 @@ class Journal(models.Model):
                                  related_name='journal_lecturer')
     date = models.DateField(verbose_name='Дата', auto_now_add=True)
     number_of_lesson = models.PositiveIntegerField(verbose_name='Общее число пар')
-    lessons = SortedManyToManyField('Lesson', verbose_name='Пары', blank=True, null=True)
+    lessons = SortedManyToManyField('Lesson', verbose_name='Пары', blank=True)
     slug = AutoSlugField(populate_from='get_url', unique=True, verbose_name='URL', max_length=50, blank=True, null=True)
 
     def __str__(self):

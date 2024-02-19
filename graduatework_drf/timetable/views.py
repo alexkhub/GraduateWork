@@ -1,13 +1,14 @@
 from django.db.models import Prefetch, Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .service import *
 from .models import *
 from .serializers import *
 from student_performance.models import Subject, Lecturer, Group, Users
+from bulk_update.helper import bulk_update
 
 
 class TimetableListView(ListAPIView):
@@ -69,3 +70,10 @@ class JournalRetrieveView(RetrieveAPIView):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+
+class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    queryset = Lesson.objects.all().prefetch_related('student_passes')
+    serializer_class = LessonDetailSerializer
+    lookup_field = 'id'
+

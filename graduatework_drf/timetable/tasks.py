@@ -18,7 +18,7 @@ def create_lessons():
                                     lecturer=change.lecturer,
                                     classroom=change.classroom)])
     timetables = TimetableOfClasses.objects.filter(
-        Q(evenness__in=['совмещенная', definition_evenness()]) & Q(day_of_the_week='сб')).exclude(
+        Q(evenness__in=['совмещенная', definition_evenness()]) & Q(day_of_the_week=get_day_of_the_week())).exclude(
         group__in=groups).order_by('group', 'lesson_number').select_related('group', 'subject', 'classroom',
                                                                             'lecturer')
 
@@ -27,12 +27,15 @@ def create_lessons():
                                     subject=timetable.subject,
                                     lecturer=timetable.lecturer,
                                     classroom=timetable.classroom)])
-    lessons_2 = Lesson.objects.bulk_create(lessons_list)
-    for lesson in lessons_2:
-        print(f'{lesson.subject.slug}-{lesson.group.slug}-{lesson.group.curs}')
+    Lesson.objects.bulk_create(lessons_list)
+    lessons = Lesson.objects.filter(date=get_date()).select_related('group', 'subject', 'classroom',
+                                                                    'lecturer')
+    for lesson in lessons:
+
         try:
-            journal = Journal.objects.get(slug=f'{lesson.subject.slug}-{lesson.group.slug}-{lesson.group.curs}')
-            journal.lessons.add(lesson)
+            Journal.objects.get(
+                slug=f'{lesson.subject.slug}-{lesson.group.slug}-{lesson.group.curs}').lessons.add(lesson)
+
         except Journal.DoesNotExist:
             pass
     return None

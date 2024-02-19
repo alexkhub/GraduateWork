@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import *
 from student_performance.serializers import LecturerInformationSerializer, UsernameSerializer
 
+from student_performance.models import Users
+
 
 class TimetableSerializer(serializers.ModelSerializer):
     group = serializers.SlugRelatedField('name', read_only=True)
@@ -56,3 +58,14 @@ class JournalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Journal
         fields = '__all__'
+
+
+class LessonDetailSerializer(serializers.ModelSerializer):
+    student_passes = UsernameSerializer(many=True )
+
+    class Meta:
+        model = Lesson
+        exclude = ('subject', 'lecturer', 'classroom')
+
+
+
