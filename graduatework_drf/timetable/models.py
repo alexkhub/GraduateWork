@@ -21,7 +21,6 @@ TYPE_OF_LESSON = (
     ('пз', 'практическое занятие'),
     ('лк', 'лекционное занятие'),
     ('с', 'семинар'),
-
 )
 
 
@@ -125,7 +124,7 @@ class Lesson(models.Model):
                                   null=True)
     type_of_lesson = models.CharField(max_length=50, verbose_name='Тип занятия', default='лк', choices=TYPE_OF_LESSON)
     date = models.DateField(verbose_name='Дата', auto_now_add=True)
-    student_passes = SortedManyToManyField('student_performance.Users', verbose_name='Пропуски')
+    student_passes = SortedManyToManyField('student_performance.Users', verbose_name='Пропуски', blank=True)
     quest = models.ForeignKey('student_work.Quest', on_delete=models.PROTECT, verbose_name='Задания', blank=True,
                               null=True)
 

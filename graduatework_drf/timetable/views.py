@@ -8,7 +8,6 @@ from .service import *
 from .models import *
 from .serializers import *
 from student_performance.models import Subject, Lecturer, Group, Users
-from bulk_update.helper import bulk_update
 
 
 class TimetableListView(ListAPIView):
@@ -73,7 +72,10 @@ class JournalRetrieveView(RetrieveAPIView):
 
 
 class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    queryset = Lesson.objects.all().prefetch_related('student_passes')
+    queryset = Lesson.objects.all().select_related('quest', 'group').prefetch_related('student_passes')
     serializer_class = LessonDetailSerializer
     lookup_field = 'id'
+    http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options', 'trace']
 
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)

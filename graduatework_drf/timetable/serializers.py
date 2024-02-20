@@ -61,11 +61,27 @@ class JournalSerializer(serializers.ModelSerializer):
 
 
 class LessonDetailSerializer(serializers.ModelSerializer):
-    student_passes = UsernameSerializer(many=True )
+    student_passes = UsernameSerializer(many=True)
+
 
     class Meta:
         model = Lesson
         exclude = ('subject', 'lecturer', 'classroom')
+
+    def create_or_student_passess(self, student_passes):
+        student_ids = []
+        for student in student_passes:
+            package_instance, created = Users.objects.update_or_create(pk=student.get('id'), defaults=student)
+            student_ids.append(package_instance.pk)
+        return student_ids
+
+    def update(self, instance, validated_data):
+        student_passes = validated_data.pop('student_passes', [])
+        instance.student_passes = set(self.create_or_student_passess(student_passes))
+        instance.lesson_topic = validated_data.get('lesson_topic', instance.lesson_topic)
+        instance.type_of_lesson = validated_data.get('type_of_lesson', instance.type_of_lesson)
+        instance.quest = validated_data.get('quest', instance.quest)
+        return  instance
 
 
 
