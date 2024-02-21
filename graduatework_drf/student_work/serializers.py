@@ -62,7 +62,6 @@ class ProfileStudentQuestSerializer(serializers.ModelSerializer):
     subject = serializers.SlugRelatedField(slug_field='subject_name', queryset=Subject.objects.all())
     lecturer = LecturerInformationSerializer()
 
-    # lecturer = serializers.CharField(source='quest_lecturer')
     class Meta:
         model = Quest
         fields = (

@@ -75,7 +75,19 @@ class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = Lesson.objects.all().select_related('quest', 'group').prefetch_related('student_passes')
     serializer_class = LessonDetailSerializer
     lookup_field = 'id'
-    http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options', 'trace']
 
+    # http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options', 'trace']
+    #
     def patch(self, request, *args, **kwargs):
         return self.partial_update(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+
+        partial = kwargs.pop('partial', True)
+        instance = self.get_object()
+
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+
+        self.perform_update(serializer)
+        return Response(serializer.data)

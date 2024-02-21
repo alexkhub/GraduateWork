@@ -2,7 +2,9 @@ from rest_framework import serializers
 from .models import *
 from student_performance.serializers import LecturerInformationSerializer, UsernameSerializer
 
-from student_performance.models import Users
+from student_performance.models import Users, Group
+
+from student_work.models import Quest
 
 
 class TimetableSerializer(serializers.ModelSerializer):
@@ -60,28 +62,34 @@ class JournalSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class LessonDetailSerializer(serializers.ModelSerializer):
-    student_passes = UsernameSerializer(many=True)
+class CustomChoiceField(serializers.ChoiceField):
+    def to_internal_value(self, data):
+        # type casting
+        if isinstance(data, int):
+            return float(data)
 
+        return super().to_internal_value(data)
+
+class LessonDetailSerializer(serializers.ModelSerializer):
+    student_passes = serializers.SlugRelatedField(many=True, slug_field='username', queryset=Users.objects.all())
+    group = serializers.SlugRelatedField(many=False, slug_field='name', queryset=Group.objects.all())
+    quest = serializers.SlugRelatedField(many=False, slug_field='quest_name', queryset=Quest.objects.all())
+    type_of_lesson = CustomChoiceField(choices=TYPE_OF_LESSON)
 
     class Meta:
         model = Lesson
         exclude = ('subject', 'lecturer', 'classroom')
 
-    def create_or_student_passess(self, student_passes):
-        student_ids = []
-        for student in student_passes:
-            package_instance, created = Users.objects.update_or_create(pk=student.get('id'), defaults=student)
-            student_ids.append(package_instance.pk)
-        return student_ids
-
     def update(self, instance, validated_data):
-        student_passes = validated_data.pop('student_passes', [])
-        instance.student_passes = set(self.create_or_student_passess(student_passes))
+        student_passes_instance = validated_data.pop('student_passes')
         instance.lesson_topic = validated_data.get('lesson_topic', instance.lesson_topic)
         instance.type_of_lesson = validated_data.get('type_of_lesson', instance.type_of_lesson)
         instance.quest = validated_data.get('quest', instance.quest)
-        return  instance
+        # instance.group = validated_data.get('group', instance.group)
+        instance.student_passes.clear()
 
+        instance.save()
+        for sp in student_passes_instance:
+            instance.student_passes.add(sp)
 
-
+        return instance
