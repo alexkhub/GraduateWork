@@ -55,7 +55,7 @@ class LectorTimeTableListView(ListAPIView):
 class JournalRetrieveView(RetrieveAPIView):
     queryset = Journal.objects.all().select_related('subject', 'group', ).prefetch_related(
         Prefetch('lessons', queryset=Lesson.objects.all().select_related('quest').prefetch_related(
-            Prefetch('student_passes', queryset=Users.objects.all().only('username'))).only(
+           ).only(
             'quest__quest_name', 'lesson_topic', 'lesson_number', 'date', 'type_of_lesson')),
         Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
 
@@ -72,22 +72,19 @@ class JournalRetrieveView(RetrieveAPIView):
 
 
 class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    queryset = Lesson.objects.all().select_related('quest', 'group').prefetch_related('student_passes')
+    queryset = Lesson.objects.all().select_related('quest', 'group').prefetch_related(
+        Prefetch('student_passes', queryset=Users.objects.all().only('username'))).only(
+        'group__name', 'quest__quest_name', 'type_of_lesson', 'lesson_topic', 'lesson_number', 'date')
     serializer_class = LessonDetailSerializer
     lookup_field = 'id'
 
-    # http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options', 'trace']
-    #
-    def patch(self, request, *args, **kwargs):
-        return self.partial_update(request, *args, **kwargs)
+
+
 
     def update(self, request, *args, **kwargs):
-
         partial = kwargs.pop('partial', True)
         instance = self.get_object()
-
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
-
         self.perform_update(serializer)
         return Response(serializer.data)

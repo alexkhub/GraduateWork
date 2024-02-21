@@ -70,22 +70,25 @@ class CustomChoiceField(serializers.ChoiceField):
 
         return super().to_internal_value(data)
 
+
 class LessonDetailSerializer(serializers.ModelSerializer):
-    student_passes = serializers.SlugRelatedField(many=True, slug_field='username', queryset=Users.objects.all())
-    group = serializers.SlugRelatedField(many=False, slug_field='name', queryset=Group.objects.all())
-    quest = serializers.SlugRelatedField(many=False, slug_field='quest_name', queryset=Quest.objects.all())
+    group = serializers.SlugRelatedField(many=False, slug_field='name', read_only=True)
+    student_passes = serializers.SlugRelatedField(many=True, slug_field='username',
+                                                  queryset=Users.objects.filter(is_staff=False).only('username'))
+
+    quest = serializers.SlugRelatedField(many=False, slug_field='quest_name', queryset=Quest.objects.all().only('id', 'quest_name', 'date_added'))
     type_of_lesson = CustomChoiceField(choices=TYPE_OF_LESSON)
 
     class Meta:
         model = Lesson
         exclude = ('subject', 'lecturer', 'classroom')
 
+
     def update(self, instance, validated_data):
         student_passes_instance = validated_data.pop('student_passes')
         instance.lesson_topic = validated_data.get('lesson_topic', instance.lesson_topic)
         instance.type_of_lesson = validated_data.get('type_of_lesson', instance.type_of_lesson)
         instance.quest = validated_data.get('quest', instance.quest)
-        # instance.group = validated_data.get('group', instance.group)
         instance.student_passes.clear()
 
         instance.save()
