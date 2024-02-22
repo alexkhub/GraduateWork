@@ -1,6 +1,7 @@
 from django.db.models import Prefetch, Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from rest_framework import status
 from rest_framework.generics import ListAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -8,7 +9,7 @@ from .service import *
 from .models import *
 from .serializers import *
 from student_performance.models import Subject, Lecturer, Group, Users
-
+from .tasks import *
 
 class TimetableListView(ListAPIView):
     queryset = TimetableOfClasses.objects.all().order_by('group', 'lesson_number').prefetch_related(
@@ -55,10 +56,9 @@ class LectorTimeTableListView(ListAPIView):
 class JournalRetrieveView(RetrieveAPIView):
     queryset = Journal.objects.all().select_related('subject', 'group', ).prefetch_related(
         Prefetch('lessons', queryset=Lesson.objects.all().select_related('quest').prefetch_related(
-           ).only(
+            Prefetch('student_passes', queryset=Users.objects.all().only('username'))).only(
             'quest__quest_name', 'lesson_topic', 'lesson_number', 'date', 'type_of_lesson')),
         Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
-
     ).only(
         'subject__subject_name', 'group__name', 'lecturer', 'lessons', 'date', 'number_of_lesson', 'slug')
     serializer_class = JournalSerializer
@@ -68,7 +68,7 @@ class JournalRetrieveView(RetrieveAPIView):
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
@@ -78,9 +78,6 @@ class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     serializer_class = LessonDetailSerializer
     lookup_field = 'id'
 
-
-
-
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', True)
         instance = self.get_object()
@@ -88,3 +85,11 @@ class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        email_body = f"Была удалена следующая пара {instance.lesson_topic}  {instance.group}  {instance.subject}"
+        send_destroy_lesson.delay(email_body=email_body)
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+

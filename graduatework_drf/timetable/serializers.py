@@ -76,13 +76,13 @@ class LessonDetailSerializer(serializers.ModelSerializer):
     student_passes = serializers.SlugRelatedField(many=True, slug_field='username',
                                                   queryset=Users.objects.filter(is_staff=False).only('username'))
 
-    quest = serializers.SlugRelatedField(many=False, slug_field='quest_name', queryset=Quest.objects.all().only('id', 'quest_name', 'date_added'))
+    quest = serializers.SlugRelatedField(many=False, slug_field='quest_name',
+                                         queryset=Quest.objects.all().only('id', 'quest_name', 'date_added'))
     type_of_lesson = CustomChoiceField(choices=TYPE_OF_LESSON)
 
     class Meta:
         model = Lesson
         exclude = ('subject', 'lecturer', 'classroom')
-
 
     def update(self, instance, validated_data):
         student_passes_instance = validated_data.pop('student_passes')
@@ -94,5 +94,4 @@ class LessonDetailSerializer(serializers.ModelSerializer):
         instance.save()
         for sp in student_passes_instance:
             instance.student_passes.add(sp)
-
         return instance

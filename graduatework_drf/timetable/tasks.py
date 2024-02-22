@@ -31,7 +31,6 @@ def create_lessons():
     lessons = Lesson.objects.filter(date=get_date()).select_related('group', 'subject', 'classroom',
                                                                     'lecturer')
     for lesson in lessons:
-
         try:
             Journal.objects.get(
                 slug=f'{lesson.subject.slug}-{lesson.group.slug}-{lesson.group.curs}').lessons.add(lesson)
@@ -39,3 +38,8 @@ def create_lessons():
         except Journal.DoesNotExist:
             pass
     return None
+
+
+@app.task
+def send_destroy_lesson(email_body):
+    send_destroy_lesson_email(email_body)

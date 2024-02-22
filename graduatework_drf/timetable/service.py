@@ -1,5 +1,7 @@
 from datetime import date
 
+from django.core.mail import send_mail
+
 
 def get_date() -> str:
     today = str(date.today())
@@ -17,3 +19,14 @@ def definition_evenness() -> str:
     if week_number % 2 == 0:
         return 'четная'
     return 'нечетная'
+
+
+
+def send_destroy_lesson_email(email_body):
+    send_mail(
+        'Удаление пары',
+        email_body,
+        'aleksandrkhubaevwork@gmail.com',
+        ['aleksandrkhubaev04@gmail.com'],
+        fail_silently=False
+    )

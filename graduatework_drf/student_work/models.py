@@ -8,8 +8,8 @@ class Quest(models.Model):
     quest_name = models.CharField(max_length=100, verbose_name='Задание')
     subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
                                 related_name='quest_subject')
-    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель',
-                                 related_name='quest_lecturer')
+    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель',
+                                 related_name='quest_lecturer', blank=True, null=True)
     group = models.ForeignKey('student_performance.Group', on_delete=models.CASCADE, verbose_name='Группа',
                               related_name='quest_group')
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
@@ -28,7 +28,7 @@ class Quest(models.Model):
 
 class UserQuest(models.Model):
     status = models.BooleanField(default=True, verbose_name='Статус')
-    quest = models.ForeignKey('Quest', on_delete=models.PROTECT, verbose_name='Задание')
+    quest = models.ForeignKey('Quest', on_delete=models.SET_NULL, verbose_name='Задание', blank=True, null=True)
     user = models.ForeignKey('student_performance.Users', on_delete=models.CASCADE, verbose_name='Студент',
                              related_name='user_quest_student')
     comment = models.TextField(verbose_name='Комментарий', blank=True, null=True)

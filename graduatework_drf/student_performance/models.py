@@ -72,8 +72,8 @@ class Lecturer(models.Model):
 
 class Student_Scores(models.Model):
     student = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Студент')
-    subject = models.ForeignKey('Subject', on_delete=models.PROTECT, verbose_name='Предмет')
-    lecturer = models.ForeignKey('Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель')
+    subject = models.ForeignKey('Subject', on_delete=models.CASCADE, verbose_name='Предмет', blank=True, null=True)
+    lecturer = models.ForeignKey('Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель', blank=True, null=True)
     cause = models.CharField(max_length=70, verbose_name='Причина', )
     points = models.PositiveIntegerField(verbose_name='Баллы', default=0)
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
@@ -99,7 +99,7 @@ class Exam_Grades(models.Model):
 
 class Overall_Performance(models.Model):
     student = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Студент')
-    subject = models.ForeignKey('Subject', on_delete=models.PROTECT, verbose_name='Предмет')
+    subject = models.ForeignKey('Subject', on_delete=models.CASCADE, verbose_name='Предмет')
     student_scores = SortedManyToManyField('Student_Scores', verbose_name='Баллы студентов')
     exam_grades = models.ForeignKey('Exam_Grades', on_delete=models.CASCADE, verbose_name='Экзамен')
     overall_points = models.PositiveIntegerField(verbose_name='Общее число баллов', default=0)

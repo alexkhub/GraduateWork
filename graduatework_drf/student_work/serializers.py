@@ -21,7 +21,7 @@ class GroupQuestSerializer(serializers.ModelSerializer):
         lecturer_data = validated_data.pop('lecturer')
         lecturer_data['user'] = self.context['request'].user
 
-        lecturer_instance = Lecturer.objects.create(**lecturer_data)
+        lecturer_instance, _ = Lecturer.objects.get_or_create(**lecturer_data)
         return Quest.objects.create(lecturer=lecturer_instance, **validated_data)
 
 
@@ -31,7 +31,7 @@ class StudentQuestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserQuest
-        fields = ('status', 'comment', 'file_link', 'date_added', 'quest', 'user')
+        fields = ('id', 'status', 'comment', 'file_link', 'date_added', 'quest', 'user')
 
     def update(self, instance, validated_data):
         instance.comment = validated_data.get('comment', instance.comment)

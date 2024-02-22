@@ -49,12 +49,12 @@ class Exam(models.Model):
                               related_name='exam_group')
     subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
                                 related_name='exam_subject')
-    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель',
-                                 related_name='exam_lecturer')
+    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель',
+                                 related_name='exam_lecturer', blank=True, null=True)
     start_time = models.TimeField(verbose_name='Начало экзамена')
     end_time = models.TimeField(verbose_name='Конец экзамена')
     date = models.DateField(verbose_name='Дата', blank=True, null=True)
-    classroom = models.ForeignKey('ClassRoom', on_delete=models.PROTECT, verbose_name='Аудитория', blank=True,
+    classroom = models.ForeignKey('ClassRoom', on_delete=models.SET_NULL, verbose_name='Аудитория', blank=True,
                                   null=True)
 
     class Meta:
@@ -70,15 +70,15 @@ class TimetableOfClasses(models.Model):
                               related_name='timetable_group')
     subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
                                 related_name='timetable_subject')
-    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель',
-                                 related_name='timetable_lecturer')
+    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель',
+                                 related_name='timetable_lecturer', blank=True, null=True)
     lesson_number = models.PositiveIntegerField(verbose_name='Номер пары', default=1)
     start_time = models.TimeField(verbose_name='Начало пары')
     end_time = models.TimeField(verbose_name='Конец пары')
     evenness = models.CharField(max_length=30, verbose_name='Четность недели', default='совмещенная',
                                 choices=EVENNESS_OF_THE_WEEK)
     day_of_the_week = models.CharField(max_length=30, verbose_name='День недели', choices=DAYS_OF_THE_WEEK_CHOICES)
-    classroom = models.ForeignKey('ClassRoom', on_delete=models.PROTECT, verbose_name='Аудитория', blank=True,
+    classroom = models.ForeignKey('ClassRoom', on_delete=models.SET_NULL, verbose_name='Аудитория', blank=True,
                                   null=True)
 
     def __str__(self):
@@ -94,12 +94,12 @@ class TimetableChanges(models.Model):
                               related_name='changes_group')
     subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
                                 related_name='changes_subject')
-    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель',
-                                 related_name='changes_lecturer')
+    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель',
+                                 related_name='changes_lecturer', blank=True, null=True)
     lesson_number = models.PositiveIntegerField(verbose_name='Номер пары', default=1)
     start_time = models.TimeField(verbose_name='Начало пары')
     end_time = models.TimeField(verbose_name='Конец пары')
-    classroom = models.ForeignKey('ClassRoom', on_delete=models.PROTECT, verbose_name='Аудитория', blank=True,
+    classroom = models.ForeignKey('ClassRoom', on_delete=models.SET_NULL, verbose_name='Аудитория', blank=True,
                                   null=True)
     date = models.DateField(verbose_name='Дата', blank=True, null=True)
 
@@ -118,14 +118,14 @@ class Lesson(models.Model):
                               related_name='lesson_group')
     subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
                                 related_name='lesson_subject')
-    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.PROTECT, verbose_name='Преподаватель',
-                                 related_name='lesson_lecturer')
-    classroom = models.ForeignKey('ClassRoom', on_delete=models.PROTECT, verbose_name='Аудитория', blank=True,
+    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель',
+                                 related_name='lesson_lecturer', blank=True, null=True)
+    classroom = models.ForeignKey('ClassRoom', on_delete=models.SET_NULL, verbose_name='Аудитория', blank=True,
                                   null=True)
     type_of_lesson = models.CharField(max_length=50, verbose_name='Тип занятия', default='лк', choices=TYPE_OF_LESSON)
     date = models.DateField(verbose_name='Дата', auto_now_add=True)
     student_passes = SortedManyToManyField('student_performance.Users', verbose_name='Пропуски', blank=True)
-    quest = models.ForeignKey('student_work.Quest', on_delete=models.PROTECT, verbose_name='Задания', blank=True,
+    quest = models.ForeignKey('student_work.Quest', on_delete=models.SET_NULL, verbose_name='Задания', blank=True,
                               null=True)
 
     class Meta:
