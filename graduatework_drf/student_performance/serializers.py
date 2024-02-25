@@ -38,8 +38,10 @@ class StudentProfileSerializer(serializers.ModelSerializer):
 
 
 class UsernameSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+
     class Meta:
         model = Users
-        fields = ('username',)
+        fields = ('id', 'username',)
 
 

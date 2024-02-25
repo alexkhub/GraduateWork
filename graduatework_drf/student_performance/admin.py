@@ -21,7 +21,7 @@ class SubjectAdmin(admin.ModelAdmin):
     list_display = ('id', 'subject_name', 'subject_code')
     list_display_links = ('id', 'subject_name', 'subject_code')
     search_fields = ('subject_name', 'subject_code')
-    prepopulated_fields = {'slug': ('subject_name', 'subject_code')}
+    prepopulated_fields = {'slug': ('subject_name',)}
 
 
 class LecturerAdmin(admin.ModelAdmin):

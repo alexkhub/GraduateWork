@@ -2,6 +2,10 @@ from rest_framework import serializers
 from .models import *
 from student_performance.serializers import LecturerInformationSerializer, UsernameSerializer
 
+from student_performance.models import Users, Group
+
+from student_work.models import Quest
+
 
 class TimetableSerializer(serializers.ModelSerializer):
     group = serializers.SlugRelatedField('name', read_only=True)
@@ -56,3 +60,38 @@ class JournalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Journal
         fields = '__all__'
+
+
+class CustomChoiceField(serializers.ChoiceField):
+    def to_internal_value(self, data):
+        # type casting
+        if isinstance(data, int):
+            return float(data)
+
+        return super().to_internal_value(data)
+
+
+class LessonDetailSerializer(serializers.ModelSerializer):
+    group = serializers.SlugRelatedField(many=False, slug_field='name', read_only=True)
+    student_passes = serializers.SlugRelatedField(many=True, slug_field='username',
+                                                  queryset=Users.objects.filter(is_staff=False).only('username'))
+
+    quest = serializers.SlugRelatedField(many=False, slug_field='quest_name',
+                                         queryset=Quest.objects.all().only('id', 'quest_name', 'date_added'))
+    type_of_lesson = CustomChoiceField(choices=TYPE_OF_LESSON)
+
+    class Meta:
+        model = Lesson
+        exclude = ('subject', 'lecturer', 'classroom')
+
+    def update(self, instance, validated_data):
+        student_passes_instance = validated_data.pop('student_passes')
+        instance.lesson_topic = validated_data.get('lesson_topic', instance.lesson_topic)
+        instance.type_of_lesson = validated_data.get('type_of_lesson', instance.type_of_lesson)
+        instance.quest = validated_data.get('quest', instance.quest)
+        instance.student_passes.clear()
+
+        instance.save()
+        for sp in student_passes_instance:
+            instance.student_passes.add(sp)
+        return instance
