@@ -3,10 +3,11 @@ import './login.css';
 import axios from 'axios';
 
 function Login() {
-    
+
     function login() {
         const loginValue = document.querySelector('#login-input').value;
         const passwordValue = document.querySelector('#login-password').value;
+
         if (localStorage.getItem('jwt') === null) {
             axios.post("http://127.0.0.1:8000/auth/jwt/create",
                 {

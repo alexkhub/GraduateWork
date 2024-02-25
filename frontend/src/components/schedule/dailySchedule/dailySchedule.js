@@ -1,8 +1,19 @@
+import React, { useState, useEffect } from 'react';
 import Pair from "../pair/pair";
 // import DoublePair from "../doublePair/doublePair";
 
 
 function DailySchedule(props) {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api-timetable/timetable/4-1is/')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setData(data);
+            })
+    }, []);
     return (
         <>
             <tr>
@@ -10,10 +21,10 @@ function DailySchedule(props) {
                 <td className="day">{props.day}</td>
                 <td></td>
             </tr>
-
+            
             <Pair
                 pairNumber='1'
-                subjectName={props.firstSubjectName}
+                subjectName={JSON.stringify(data[0])}
                 teacherName={props.firstTeacherName}
                 audience={props.firstAudience}
                 time="9:00 - 10:30"

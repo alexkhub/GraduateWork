@@ -1,14 +1,12 @@
+
 import DailySchedule from './dailySchedule/dailySchedule';
 import './schedule.css';
 
+
 function Schedule() {
-    fetch('http://127.0.0.1:8000/api-timetable/timetable/4-1is/')
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
+  
     return (
         <>
-
             <div className="daily-schedule schedule-content">
                 <p>Расписание на сегодня</p>
                 <table className="daily-schedule">
