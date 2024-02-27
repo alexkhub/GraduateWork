@@ -11,6 +11,7 @@ from .serializers import *
 from student_performance.models import Subject, Lecturer, Group, Users
 from .tasks import *
 
+
 class TimetableListView(ListAPIView):
     queryset = TimetableOfClasses.objects.all().order_by('group', 'lesson_number').prefetch_related(
 
@@ -23,6 +24,14 @@ class TimetableListView(ListAPIView):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
         return self.queryset
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            'timetable': serializer.data
+        }, status=status.HTTP_200_OK)
+
 
 class ExamListView(ListAPIView):
     queryset = Exam.objects.all().prefetch_related(
@@ -34,12 +43,32 @@ class ExamListView(ListAPIView):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
         return self.queryset
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            'exams': serializer.data
+        }, status=status.HTTP_200_OK)
+
 
 class TimetableChangesListView(ListAPIView):
     queryset = TimetableChanges.objects.filter(date__gte=get_date()).prefetch_related(
         Prefetch('lecturer', queryset=Lecturer.objects.all())
     ).select_related('subject', 'group').order_by('date', 'group', 'lesson_number')
     serializer_class = TimetableChangesSerializer
+
+    def get_queryset(self):
+        self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
+        return self.queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            'timetable_changes': serializer.data
+        }, status=status.HTTP_200_OK)
 
 
 class LectorTimeTableListView(ListAPIView):
@@ -51,6 +80,14 @@ class LectorTimeTableListView(ListAPIView):
 
     def get_queryset(self):
         return self.queryset.filter(lecturer__user__slug=self.request.user.slug)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            'lector_timetable': serializer.data
+        }, status=status.HTTP_200_OK)
 
 
 class JournalRetrieveView(RetrieveAPIView):
@@ -68,7 +105,9 @@ class JournalRetrieveView(RetrieveAPIView):
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({
+            'journal': serializer.data
+        }, status=status.HTTP_200_OK)
 
 
 class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
@@ -77,6 +116,13 @@ class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         'group__name', 'quest__quest_name', 'type_of_lesson', 'lesson_topic', 'lesson_number', 'date')
     serializer_class = LessonDetailSerializer
     lookup_field = 'id'
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response({
+            'lesson_detail': serializer.data
+        }, status=status.HTTP_200_OK)
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', True)
@@ -92,4 +138,3 @@ class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         send_destroy_lesson.delay(email_body=email_body)
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
-
