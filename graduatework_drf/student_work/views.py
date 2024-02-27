@@ -31,6 +31,14 @@ class GroupQuestListCreateView(ListCreateAPIView):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
         return self.queryset
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            'group_quests': serializer.data
+        }, status=status.HTTP_200_OK)
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -47,6 +55,14 @@ class DetailStudentQuestRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     lookup_field = 'id'
     # permission_classes = (DetailStudentQuestPermission, IsAuthenticated)
     authentication_classes = (JWTAuthentication,)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response({
+            'detail_student_quest': serializer.data
+        }, status=status.HTTP_200_OK)
+
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
