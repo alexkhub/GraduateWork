@@ -24,7 +24,7 @@ function DailySchedule(props) {
             
             <Pair
                 pairNumber='1'
-                subjectName={JSON.stringify(data[0])}
+                subjectName={JSON.stringify(data)}
                 teacherName={props.firstTeacherName}
                 audience={props.firstAudience}
                 time="9:00 - 10:30"
