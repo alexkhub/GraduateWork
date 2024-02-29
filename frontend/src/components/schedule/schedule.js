@@ -1,10 +1,7 @@
-
 import DailySchedule from './dailySchedule/dailySchedule';
 import './schedule.css';
 
-
 function Schedule() {
-  
     return (
         <>
             <div className="daily-schedule schedule-content">
@@ -46,7 +43,7 @@ function Schedule() {
 
             <div className="weekly-schedule schedule-content">
                 <p>Расписание на неделю</p>
-                <table className="daily-schedule">
+                {/* <table className="daily-schedule">
                     <tbody>
 
                         <DailySchedule
@@ -110,7 +107,7 @@ function Schedule() {
                         />
 
                     </tbody>
-                </table>
+                </table> */}
             </div>
         </>
     )

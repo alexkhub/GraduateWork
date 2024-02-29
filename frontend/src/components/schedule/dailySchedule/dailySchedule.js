@@ -2,17 +2,23 @@ import React, { useState, useEffect } from 'react';
 import Pair from "../pair/pair";
 // import DoublePair from "../doublePair/doublePair";
 
-
 function DailySchedule(props) {
-    const [data, setData] = useState(null);
+    const [dataSubject, setSubjectData] = useState('');
+    const [dataLecturer, setLecturerData] = useState('');
+    const [dataAudience, setAudienceData] = useState('');
+    const [dataStartTime, setStartTimeData] = useState('');
+    const [dataEndTime, setEndTimeData] = useState('');
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api-timetable/timetable/4-1is/')
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-                setData(data);
-            })
+                setSubjectData(data.timetable[0].subject);
+                setLecturerData(data.timetable[0].lecturer.user);
+                setAudienceData(data.timetable[0].classroom);
+                setStartTimeData(data.timetable[0].start_time);
+                setEndTimeData(data.timetable[0].end_time);
+        })
     }, []);
     return (
         <>
@@ -24,13 +30,13 @@ function DailySchedule(props) {
             
             <Pair
                 pairNumber='1'
-                subjectName={JSON.stringify(data)}
-                teacherName={props.firstTeacherName}
-                audience={props.firstAudience}
-                time="9:00 - 10:30"
+                subjectName={dataSubject}
+                teacherName={dataLecturer}
+                audience={dataAudience}
+                time={`${dataStartTime} - ${dataEndTime}`}
             />
 
-            <Pair
+            {/* <Pair
                 pairNumber='2'
                 subjectName={props.secondSubjectName}
                 teacherName={props.secondTeacherName}
@@ -52,7 +58,7 @@ function DailySchedule(props) {
                 teacherName={props.fourthTeacherName}
                 audience={props.fourthAudience}
                 time="14:30 - 16:00"
-            />
+            /> */}
         </>
     )
 }
