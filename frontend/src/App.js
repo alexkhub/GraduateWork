@@ -8,6 +8,7 @@ import Profile from "./components/profile/profile";
 import Tasks from "./components/tasks/tasks";
 import AccountVerified from "./components/accountVerified/accountVerified";
 import Schedule from "./components/schedule/schedule";
+import Ratings from "./components/ratings/ratings";
 import NotFound from "./components/notFound/notFound";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/account-verified" element={<AccountVerified />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/ratings" element={<Ratings />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="/" element={<Login />} />
         </Routes>

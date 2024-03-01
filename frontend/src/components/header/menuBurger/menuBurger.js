@@ -15,7 +15,7 @@ function MenuBurger() {
                     <li><Link to='/schedule'>Расписание</Link></li>
                     <li><Link to='/404'>Экзамены</Link></li>
                     <li><Link to='/tasks'>Задания</Link></li>
-                    <li><Link to='/404'>Оценки</Link></li>
+                    <li><Link to='/ratings'>Оценки</Link></li>
                     <li><Link to='/404'>Замены</Link></li>
                 </ul>
             </div>
