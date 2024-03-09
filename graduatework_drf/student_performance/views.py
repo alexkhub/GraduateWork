@@ -38,7 +38,7 @@ class StudentPerformanceListView(ListAPIView):
     filterset_class = MeasurableTypesControlFilter
 
     def get_queryset(self):
-        return self.queryset.filter(student=self.request.user.slug)
+        return self.queryset.filter(student__slug=self.kwargs['slug'])
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
