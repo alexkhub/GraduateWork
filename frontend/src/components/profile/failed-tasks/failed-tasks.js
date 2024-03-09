@@ -6,7 +6,7 @@ function FailedTasks() {
     const sliderLineItems = document.querySelectorAll('.failed-tasks-slider-line div');
     let maxOffset = (sliderLineItems.length - 6) * 330;
 
-    let [left, leftOffset] = useState(20)
+    let [left, leftOffset] = useState(20);
 
     function offsetSliderLeft() {
         left -= 330;
@@ -26,7 +26,7 @@ function FailedTasks() {
 
     return (
         <div className="failed-tasks">
-            <p className="failed-tasks-title">Просроченные задания</p>
+            <p className="failed-tasks-title">Последние задания</p>
             <i onClick={offsetSliderRight} className="fas fa-chevron-left"></i>
             <div style={{ left: left }} className="failed-tasks-slider-line">
 
@@ -34,7 +34,7 @@ function FailedTasks() {
                     teacherName='Гагиева В.Л.'
                     subjectName='ПМ 01'
                     taskDate='28.12.2023'
-                    taskStatus='Просрочено'
+                    taskStatus='Сдано'
                 />
 
                 <SliderItem

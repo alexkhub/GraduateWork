@@ -1,49 +1,44 @@
+import React, { useState, useEffect } from 'react';
 import Pair from "../pair/pair";
 // import DoublePair from "../doublePair/doublePair";
 
-
 function DailySchedule(props) {
-    return (
-        <>
-            <tr>
-                <td></td>
-                <td className="day">{props.day}</td>
-                <td></td>
-            </tr>
+    const [data, setData] = useState('');
+    const pairs = [];
 
-            <Pair
-                pairNumber='1'
-                subjectName={props.firstSubjectName}
-                teacherName={props.firstTeacherName}
-                audience={props.firstAudience}
-                time="9:00 - 10:30"
-            />
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api-timetable/timetable/4-1is/')
+            .then(response => response.json())
+            .then(data => {
+                setData(data.timetable);
+            })
+    }, []);
 
+    for (let i = 0; i < data.length; i++) {
+        pairs.push(
             <Pair
-                pairNumber='2'
-                subjectName={props.secondSubjectName}
-                teacherName={props.secondTeacherName}
-                audience={props.secondAudience}
-                time="10:40 - 12:10"
-            />
+                pairNumber={i + 1}
+                subjectName={JSON.stringify(data[i].subject)}
+                teacherName={JSON.stringify(data[i].lecturer.user)}
+                audience={JSON.stringify(data[i].classroom)}
+                time={`${JSON.stringify(data[i].start_time)} - ${JSON.stringify(data[i].end_time)}`} />
+        )
+    }
 
-            <Pair
-                pairNumber='3'
-                subjectName={props.thirstSubjectName}
-                teacherName={props.thirstTeacherName}
-                audience={props.thirstAudience}
-                time="12:50 - 14:20"
-            />
+    if (data) {
+        return (
+            <>
+                <tr>
+                    <td></td>
+                    <td className="day">{props.day}</td>
+                    <td></td>
+                </tr>
 
-            <Pair
-                pairNumber='4'
-                subjectName={props.fourthSubjectName}
-                teacherName={props.fourthTeacherName}
-                audience={props.fourthAudience}
-                time="14:30 - 16:00"
-            />
-        </>
-    )
+                {pairs}
+
+            </>
+        )
+    }
 }
 
 export default DailySchedule;
