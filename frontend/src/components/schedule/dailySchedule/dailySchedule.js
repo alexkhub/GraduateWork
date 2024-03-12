@@ -5,9 +5,10 @@ import Pair from "../pair/pair";
 function DailySchedule(props) {
     const [data, setData] = useState('');
     const pairs = [];
-
+    let group = '4-1is';
+    
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api-timetable/timetable/4-1is/')
+        fetch(`http://127.0.0.1:8000/api-timetable/timetable/${group}/`)
             .then(response => response.json())
             .then(data => {
                 setData(data.timetable);
