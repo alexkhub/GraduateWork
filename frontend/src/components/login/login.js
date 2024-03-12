@@ -42,7 +42,6 @@ function Login() {
                     <button onClick={login}>Войти</button>
                     <div className="login-links">
                         <Link to="/" type="button" className="link-button">Сбросить пароль</Link>
-                        <Link to="/registration" className="link-button">Регистрация</Link>
                     </div>
                 </div>
             </form>

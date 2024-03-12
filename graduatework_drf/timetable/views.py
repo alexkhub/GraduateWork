@@ -13,7 +13,7 @@ from .tasks import *
 
 
 class TimetableListView(ListAPIView):
-    queryset = TimetableOfClasses.objects.all().order_by('group', 'lesson_number').prefetch_related(
+    queryset = TimetableOfClasses.objects.all().order_by('day_of_the_week', 'lesson_number').prefetch_related(
 
         Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
     ).select_related('subject', 'group', 'classroom')
