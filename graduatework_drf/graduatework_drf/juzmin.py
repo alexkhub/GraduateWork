@@ -24,7 +24,7 @@ JAZZMIN_SETTINGS = {
     # "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "Если есть куница, значит есть и миньетица",
+    "welcome_sign": "Привет Дима ))",
 
     # # Copyright on the footer
     # "copyright": "Acme Library Ltd",

@@ -14,6 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 from .juzmin import JAZZMIN_SETTINGS
 import mimetypes
+from import_export.formats.base_formats import CSV, JSON
 
 
 mimetypes.add_type("application/javascript", ".js", True)
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     'sortedm2m',
     'django_celery_results',
     'django_celery_beat',
+    'import_export',
 
     'student_performance.apps.StudentPerformanceConfig',
     'student_work.apps.StudentWorkConfig',
@@ -268,3 +270,7 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+
+#импорт данных
+IMPORT_FORMATS = [CSV, JSON]

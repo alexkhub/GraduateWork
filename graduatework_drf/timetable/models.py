@@ -49,7 +49,8 @@ class Exam(models.Model):
                               related_name='exam_group')
     subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
                                 related_name='exam_subject')
-    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель',
+    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL,
+                                 verbose_name='Преподаватель',
                                  related_name='exam_lecturer', blank=True, null=True)
     start_time = models.TimeField(verbose_name='Начало экзамена')
     end_time = models.TimeField(verbose_name='Конец экзамена')
@@ -70,7 +71,8 @@ class TimetableOfClasses(models.Model):
                               related_name='timetable_group')
     subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
                                 related_name='timetable_subject')
-    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель',
+    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL,
+                                 verbose_name='Преподаватель',
                                  related_name='timetable_lecturer', blank=True, null=True)
     lesson_number = models.PositiveIntegerField(verbose_name='Номер пары', default=1)
     start_time = models.TimeField(verbose_name='Начало пары')
@@ -94,7 +96,8 @@ class TimetableChanges(models.Model):
                               related_name='changes_group')
     subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
                                 related_name='changes_subject')
-    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель',
+    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL,
+                                 verbose_name='Преподаватель',
                                  related_name='changes_lecturer', blank=True, null=True)
     lesson_number = models.PositiveIntegerField(verbose_name='Номер пары', default=1)
     start_time = models.TimeField(verbose_name='Начало пары')
@@ -118,7 +121,8 @@ class Lesson(models.Model):
                               related_name='lesson_group')
     subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
                                 related_name='lesson_subject')
-    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель',
+    lecturer = models.ForeignKey('student_performance.Lecturer', on_delete=models.SET_NULL,
+                                 verbose_name='Преподаватель',
                                  related_name='lesson_lecturer', blank=True, null=True)
     classroom = models.ForeignKey('ClassRoom', on_delete=models.SET_NULL, verbose_name='Аудитория', blank=True,
                                   null=True)
@@ -134,6 +138,18 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f'{self.group}-{self.lesson_topic}-{self.date}'
+
+
+class NonWorkingDay(models.Model):
+    reason = models.CharField(max_length=100, verbose_name="Причина")
+    date = models.DateField(verbose_name='Дата')
+
+    class Meta:
+        verbose_name = 'Не рабочий день'
+        verbose_name_plural = 'Не рабочие дни'
+
+    def __str__(self):
+        return f'{self.reason}-{self.date}'
 
 
 class Journal(models.Model):
@@ -157,3 +173,20 @@ class Journal(models.Model):
     class Meta:
         verbose_name = 'Журнал'
         verbose_name_plural = 'Журналы'
+
+
+class PracticeTimetable(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Название практики')
+    start_date = models.DateField(verbose_name='Дата начала практики')
+    end_date = models.DateField(verbose_name='Дата конца практики')
+    group = models.ForeignKey('student_performance.Group', on_delete=models.CASCADE, verbose_name='Группа',
+                              related_name='practice_group')
+    industrial_practice = models.BooleanField(verbose_name='Производственная практика', default=False)
+    document = models.FileField(upload_to='accompanying_document/%Y/%m/%d/', blank=True, null=True, verbose_name='Сопроводительный документ')
+
+    class Meta:
+        verbose_name = 'Практика'
+        verbose_name_plural = 'Практики'
+
+    def __str__(self):
+        return f'{self.group}-{self.name}-{self.start_date}'

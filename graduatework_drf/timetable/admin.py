@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import *
-
+from import_export.admin import ImportExportActionModelAdmin
 
 # Register your models here.
 class ExamAdmin(admin.ModelAdmin):
@@ -21,7 +21,7 @@ class TimetableOfClasseAdmin(admin.ModelAdmin):
 
 class TimetableChangesAdmin(admin.ModelAdmin):
     list_display = (
-    'id', 'group', 'subject', 'lecturer', 'lesson_number', 'start_time', 'end_time', 'date', 'classroom')
+        'id', 'group', 'subject', 'lecturer', 'lesson_number', 'start_time', 'end_time', 'date', 'classroom')
     search_fields = ('group', 'subject__subject_name', 'lecturer__user')
     list_filter = ('group', 'subject__subject_name', 'lecturer__user', 'classroom')
     list_editable = ('start_time', 'end_time', 'classroom')
@@ -34,8 +34,8 @@ class ClassRoomAdmin(admin.ModelAdmin):
     list_filter = ('campus',)
 
 
-class LessonAdmin(admin.ModelAdmin):
-    list_display = ('id','lesson_number', 'lesson_topic', 'group', 'subject', 'lecturer', 'date', 'classroom')
+class LessonAdmin(ImportExportActionModelAdmin):
+    list_display = ('id', 'lesson_number', 'lesson_topic', 'group', 'subject', 'lecturer', 'date', 'classroom')
     list_display_links = ('id', 'lesson_number', 'lesson_topic',)
     search_fields = ('group', 'subject__subject_name', 'lecturer__user', 'lesson_topic')
     list_filter = ('group', 'subject__subject_name', 'lecturer__user', 'classroom')
@@ -50,9 +50,24 @@ class JournalAdmin(admin.ModelAdmin):
     list_editable = ('number_of_lesson',)
 
 
+class NonWorkingDayAdmin(ImportExportActionModelAdmin):
+    list_display = ('id', 'reason', 'date')
+    list_display_links = ('id', 'reason', 'date')
+
+
+class PracticeTimetableAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'group', 'industrial_practice', 'start_date', 'end_date', )
+    list_display_links = ('id', 'name')
+    list_filter = ('group', 'industrial_practice',)
+    search_fields = ('name', )
+    list_editable = ('industrial_practice',)
+
+
 admin.site.register(Exam, ExamAdmin)
 admin.site.register(TimetableOfClasses, TimetableOfClasseAdmin)
 admin.site.register(TimetableChanges, TimetableChangesAdmin)
 admin.site.register(ClassRoom, ClassRoomAdmin)
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Journal, JournalAdmin)
+admin.site.register(NonWorkingDay, NonWorkingDayAdmin)
+admin.site.register(PracticeTimetable, PracticeTimetableAdmin)

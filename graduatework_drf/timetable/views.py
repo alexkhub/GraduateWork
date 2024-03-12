@@ -138,3 +138,5 @@ class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         send_destroy_lesson.delay(email_body=email_body)
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
