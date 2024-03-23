@@ -4,15 +4,15 @@ import Pair from './pair/pair';
 import './schedule.css';
 
 function Schedule() {
-
     const [data, setData] = useState('');
+
     const mondayPairs = [];
     const tuesdayPairs = [];
     const wednesdayPairs = [];
     const thursdayPairs = [];
     const fridayPairs = [];
-    let group = '4-1is';
 
+    let group = '4-1is';
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api-timetable/timetable/${group}/`)
             .then(response => response.json())
@@ -22,24 +22,33 @@ function Schedule() {
     }, []);
 
     for (let i = 0; i < data.length; i++) {
+        const pair =
+            <Pair
+                pairNumber={JSON.stringify(data[i].lesson_number)}
+                subjectName={JSON.stringify(data[i].subject)}
+                teacherName={JSON.stringify(data[i].lecturer.user)}
+                audience={JSON.stringify(data[i].classroom)}
+                time={`${JSON.stringify(data[i].start_time)} - ${JSON.stringify(data[i].end_time)}`}
+            />;
 
         switch (data[i].day_of_the_week) {
-            case 'понедельник':
-                mondayPairs.push(
-                    <Pair pairNumber={JSON.stringify(data[i].lesson_number)} subjectName={JSON.stringify(data[i].subject)} teacherName={JSON.stringify(data[i].lecturer.user)} audience={JSON.stringify(data[i].classroom)} time={`${JSON.stringify(data[i].start_time)} - ${JSON.stringify(data[i].end_time)}`} />
-                )
+            case 'понедельник' || 'Понедельник':
+                mondayPairs.push(pair)
                 break;
-            case 'вторник':
-                tuesdayPairs.push(
-                    <Pair pairNumber={JSON.stringify(data[i].lesson_number)} subjectName={JSON.stringify(data[i].subject)} teacherName={JSON.stringify(data[i].lecturer.user)} audience={JSON.stringify(data[i].classroom)} time={`${JSON.stringify(data[i].start_time)} - ${JSON.stringify(data[i].end_time)}`} />
-                )
+            case 'вторник' || 'Вторник':
+                tuesdayPairs.push(pair)
                 break
-            case 'среда':
-                wednesdayPairs.push(
-                    <Pair pairNumber={JSON.stringify(data[i].lesson_number)} subjectName={JSON.stringify(data[i].subject)} teacherName={JSON.stringify(data[i].lecturer.user)} audience={JSON.stringify(data[i].classroom)} time={`${JSON.stringify(data[i].start_time)} - ${JSON.stringify(data[i].end_time)}`} />
-                )
-            default:
+            case 'среда' || 'Среда':
+                wednesdayPairs.push(pair)
                 break;
+            case 'четверг' || 'Четверг':
+                thursdayPairs.push(pair)
+                break;
+            case 'пятница' || 'Пятница':
+                fridayPairs.push(pair)
+                break;
+            default:
+                return
         }
     }
 
@@ -49,12 +58,10 @@ function Schedule() {
                 <p>Расписание на сегодня</p>
                 <table className="daily-schedule">
                     <tbody>
-
                         <DailySchedule
                             day='Понедельник'
+                            pairs={mondayPairs}
                         />
-                        {mondayPairs}
-
                     </tbody>
                 </table>
             </div>
@@ -64,16 +71,26 @@ function Schedule() {
 
                 <table className="daily-schedule">
                     <tbody>
-                        <DailySchedule day='Понедельник' />
-                        {mondayPairs}
-                        <DailySchedule day='Вторник' />
-                        {tuesdayPairs}
-                        <DailySchedule day='Среда' />
-                        {wednesdayPairs}
-                        <DailySchedule day='Четверг' />
-                        {thursdayPairs}
-                        <DailySchedule day='Пятница' />
-                        {fridayPairs}
+                        <DailySchedule
+                            day='Понедельник'
+                            pairs={mondayPairs}
+                        />
+                        <DailySchedule
+                            day='Вторник'
+                            pairs = {tuesdayPairs}
+                            />
+                        <DailySchedule
+                            day='Среда'
+                            pairs={wednesdayPairs}
+                            />
+                        <DailySchedule
+                            day='Четверг'
+                            pairs={thursdayPairs}
+                            />
+                        <DailySchedule
+                            day='Пятница'
+                            pairs={fridayPairs}
+                        />
                     </tbody>
                 </table>
 
