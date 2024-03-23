@@ -1,3 +1,5 @@
+import './DailySchedule.css'
+
 function DailySchedule(props) {
     return (
         <>

@@ -1,0 +1,17 @@
+.pair {
+    text-align: center;
+    transform: rotate(-90deg);
+}
+
+.audience {
+    text-align: center;
+}
+
+.subject {
+    text-align: left;
+    transition: .3s ease background-color;
+}
+
+.subject:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}

@@ -1,7 +1,9 @@
 import DailySchedule from './DailySchedule/DailySchedule';
 import React, { useState, useEffect } from 'react';
 import Pair from './Pair/Pair';
+import DoublePair from './DoublePair/DoublePair';
 import './Schedule.css';
+import axios from 'axios';
 
 function Schedule() {
     const [data, setData] = useState('');
@@ -14,22 +16,35 @@ function Schedule() {
 
     let group = '4-1is';
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api-timetable/timetable/${group}/`)
-            .then(response => response.json())
-            .then(data => {
-                setData(data.timetable);
-            })
+           axios.get(`http://127.0.0.1:8000/api-timetable/timetable/${group}/`)
+           .then(data => setData(data.data.timetable))
     }, []);
 
     for (let i = 0; i < data.length; i++) {
-        const pair =
+
+        data[i].lecturer.user = data[i].lecturer.user.replace('-', ' ').replace('_', ' ')
+        
+        let pair =
             <Pair
-                pairNumber={JSON.stringify(data[i].lesson_number)}
-                subjectName={JSON.stringify(data[i].subject)}
-                teacherName={JSON.stringify(data[i].lecturer.user)}
-                audience={JSON.stringify(data[i].classroom)}
-                time={`${JSON.stringify(data[i].start_time)} - ${JSON.stringify(data[i].end_time)}`}
+                pairNumber={data[i].lesson_number}
+                subjectName={data[i].subject}
+                teacherName={data[i].lecturer.user}
+                audience={data[i].classroom}
+                time={`${data[i].start_time} - ${data[i].end_time}`}
             />;
+
+        if (data[i].evenness === 'совмещенная') {
+            pair = <DoublePair
+                pairNumber={data[i].lesson_number}
+                subjectName={data[i].subject}
+                teacherName={data[i].lecturer.user}
+                audience={data[i].classroom}
+                time={`${data[i].start_time} - ${data[i].end_time}`}
+                secondSubjectName=''
+                secondTeacherName=''
+                secondAudience=''
+            />;
+        }
 
         switch (data[i].day_of_the_week) {
             case 'понедельник' || 'Понедельник':
@@ -77,16 +92,16 @@ function Schedule() {
                         />
                         <DailySchedule
                             day='Вторник'
-                            pairs = {tuesdayPairs}
-                            />
+                            pairs={tuesdayPairs}
+                        />
                         <DailySchedule
                             day='Среда'
                             pairs={wednesdayPairs}
-                            />
+                        />
                         <DailySchedule
                             day='Четверг'
                             pairs={thursdayPairs}
-                            />
+                        />
                         <DailySchedule
                             day='Пятница'
                             pairs={fridayPairs}
