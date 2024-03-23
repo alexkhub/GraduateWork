@@ -1,6 +1,6 @@
-import './header.css';
+import './Header.css';
 import { Link } from 'react-router-dom';
-import MenuBurger from './menuBurger/menuBurger';
+import MenuBurger from './MenuBurger/MenuBurger';
 
 function Header() {
 

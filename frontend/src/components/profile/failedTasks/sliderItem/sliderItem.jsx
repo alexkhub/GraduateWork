@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import './SliderItem.css'
 
 function SliderItem(props) {
     return (

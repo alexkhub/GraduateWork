@@ -1,6 +1,6 @@
-import './topContent.css';
-import TaskItem from './lastWeekTaskItem/lastWeekTaskItem';
-import StudentInfo from './studentInfo/studentInfo.jsx';
+import './TopContent.css';
+import TaskItem from './LastWeekTaskItem/LastWeekTaskItem';
+import StudentInfo from './StudentInfo/StudentInfo.jsx';
 
 function ProfileTopContent() {
 

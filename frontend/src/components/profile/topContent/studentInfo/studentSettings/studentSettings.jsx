@@ -1,4 +1,4 @@
-import './student-settings.css'
+import './StudentSettings.css'
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 

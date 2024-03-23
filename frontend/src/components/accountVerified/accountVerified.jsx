@@ -1,4 +1,4 @@
-import './accountVerified.css';
+import './AccountVerified.css';
 
 function AccountVerified () {
     return (

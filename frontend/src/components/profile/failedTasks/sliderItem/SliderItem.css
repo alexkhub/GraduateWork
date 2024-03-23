@@ -1,0 +1,72 @@
+
+.failed-tasks-slider-line {
+    position: relative;
+    display: flex;
+    column-gap: 30px;
+    margin-top: 10px;
+
+    transition: .3s ease left;
+}
+
+.failed-tasks i {
+    position: absolute;
+    color: white;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 100%;
+    background: rgba(170, 170, 170, 0.10);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.fa-chevron-right {
+    right: 30px;
+    top: 500px;
+}
+
+.fa-chevron-left {
+    top: 500px;
+    left: 50px;
+}
+
+.failed-tasks-item div {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-size: 20px;
+}
+
+.failed-tasks-item {
+    transition: .3s ease transform, .3s ease box-shadow, .3s ease background-color;
+}
+
+.failed-tasks-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 4px 20px 2px rgba(0, 0, 0, 0.25);
+    background-color: #006e51;
+}
+
+.failed-tasks-item .task-data {
+    color: white;
+}
+
+.failed-tasks-item .task-data,
+.failed-tasks-item .task-failed {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.failed-tasks-item a {
+    display: block;
+    text-align: center;
+    width: calc(100% - 20px);
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 17px;
+    background: rgba(170, 170, 170, 0.10);
+    outline: none;
+    font-size: 18px;
+    border: none;
+    color: white;
+}

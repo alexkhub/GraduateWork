@@ -1,4 +1,4 @@
-import '../tasks.css';
+import '../Tasks.css';
 import { useState } from 'react';
 
 function Task(props) {

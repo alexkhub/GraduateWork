@@ -1,4 +1,4 @@
-import './menuBurger.css';
+import './MenuBurger.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 function MenuBurger() {

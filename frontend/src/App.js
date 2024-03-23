@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Header from './components/header/header';
-import Login from "./components/login/login";
-import Profile from "./components/profile/profile";
-import Tasks from "./components/tasks/tasks";
-import AccountVerified from "./components/accountVerified/accountVerified";
-import Schedule from "./components/schedule/schedule";
-import Ratings from "./components/ratings/ratings";
-import NotFound from "./components/notFound/notFound";
+import Header from './components/Header/Header';
+import Login from './components/Login/Login';
+import Profile from './components/Profile/Profile';
+import Tasks from './components/Tasks/Tasks';
+import AccountVerified from "./components/AccountVerified/AccountVerified";
+import Schedule from "./components/Schedule/Schedule";
+import Ratings from "./components/Ratings/Ratings";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   return (

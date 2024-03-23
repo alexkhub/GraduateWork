@@ -1,5 +1,5 @@
-import './tasks.css'
-import Task from './task/task';
+import './Tasks.css'
+import Task from './Task/Task';
 
 function Tasks() {
 

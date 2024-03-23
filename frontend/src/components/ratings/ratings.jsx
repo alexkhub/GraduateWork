@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Rating from './rating/rating';
-import './ratings.css';
+import Rating from './Rating/Rating';
+import './Ratings.css';
 
 function Ratings() {
     const [data, setData] = useState('');

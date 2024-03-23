@@ -1,7 +1,7 @@
-import DailySchedule from './dailySchedule/dailySchedule';
+import DailySchedule from './DailySchedule/DailySchedule';
 import React, { useState, useEffect } from 'react';
-import Pair from './pair/pair';
-import './schedule.css';
+import Pair from './Pair/Pair';
+import './Schedule.css';
 
 function Schedule() {
     const [data, setData] = useState('');

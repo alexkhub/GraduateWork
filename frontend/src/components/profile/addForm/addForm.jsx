@@ -1,4 +1,4 @@
-import './addForm.css';
+import './AddForm.css';
 
 function AddFrom() {
     return (

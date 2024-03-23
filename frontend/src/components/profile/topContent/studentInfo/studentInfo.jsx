@@ -1,5 +1,5 @@
-import './student-info.css';
-import StudentSettings from './studentSettings/studentSettings';
+import './StudentInfo.css';
+import StudentSettings from './StudentSettings/StudentSettings';
 
 function StudentInfo() {
     return (
