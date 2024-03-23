@@ -1,9 +1,7 @@
 import './student-info.css';
 import StudentSettings from './studentSettings/studentSettings';
-import axios from 'axios';
 
 function StudentInfo() {
-
     return (
         <div className="student-info">
             <StudentSettings />

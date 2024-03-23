@@ -1,6 +1,6 @@
-import SliderItem from './slider-item/slider-item';
+import SliderItem from './sliderItem/sliderItem';
 import { useState } from 'react';
-import './failed-tasks.css';
+import './failedTasks.css';
 
 function FailedTasks() {
     const sliderLineItems = document.querySelectorAll('.failed-tasks-slider-line div');

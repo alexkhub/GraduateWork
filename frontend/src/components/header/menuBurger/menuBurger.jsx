@@ -1,4 +1,4 @@
-import './menu-burger.css';
+import './menuBurger.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 function MenuBurger() {
@@ -8,7 +8,6 @@ function MenuBurger() {
     }
     return (
         <nav>
-
             <div className={isOpen ? 'menu-burger' : 'menu-burger menu-burger__hidden'}>
                 <ul>
                     <li><Link to='/404'>Успеваемость</Link></li>

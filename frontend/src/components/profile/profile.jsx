@@ -1,6 +1,6 @@
 import './profile.css';
-import ProfileTopContent from './top-content/top-content';
-import FailedTasks from './failed-tasks/failed-tasks';
+import ProfileTopContent from './topContent/topContent';
+import FailedTasks from './failedTasks/failedTasks';
 import AddFrom from './addForm/addForm';
 
 function Profile() {

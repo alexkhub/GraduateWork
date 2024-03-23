@@ -1,4 +1,4 @@
-import './not-found.css';
+import './notFound.css';
 import { Link } from "react-router-dom";
 
 function NotFound() {
