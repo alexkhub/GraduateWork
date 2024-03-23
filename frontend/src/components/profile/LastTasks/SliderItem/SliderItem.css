@@ -1,5 +1,4 @@
-
-.failed-tasks-slider-line {
+.last-tasks-slider-line {
     position: relative;
     display: flex;
     column-gap: 30px;
@@ -8,7 +7,7 @@
     transition: .3s ease left;
 }
 
-.failed-tasks i {
+.last-tasks i {
     position: absolute;
     color: white;
     padding: 10px 14px;
@@ -29,35 +28,35 @@
     left: 50px;
 }
 
-.failed-tasks-item div {
+.last-tasks-item div {
     display: flex;
     justify-content: space-between;
     color: white;
     font-size: 20px;
 }
 
-.failed-tasks-item {
+.last-tasks-item {
     transition: .3s ease transform, .3s ease box-shadow, .3s ease background-color;
 }
 
-.failed-tasks-item:hover {
+.last-tasks-item:hover {
     transform: scale(1.03);
     box-shadow: 0px 4px 20px 2px rgba(0, 0, 0, 0.25);
     background-color: #006e51;
 }
 
-.failed-tasks-item .task-data {
+.last-tasks-item .task-data {
     color: white;
 }
 
-.failed-tasks-item .task-data,
-.failed-tasks-item .task-failed {
+.last-tasks-item .task-data,
+.last-tasks-item .task-failed {
     text-align: center;
     margin-top: 15px;
     font-size: 20px;
 }
 
-.failed-tasks-item a {
+.last-tasks-item a {
     display: block;
     text-align: center;
     width: calc(100% - 20px);
@@ -69,4 +68,18 @@
     font-size: 18px;
     border: none;
     color: white;
+}
+
+.last-task-done {
+    top: 0;
+    text-align: center;
+    color: #00DA23;
+    margin-top: 15px;
+}
+
+.last-task-failed {
+    top: 0;
+    text-align: center;
+    color: #FF3C3C;
+    margin-top: 15px;
 }

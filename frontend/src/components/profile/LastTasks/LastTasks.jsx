@@ -1,9 +1,9 @@
 import SliderItem from './SliderItem/SliderItem';
 import { useState } from 'react';
-import './FailedTasks.css';
+import './LastTasks.css';
 
-function FailedTasks() {
-    const sliderLineItems = document.querySelectorAll('.failed-tasks-slider-line div');
+function LastTasks() {
+    const sliderLineItems = document.querySelectorAll('.last-tasks-slider-line div');
     let maxOffset = (sliderLineItems.length - 6) * 330;
 
     let [left, leftOffset] = useState(20);
@@ -25,10 +25,10 @@ function FailedTasks() {
     }
 
     return (
-        <div className="failed-tasks">
-            <p className="failed-tasks-title">Последние задания</p>
+        <div className="last-tasks">
+            <p className="last-tasks-title">Последние задания</p>
             <i onClick={offsetSliderRight} className="fas fa-chevron-left"></i>
-            <div style={{ left: left }} className="failed-tasks-slider-line">
+            <div style={{ left: left }} className="last-tasks-slider-line">
 
                 <SliderItem
                     teacherName='Гагиева В.Л.'
@@ -44,20 +44,20 @@ function FailedTasks() {
                     taskStatus='Просрочено'
                 />
 
-                <div className="failed-tasks-item"></div>
-                <div className="failed-tasks-item"></div>
-                <div className="failed-tasks-item"></div>
-                <div className="failed-tasks-item"></div>
-                <div className="failed-tasks-item"></div>
-                <div className="failed-tasks-item"></div>
-                <div className="failed-tasks-item"></div>
-                <div className="failed-tasks-item"></div>
-                <div className="failed-tasks-item"></div>
-                <div className="failed-tasks-item"></div>
+                <div className="last-tasks-item"></div>
+                <div className="last-tasks-item"></div>
+                <div className="last-tasks-item"></div>
+                <div className="last-tasks-item"></div>
+                <div className="last-tasks-item"></div>
+                <div className="last-tasks-item"></div>
+                <div className="last-tasks-item"></div>
+                <div className="last-tasks-item"></div>
+                <div className="last-tasks-item"></div>
+                <div className="last-tasks-item"></div>
             </div>
             <i onClick={offsetSliderLeft} className="fas fa-chevron-right"></i>
         </div>
     )
 }
 
-export default FailedTasks;
+export default LastTasks;

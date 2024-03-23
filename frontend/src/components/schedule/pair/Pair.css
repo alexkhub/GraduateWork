@@ -12,6 +12,10 @@
     transition: .3s ease background-color;
 }
 
+.subject::first-letter {
+    text-transform: uppercase;
+}
+
 .subject:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }

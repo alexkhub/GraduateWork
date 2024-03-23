@@ -3,7 +3,3 @@
     height: calc(100svh - (60px + 30px));
     overflow: hidden;
 }
-
-#app {
-    background-color: #00674A;
-}

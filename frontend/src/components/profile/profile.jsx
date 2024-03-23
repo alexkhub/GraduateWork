@@ -1,13 +1,13 @@
 import './Profile.css';
 import ProfileTopContent from './TopContent/TopContent';
-import FailedTasks from './FailedTasks/FailedTasks';
+import LastTasks from './LastTasks/LastTasks';
 import AddFrom from './AddForm/AddForm';
 
 function Profile() {
     return (
         <div className='profile-content'>
             <ProfileTopContent />
-            <FailedTasks />
+            <LastTasks />
             {/* <AddFrom />  */}
         </div>
     )

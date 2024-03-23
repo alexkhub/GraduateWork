@@ -3,13 +3,13 @@ import './SliderItem.css'
 
 function SliderItem(props) {
     return (
-        <div className="failed-tasks-item">
+        <div className="last-tasks-item">
             <div>
                 <p>{props.teacherName}</p>
                 <p>{props.subjectName}</p>
             </div>
             <p className="task-data">{props.taskDate}</p>
-            <p className="task-failed">{props.taskStatus}</p>
+            <p className={props.taskStatus == 'Сдано' ? 'task-status last-task-done' : 'task-status last-task-failed'}>{props.taskStatus}</p>
             <Link to="/">Посмотреть</Link>
         </div>
     )
