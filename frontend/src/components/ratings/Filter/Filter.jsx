@@ -4,18 +4,20 @@ import './Filter.css';
 
 function Filter() {
     const [isOpen, toggleOpen] = useState(true);
-    const [disciplines] = useState([]);
-    
+    const disciplines = [];
+
     function toggleFilters() {
         toggleOpen(!isOpen);
     }
-    
-    useEffect(() => {
-        const subjectsNames = document.querySelectorAll('.rating-subject-name');
+
+    const subjectsNames = document.querySelectorAll('.rating-subject-name');
         subjectsNames.forEach((el, index) => {
             disciplines.push(<Discipline disciplineName={el.textContent} id={index} />)
+
+            if (disciplines.length > subjectsNames.length) {
+                disciplines.length = subjectsNames.length;
+            }
         })
-    });
 
     return (
         <>
@@ -25,7 +27,7 @@ function Filter() {
             <div className={isOpen ? 'filters-container filters-container__unactive' : 'filters-container filters-container__active'}>
                 <div>
                     <i className="fas fa-times" onClick={toggleFilters}></i>
-                    <p className="filters-title">Фильтр</p>
+                    <p className="filters-title">Фильтры</p>
                 </div>
                 <div className="filters-content">
                     <p className='filters-content-title'>Выберите дисциплину:</p>

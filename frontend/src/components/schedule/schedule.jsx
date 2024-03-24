@@ -18,7 +18,7 @@ function Schedule() {
     useEffect(() => {
            axios.get(`http://127.0.0.1:8000/api-timetable/timetable/${group}/`)
            .then(data => setData(data.data.timetable))
-    }, []);
+    }, [group]);
 
     for (let i = 0; i < data.length; i++) {
 

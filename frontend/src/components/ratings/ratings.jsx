@@ -12,7 +12,7 @@ function Ratings() {
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api-student_performance/scores/${user}/`)
             .then(data => setData(data.data.measurable_types_control))
-    }, []);
+    }, [user]);
 
     for (let i = 0; i < data.length; i++) {
         data[i].lecturer.user = data[i].lecturer.user.replace('-', ' ').replace('_', ' ');

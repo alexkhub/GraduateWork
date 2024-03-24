@@ -3,11 +3,36 @@ import './Discipline.css'
 
 function Discipline(props) {
 
+    let selectedRadio;
+    const subjectNames = document.querySelectorAll('.rating-subject-name');
+    
+    // Sort ratings
     useEffect(() => {
-        const inputs = document.querySelectorAll('.discipline input')
+        const inputs = document.querySelectorAll('.discipline input[type="radio"]');
         inputs.forEach(el => {
             el.addEventListener('change', () => {
-                return el.nextElementSibling.textContent
+                // Get selected radio
+                if (el.checked) {
+                    selectedRadio = el.nextElementSibling.textContent;
+                }
+
+                // Hide unsuitable ratings
+                subjectNames.forEach(el => {
+                    if (el.textContent !== selectedRadio) {
+                        setTimeout(() => {
+                            el.parentElement.style.display = 'none';
+                        }, 300);
+                        el.parentElement.style.opacity = 0;
+                        console.log('aa')
+
+                        // Show suitable ratings
+                    } else if (el.textContent === selectedRadio) {
+                        el.parentElement.style.display = 'block'
+                        setTimeout(() => {
+                            el.parentElement.style.opacity = 100;
+                        }, 300);
+                    }
+                })
             })
         })
     }, [])
