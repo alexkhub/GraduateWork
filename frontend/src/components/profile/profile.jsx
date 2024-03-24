@@ -1,7 +1,7 @@
 import './Profile.css';
 import ProfileTopContent from './TopContent/TopContent';
 import LastTasks from './LastTasks/LastTasks';
-import AddFrom from './AddForm/AddForm';
+// import AddFrom from './AddForm/AddForm';
 
 function Profile() {
     return (

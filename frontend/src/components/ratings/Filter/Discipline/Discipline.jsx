@@ -3,11 +3,11 @@ import './Discipline.css'
 
 function Discipline(props) {
 
-    let selectedRadio;
     const subjectNames = document.querySelectorAll('.rating-subject-name');
     
     // Sort ratings
     useEffect(() => {
+        let selectedRadio;
         const inputs = document.querySelectorAll('.discipline input[type="radio"]');
         inputs.forEach(el => {
             el.addEventListener('change', () => {
@@ -23,11 +23,10 @@ function Discipline(props) {
                             el.parentElement.style.display = 'none';
                         }, 300);
                         el.parentElement.style.opacity = 0;
-                        console.log('aa')
 
                         // Show suitable ratings
                     } else if (el.textContent === selectedRadio) {
-                        el.parentElement.style.display = 'block'
+                        el.parentElement.style.display = 'flex'
                         setTimeout(() => {
                             el.parentElement.style.opacity = 100;
                         }, 300);
@@ -35,7 +34,7 @@ function Discipline(props) {
                 })
             })
         })
-    }, [])
+    }, [subjectNames])
 
     return (
         <div className="discipline">

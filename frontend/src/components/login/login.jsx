@@ -7,16 +7,18 @@ function Login() {
         const loginInput = document.querySelector('#login-input').value;
         const passwordInput = document.querySelector('#password-input').value;
 
-        axios.post("http://127.0.0.1:8000/auth/jwt/create/",
-            {
-                username: passwordInput,
-                password: loginInput
-            })
-            .then(data => {
-                localStorage.setItem('JWT', JSON.stringify(data.data.access))
-            });
+        if (localStorage.getItem('JWT') === null) {
+            axios.post("http://127.0.0.1:8000/auth/jwt/create/",
+                {
+                    username: passwordInput,
+                    password: loginInput
+                })
+                .then(data => {
+                    localStorage.setItem('JWT', data.data.access)
+                });
         }
-        axios.defaults.headers.common.Authorization = `JWT ${localStorage.getItem('JWT')}`
+    }
+    axios.defaults.headers.common.Authorization = `JWT ${localStorage.getItem('JWT')}`
 
     return (
         <div className="content">

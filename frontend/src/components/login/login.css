@@ -15,7 +15,7 @@ form input {
     background-color: white;
     border-radius: 15px;
     outline: none;
-    border: none;
+    border: none; 
     color: black;
 
     transition: .3s ease background-color;

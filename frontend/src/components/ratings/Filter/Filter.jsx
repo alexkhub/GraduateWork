@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Discipline from './Discipline/Discipline';
 import './Filter.css';
 
 function Filter() {
+    const inputs = document.querySelectorAll('.discipline input');
+    const ratings = document.querySelectorAll('.rating');
     const [isOpen, toggleOpen] = useState(true);
     const disciplines = [];
 
@@ -10,14 +12,22 @@ function Filter() {
         toggleOpen(!isOpen);
     }
 
-    const subjectsNames = document.querySelectorAll('.rating-subject-name');
-        subjectsNames.forEach((el, index) => {
-            disciplines.push(<Discipline disciplineName={el.textContent} id={index} />)
-
-            if (disciplines.length > subjectsNames.length) {
-                disciplines.length = subjectsNames.length;
-            }
+    function clearFilters() {
+        inputs.forEach(input => input.checked = false);
+        ratings.forEach(rating => {
+            rating.style.opacity = 100;
+            rating.style.display = 'flex';
         })
+    }
+
+    const subjectsNames = document.querySelectorAll('.rating-subject-name');
+    subjectsNames.forEach((el, index) => {
+        disciplines.push(<Discipline disciplineName={el.textContent} id={index} />)
+
+        if (disciplines.length > subjectsNames.length) {
+            disciplines.length = subjectsNames.length;
+        }
+    })
 
     return (
         <>
@@ -34,6 +44,7 @@ function Filter() {
                     <div className="disciplines">
                         {disciplines}
                     </div>
+                    <button className="clear-filter" onClick={clearFilters}>Сбросить фильтр</button>
                 </div>
             </div>
         </>

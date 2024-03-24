@@ -20,11 +20,13 @@ function Schedule() {
            .then(data => setData(data.data.timetable))
     }, [group]);
 
+    console.log(data)
+
     for (let i = 0; i < data.length; i++) {
 
         data[i].lecturer.user = data[i].lecturer.user.replace('-', ' ').replace('_', ' ')
 
-        let pair = <Pair pairNumber={data[i].lesson_number} subjectName={data[i].subject} teacherName={data[i].lecturer.user} audience={data[i].classroom} time={`${data[i].start_time} - ${data[i].end_time}`} />;
+        let pair = <Pair pairNumber={data[i].lesson_number} subjectName={data[i].subject} teacherName={data[i].lecturer.user} group = {data[i].group} audience={data[i].classroom} time={`${data[i].start_time} - ${data[i].end_time}`} />;
 
         if (data[i].evenness === 'совмещенная') {
             pair = <DoublePair
