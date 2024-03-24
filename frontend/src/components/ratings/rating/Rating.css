@@ -14,9 +14,9 @@
     transition: .3s ease box-shadow, .3s ease opacity;
 }
 
-/* .rating-subject-name::first-letter {
+.rating-subject-name::first-letter {
     text-transform: uppercase;
-} */
+}
 
 .rating:hover {
     box-shadow: 0px 0px 8px 10px rgba(0, 0, 0, 0.05);

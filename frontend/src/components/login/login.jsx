@@ -1,25 +1,22 @@
-import { Link } from 'react-router-dom';
-// import React, { useState } from 'react';
-import './Login.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './Login.css';
 
 function Login() {
     function login() {
-        const loginValue = document.querySelector('#login-input').value;
-        const passwordValue = document.querySelector('#login-password').value;
+        const loginInput = document.querySelector('#login-input').value;
+        const passwordInput = document.querySelector('#password-input').value;
 
         axios.post("http://127.0.0.1:8000/auth/jwt/create/",
             {
-                username: loginValue,
-                password: passwordValue
-            },
-            { headers: { 'Content-Type': 'application/json' } })
-            .then(
-                data => {
-                    axios.defaults.headers.common['Authorization'] = `JWT ${data.data.access}`;
-                }
-            );
-    }
+                username: passwordInput,
+                password: loginInput
+            })
+            .then(data => {
+                localStorage.setItem('JWT', JSON.stringify(data.data.access))
+            });
+        }
+        axios.defaults.headers.common.Authorization = `JWT ${localStorage.getItem('JWT')}`
 
     return (
         <div className="content">
@@ -33,7 +30,7 @@ function Login() {
                         <input type="text" id="login-input" placeholder="Логин" />
                     </div>
                     <div>
-                        <input type="password" id="login-password" placeholder="Пароль" />
+                        <input type="password" id="password-input" placeholder="Пароль" />
                     </div>
                     <button onClick={login} type='button'>Войти</button>
                     <div className="login-links">
