@@ -15,7 +15,6 @@ function Ratings() {
     }, []);
 
     for (let i = 0; i < data.length; i++) {
-
         data[i].lecturer.user = data[i].lecturer.user.replace('-', ' ').replace('_', ' ');
 
         ratings.push(
