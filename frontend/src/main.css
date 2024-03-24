@@ -9,6 +9,19 @@ a {
     text-decoration: none;
 }
 
+body::-webkit-scrollbar {
+    width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #00674A;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #008b64;
+    border-radius: 20px;
+}
+
 .content {
     display: flex;
     justify-content: center;

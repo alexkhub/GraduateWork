@@ -5,31 +5,32 @@ import './Ratings.css';
 import axios from 'axios';
 
 function Ratings() {
-    const [data, setData] = useState('');
+    const [rating, setRating] = useState('');
     const ratings = [];
     let user = 'alexkhub';
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api-student_performance/scores/${user}/`)
-            .then(data => setData(data.data.measurable_types_control))
+            .then(data => setRating(data.data.measurable_types_control))
     }, [user]);
 
-    for (let i = 0; i < data.length; i++) {
-        data[i].lecturer.user = data[i].lecturer.user.replace('-', ' ').replace('_', ' ');
+    for (let i = 0; i < rating.length; i++) {
+        rating[i].lecturer.user = rating[i].lecturer.user.replace('-', ' ').replace('_', ' ');
 
         ratings.push(
             <Rating
-                subjectName={data[i].subject}
-                lecturer={data[i].lecturer.user}
-                score={data[i].points}
-                date={data[i].date}
+                subjectName={rating[i].subject}
+                lecturer={rating[i].lecturer.user}
+                score={rating[i].points}
+                date={rating[i].date}
+                key={rating[i].id}
             />
         )
     }
     return (
         <>
             <div className="rating-content">
-                <Filter />
+                <Filter key='1' />
                 <div className="ratings">
                     {ratings}
                 </div>

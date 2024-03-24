@@ -1,13 +1,12 @@
-import DailySchedule from './DailySchedule/DailySchedule';
 import React, { useState, useEffect } from 'react';
-import Pair from './Pair/Pair';
-import DoublePair from './DoublePair/DoublePair';
-import './Schedule.css';
 import axios from 'axios';
+import DailySchedule from './DailySchedule/DailySchedule';
+import DoublePair from './DoublePair/DoublePair';
+import Pair from './Pair/Pair';
+import './Schedule.css';
 
 function Schedule() {
-    const [data, setData] = useState('');
-
+    const [pairs, setPairs] = useState('');
     const mondayPairs = [];
     const tuesdayPairs = [];
     const wednesdayPairs = [];
@@ -16,32 +15,32 @@ function Schedule() {
 
     let group = '4-1is';
     useEffect(() => {
-           axios.get(`http://127.0.0.1:8000/api-timetable/timetable/${group}/`)
-           .then(data => setData(data.data.timetable))
+        axios.get(`http://127.0.0.1:8000/api-timetable/timetable/${group}/`)
+            .then(data => setPairs(data.data.timetable))
     }, [group]);
 
-    console.log(data)
+    console.log(pairs)
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < pairs.length; i++) {
+        pairs[i].lecturer.user = pairs[i].lecturer.user.replace('-', ' ').replace('_', ' ')
 
-        data[i].lecturer.user = data[i].lecturer.user.replace('-', ' ').replace('_', ' ')
+        let pair = <Pair pairNumber={pairs[i].lesson_number} subjectName={pairs[i].subject} teacherName={pairs[i].lecturer.user} audience={pairs[i].classroom} time={`${pairs[i].start_time} - ${pairs[i].end_time}`} key={pairs[i].id} />;
 
-        let pair = <Pair pairNumber={data[i].lesson_number} subjectName={data[i].subject} teacherName={data[i].lecturer.user} group = {data[i].group} audience={data[i].classroom} time={`${data[i].start_time} - ${data[i].end_time}`} />;
-
-        if (data[i].evenness === 'совмещенная') {
+        if (pairs[i].evenness === 'совмещенная') {
             pair = <DoublePair
-                pairNumber={data[i].lesson_number}
-                subjectName={data[i].subject}
-                teacherName={data[i].lecturer.user}
-                audience={data[i].classroom}
-                time={`${data[i].start_time} - ${data[i].end_time}`}
+                pairNumber={pairs[i].lesson_number}
+                subjectName={pairs[i].subject}
+                teacherName={pairs[i].lecturer.user}
+                audience={pairs[i].classroom}
+                time={`${pairs[i].start_time} - ${pairs[i].end_time}`}
                 secondSubjectName=''
                 secondTeacherName=''
                 secondAudience=''
+                key={pairs[i].id}
             />;
         }
 
-        switch (data[i].day_of_the_week) {
+        switch (pairs[i].day_of_the_week) {
             case 'понедельник' || 'Понедельник':
                 mondayPairs.push(pair)
                 break;
@@ -62,45 +61,26 @@ function Schedule() {
         }
     }
 
-        return (
+    return (
         <>
             <div className="daily-schedule schedule-content">
-                <p>Расписание на сегодня</p>
+                <p>Расписание на завтра</p>
                 <table className="daily-schedule">
                     <tbody>
-                        <DailySchedule
-                            day='Понедельник'
-                            pairs={mondayPairs}
-                        />
+                        <DailySchedule day='Понедельник' pairs={mondayPairs} />
                     </tbody>
                 </table>
             </div>
 
             <div className="weekly-schedule schedule-content">
                 <p>Расписание на неделю</p>
-
                 <table className="daily-schedule">
                     <tbody>
-                        <DailySchedule
-                            day='Понедельник'
-                            pairs={mondayPairs}
-                        />
-                        <DailySchedule
-                            day='Вторник'
-                            pairs={tuesdayPairs}
-                        />
-                        <DailySchedule
-                            day='Среда'
-                            pairs={wednesdayPairs}
-                        />
-                        <DailySchedule
-                            day='Четверг'
-                            pairs={thursdayPairs}
-                        />
-                        <DailySchedule
-                            day='Пятница'
-                            pairs={fridayPairs}
-                        />
+                        <DailySchedule day='Понедельник' pairs={mondayPairs} />
+                        <DailySchedule day='Вторник' pairs={tuesdayPairs} />
+                        <DailySchedule day='Среда' pairs={wednesdayPairs} />
+                        <DailySchedule day='Четверг' pairs={thursdayPairs} />
+                        <DailySchedule day='Пятница' pairs={fridayPairs} />
                     </tbody>
                 </table>
 

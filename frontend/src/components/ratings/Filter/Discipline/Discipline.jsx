@@ -39,7 +39,7 @@ function Discipline(props) {
     return (
         <div className="discipline">
             <input type="radio" name="discipline" id={props.id} />
-            <label htmlFor={props.id}>{props.disciplineName}</label>
+            <label className='discipline-input-label' htmlFor={props.id}>{props.disciplineName}</label>
         </div>
     )
 }

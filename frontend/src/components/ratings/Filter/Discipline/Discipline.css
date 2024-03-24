@@ -1,10 +1,11 @@
-.discipline input + label {
+.discipline-input-label {
     margin-left: 10px;
     cursor: pointer;
+    font-size: 18px;
 
     transition: .3s ease color;
 }
 
-.discipline input + label:hover {
+.discipline-input-label:hover {
     color: rgba(255, 255, 255, 0.5);
 }

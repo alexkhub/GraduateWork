@@ -22,7 +22,7 @@ function Filter() {
 
     const subjectsNames = document.querySelectorAll('.rating-subject-name');
     subjectsNames.forEach((el, index) => {
-        disciplines.push(<Discipline disciplineName={el.textContent} id={index} />)
+        disciplines.push(<Discipline disciplineName={el.textContent} id={index} key={index} />)
 
         if (disciplines.length > subjectsNames.length) {
             disciplines.length = subjectsNames.length;
