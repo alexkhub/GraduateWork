@@ -79,7 +79,7 @@ class LectorTimeTableListView(ListAPIView):
     serializer_class = TimetableSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(lecturer__user__slug=self.request.user.slug)
+        return self.queryset.filter(lecturer__user__slug="admin")
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())

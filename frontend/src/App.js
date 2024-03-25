@@ -9,6 +9,7 @@ import AccountVerified from "./components/AccountVerified/AccountVerified";
 import Schedule from "./components/Schedule/Schedule";
 import Ratings from "./components/Ratings/Ratings";
 import NotFound from "./components/NotFound/NotFound";
+import TeachersSchedule from "./components/TeachersSchedule/TeachersSchedule";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/account-verified" element={<AccountVerified />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/teachers-schedule" element={<TeachersSchedule />} />
           <Route path="/ratings" element={<Ratings />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="/" element={<Login />} />
