@@ -13,7 +13,6 @@ function TeachersSchedule() {
     const thursdayPairs = [];
     const fridayPairs = [];
 
-    let teacher = 'admin';
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api-timetable/timetable_lector/`)
             .then(data => setPairs(data.data.lector_timetable))
