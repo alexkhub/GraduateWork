@@ -19,8 +19,6 @@ function Schedule() {
             .then(data => setPairs(data.data.timetable))
     }, [group]);
 
-    console.log(pairs)
-
     for (let i = 0; i < pairs.length; i++) {
         pairs[i].lecturer.user = pairs[i].lecturer.user.replace('-', ' ').replace('_', ' ')
 

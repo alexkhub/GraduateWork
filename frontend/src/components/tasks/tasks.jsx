@@ -1,37 +1,36 @@
-import './Tasks.css'
-import Task from './Task/Task';
+import "./Tasks.css";
+import Task from "./Task/Task";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function Tasks() {
+  const [tasksData, setTasks] = useState("");
+  const tasks = [];
 
-    return (
-        <div className='tasks-content'>
-            <Task
-            teacherName = 'Гагиева В.Л.'
-            subjectName = 'ПМ 01'
-            taskName = 'Название задания'
-            taskDate = '28.12.2023'
-            taskDescription = 'Описание и анализ основных принципов устройства и организации веб-сервисов. Создание демонстрационного клиент-серверного приложения.'
-            taskStatus = 'Сдано'
-            />
-            <Task
-            teacherName = 'Караев Ч.А.'
-            subjectName = 'ПМ 04'
-            taskName = 'Название задания'
-            taskDate = '29.12.2023'
-            taskDescription = 'Сделать серию из 12 побед в шахматах и создать нейросеть. Написать и вовремя сдать отчеты. И чтобы мемы были.'
-            taskStatus = 'Просрочено'
-            />
-            <Task
-            teacherName = 'Зембатова М.А.'
-            subjectName = 'ПМ 02'
-            taskName = 'Название задания'
-            taskDate = '01.01.2024'
-            taskDescription = 'В сетевой папке открыть практические и сделать до 12 числа.'
-            taskStatus = 'Просрочено'
-            />
-        </div>
-    )
+  let group = "4-1is";
+  useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:8000/api-student_work/group_quest/${group}/`)
+      .then((data) => setTasks(data.data.group_quests));
+  }, [group]);
 
+  for (let i = 0; i < tasksData.length; i++) {
+    tasks.push(
+      <Task
+        teacherName={tasksData[i].lecturer.user
+          .replace("-", " ")
+          .replace("_", " ")}
+        subjectName={tasksData[i].subject}
+        taskName={tasksData[i].quest_name}
+        taskDate={tasksData[i].date_added}
+        taskDescription={tasksData[i].description}
+        taskStatus=""
+        key={i}
+      />
+    );
+  }
+
+  return <div className="tasks-content">{tasks}</div>;
 }
 
 export default Tasks;

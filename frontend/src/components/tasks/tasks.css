@@ -1,6 +1,7 @@
 .tasks-content {
-    height: 100svh;
     display: flex;
-    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px 10px;
     padding: 30px;
 }
