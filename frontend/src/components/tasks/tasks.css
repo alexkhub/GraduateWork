@@ -1,7 +1,22 @@
-.tasks-content {
+.group-tasks-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px 10px;
     padding: 30px;
+}
+
+.student-tasks-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 30px;
+}
+
+.tasks-title {
+    text-align: center;
+    font-size: 32px;
+    color: white;
+    margin-top: 20px;
 }

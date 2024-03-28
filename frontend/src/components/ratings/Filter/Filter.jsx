@@ -30,7 +30,7 @@ function Filter() {
   }, [user]);
 
   for (let i = 0; i < subjects.length; i++) {
-    disciplines.push(<Discipline disciplineName = {subjects[i].subject} id = {i} />)
+    disciplines.push(<Discipline disciplineName = {subjects[i].subject} id = {i} key = {i} />)
   }
 
   return (

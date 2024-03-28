@@ -4,7 +4,6 @@ import { useState } from 'react';
 function Task(props) {
 
     const [taskClassName, setTaskClassName] = useState(true);
-    const [taskStatus] = useState(props.taskStatus);
 
     function openTaskHandler() {
         setTaskClassName(!taskClassName);
@@ -15,7 +14,7 @@ function Task(props) {
             <p className="teacher-name">{props.teacherName}</p>
             <p className="subject-name">{props.subjectName}</p>
             <p className="task-name">{props.taskName}</p>
-            {/* Дата, когда задание загружено */}
+            {/* Date when task upload */}
             <p className="task-date">{props.taskDate}</p>
             <button onClick={openTaskHandler} className='expand'>
                 <i className={taskClassName ? 'fas fa-chevron-down' : 'fas fa-chevron-down expand-task-opened'}></i>
@@ -28,7 +27,7 @@ function Task(props) {
                     <i className="fas fa-file-download"></i>
                     <i className="fas fa-file-upload"></i>
                 </div>
-                <p className={taskStatus === 'Сдано' ? 'task-done' : 'task-failed'}>{props.taskStatus}</p>
+                <p className={props.taskStatus ? 'task-done' : 'task-failed'}>{props.taskStatus}</p>
             </div>
 
         </div>
