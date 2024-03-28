@@ -1,6 +1,5 @@
 .rating-content {
     background-color: rgba(170, 170, 170, 0.1);
-    height: calc(100svh - 60px);
 }
 
 .ratings {
@@ -9,4 +8,5 @@
     flex-wrap: wrap;
     align-content: flex-start;
     gap: 50px;
+    height: calc(100svh - 60px);
 }

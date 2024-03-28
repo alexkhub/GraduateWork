@@ -7,14 +7,14 @@ import axios from "axios";
 function Ratings() {
   const [ratingData, setRating] = useState("");
   const ratings = [];
+  
   let user = "alexkhub";
-
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api-student_performance/scores/${user}/`)
-      .then((data) => setRating(data.data.measurable_types_control));
+.get(`http://127.0.0.1:8000/api-student_performance/scores/${user}/`)
+      .then((data) => setRating(data.data.measurable_types_control))
   }, [user]);
-
+  
   for (let i = 0; i < ratingData.length; i++) {
     ratingData[i].lecturer.user = ratingData[i].lecturer.user
       .replace("-", " ")
