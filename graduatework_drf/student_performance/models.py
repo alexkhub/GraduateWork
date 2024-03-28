@@ -32,7 +32,9 @@ class Users(AbstractUser):
 class Group(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название группы')
     curs = models.IntegerField(default=1, verbose_name='Курс', blank=True, null=True)
+    study_plan_name = models.CharField(max_length=200 , verbose_name='Учебный план', blank=True, null=True)
     slug = models.SlugField(max_length=100, unique=True, db_index=True, verbose_name='URL', )
+
 
     class Meta:
         verbose_name = 'Группа'

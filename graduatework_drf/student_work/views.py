@@ -35,8 +35,15 @@ class GroupQuestListCreateView(ListCreateAPIView):
         queryset = self.filter_queryset(self.get_queryset())
 
         serializer = self.get_serializer(queryset, many=True)
+
+
+        student_quest = UserQuest.objects.filter(date_added__gte=date_filter_sq()).select_related('quest', 'user')
+        student_quest_serializer = StudentQuestSerializer(student_quest, many=True)
+
+
         return Response({
-            'group_quests': serializer.data
+            'group_quests': serializer.data,
+            'student_quests': student_quest_serializer.data
         }, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
@@ -89,5 +96,5 @@ class CreateStudentQuestCreateView(CreateAPIView):
 
 
 class StudentQuestListView(ListAPIView):
-    queryset = queryset = UserQuest.objects.filter(date_added__gte=date_filter_sq()).select_related('quest', 'user')
+    queryset = UserQuest.objects.filter(date_added__gte=date_filter_sq()).select_related('quest', 'user')
     serializer_class = StudentQuestSerializer

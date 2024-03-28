@@ -63,6 +63,14 @@ class PracticeTimetableAdmin(admin.ModelAdmin):
     list_editable = ('industrial_practice',)
 
 
+class Study_PlanAdmin(admin.ModelAdmin):
+    list_display = ('id', 'plan_name', 'subject', 'term', 'number_of_hours', 'last_work')
+    list_display_links = ('id', 'plan_name')
+    list_filter = ('term', 'last_work', 'plan_name', 'subject__subject_name')
+    search_fields = ('plan_name', 'subject__subject_name')
+
+
+
 admin.site.register(Exam, ExamAdmin)
 admin.site.register(TimetableOfClasses, TimetableOfClasseAdmin)
 admin.site.register(TimetableChanges, TimetableChangesAdmin)
@@ -71,3 +79,4 @@ admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Journal, JournalAdmin)
 admin.site.register(NonWorkingDay, NonWorkingDayAdmin)
 admin.site.register(PracticeTimetable, PracticeTimetableAdmin)
+admin.site.register(Study_Plan, Study_PlanAdmin)

@@ -95,3 +95,11 @@ class LessonDetailSerializer(serializers.ModelSerializer):
         for sp in student_passes_instance:
             instance.student_passes.add(sp)
         return instance
+
+
+class Study_Plan_SubjectsSerializer(serializers.ModelSerializer):
+    subject = serializers.SlugRelatedField(slug_field='subject_name', read_only=True)
+
+    class Meta:
+        model = Study_Plan
+        fields = ('subject', 'plan_name', 'term')

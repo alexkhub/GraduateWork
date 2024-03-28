@@ -23,6 +23,11 @@ TYPE_OF_LESSON = (
     ('с', 'семинар'),
 )
 
+LAST_WORK_TYPE = (
+    ('Не предусмотрено', 'Не предусмотрено'),
+    ('Экзамен', 'Экзамен'),
+    ('Зачет', 'Зачет')
+)
 
 # Create your models here.
 class ClassRoom(models.Model):
@@ -190,3 +195,22 @@ class PracticeTimetable(models.Model):
 
     def __str__(self):
         return f'{self.group}-{self.name}-{self.start_date}'
+
+
+class Study_Plan(models.Model):
+    plan_name = models.CharField(max_length=200, verbose_name='Название учебного плана', db_index=True)
+    subject = models.ForeignKey('student_performance.Subject', on_delete=models.CASCADE, verbose_name='Дисциплина',
+                                related_name='study_plan_subject')
+    term = models.PositiveSmallIntegerField(verbose_name='Семестр', default=1)
+    number_of_hours = models.PositiveIntegerField(verbose_name='Количество часов')
+    last_work = models.CharField( max_length=50, verbose_name='Экзамен/Зачет', choices=LAST_WORK_TYPE, default='Не предусмотрено')
+
+    class Meta:
+        verbose_name = 'Учебный план'
+        verbose_name_plural = 'Учебные планы'
+
+    def __str__(self):
+        return f'{self.plan_name}-{self.subject}'
+
+
+    

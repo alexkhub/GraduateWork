@@ -22,15 +22,17 @@ from jwt.exceptions import DecodeError
 
 from .permissions import *
 from student_work.models import Quest, UserQuest
-
 from student_work.serializers import ProfileStudentUserQuestSerializer, ProfileStudentQuestSerializer
+from timetable.serializers import Study_Plan_SubjectsSerializer
+from timetable.models import Study_Plan
+
 
 
 class StudentPerformanceListView(ListAPIView):
     queryset = Student_Scores.objects.all().prefetch_related(
 
-        Prefetch('lecturer', queryset=Lecturer.objects.all())
-    ).order_by('-date').select_related('student', 'subject')
+        Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
+    ).order_by('-date').select_related('student', 'subject').only('student__username', 'subject__subject_name', 'cause', 'points', 'date', 'lecturer')
     serializer_class = Student_ScoresSerializer
     authentication_classes = (JWTAuthentication,)
     # permission_classes = [IsAuthenticated]
@@ -43,10 +45,13 @@ class StudentPerformanceListView(ListAPIView):
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         measurable_types_control_serializer = self.serializer_class(queryset, many=True)
-
+        user = Users.objects.get(slug=self.kwargs['slug'])
+        subjects = Study_Plan.objects.filter(Q(plan_name=user.group.study_plan_name) & Q(term=user.term)).select_related('subject')
+        subjects_serializer = Study_Plan_SubjectsSerializer(subjects, many=True)
         return Response(
             {
                 'measurable_types_control': measurable_types_control_serializer.data,
+                'subjects' : subjects_serializer.data
             },
             status=status.HTTP_200_OK
         )
