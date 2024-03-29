@@ -1,0 +1,181 @@
+.group-tasks-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px 10px;
+  padding: 30px;
+}
+
+.student-tasks-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+}
+
+.tasks-title {
+  text-align: center;
+  font-size: 32px;
+  color: white;
+  margin-top: 20px;
+}
+
+// Task card
+.task-open {
+  @extend %task;
+}
+
+.task-close {
+  @extend %task;
+  height: 170px;
+  overflow: hidden;
+}
+
+%task:hover {
+  box-shadow: $defaul-box-shadow;
+  background-color: $block-hover-bg;
+}
+
+.teacher-name,
+.subject-name,
+.task-date,
+.task-name {
+  margin-top: 15px;
+  padding: 5px 20px;
+  width: 150px;
+  border-radius: 10px;
+  text-align: center;
+  background: rgba(170, 170, 170, 0.1);
+  white-space: nowrap;
+}
+
+.expand {
+  position: absolute;
+  left: 80%;
+  top: 110px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  padding: 13px;
+  background-color: rgba(12, 101, 76, 0.5);
+  border-radius: 10px;
+  background: rgba(170, 170, 170, 0.1);
+  color: white;
+  outline: none;
+  border: none;
+
+  transition: 0.3s ease transform;
+  i {
+    transition: 0.3s ease transform;
+  }
+}
+
+.expand-task-opened {
+  transform: rotate(-180deg);
+  transition: 0.3s ease transform;
+}
+
+.task-description {
+  p {
+    padding: 10px;
+    background: rgba(12, 101, 76, 0.42);
+    margin-top: 30px;
+    height: 150px;
+    width: 300px;
+    text-align: left;
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    overflow-y: scroll;
+  }
+  p::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  p::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  p::-webkit-scrollbar-thumb {
+    background-color: green;
+  }
+}
+
+.task-options {
+  position: absolute;
+  top: 480px;
+  i {
+    cursor: pointer;
+  }
+  i:last-child {
+    margin-left: 10px;
+  }
+}
+
+.tasks-task-done {
+  @extend %task-status;
+  left: 70%;
+  color: $failed-status;
+}
+
+.tasks-task-failed {
+  @extend %task-status;
+  left: 58%;
+  color: $done-status;
+}
+
+// Student task
+.student-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  gap: 15px;
+  width: 450px;
+  height: 180px;
+  font-size: 20px;
+  background-color: #aaaaaa1e;
+  box-sizing: border-box;
+  padding: 0 30px;
+  border-radius: 20px;
+
+  transition: 0.3s ease background-color, 0.3s ease box-shadow;
+}
+
+.student-task:hover {
+  background-color: $block-hover-bg;
+  box-shadow: $defaul-box-shadow;
+}
+
+.student-task-info {
+  display: flex;
+  p:nth-child(1) {
+    padding-right: 10px;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  p:nth-child(2) {
+    padding: 0 10px;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  p:nth-child(3) {
+    padding-left: 10px;
+  }
+}
+
+.student-task-buttons {
+  display: flex;
+  column-gap: 20px;
+  i {
+    cursor: pointer;
+  }
+}
+
+.student-task-done {
+  color: $done-status;
+}
+
+.student-task-failed {
+  color: $failed-status;
+}

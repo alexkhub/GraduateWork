@@ -1,0 +1,101 @@
+.rating-content {
+  background-color: $transparent-bg;
+}
+
+// Ratings container
+.ratings {
+  padding: 70px 70px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 50px;
+  height: calc(100svh - 60px);
+}
+
+// Rating card
+.rating {
+  width: 170px;
+  height: 120px;
+  padding: 30px;
+  color: white;
+  text-align: center;
+  border-radius: 20px;
+  background-color: rgba(170, 170, 170, 0.1);
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  cursor: pointer;
+
+  transition: 0.3s ease box-shadow, 0.3s ease background-color;
+}
+
+.rating-subject-name::first-letter {
+  text-transform: uppercase;
+}
+
+.rating:hover {
+  box-shadow: $defaul-box-shadow;
+  background-color: $block-hover-bg;
+}
+
+// Filter
+.subject-filter {
+  position: absolute;
+  left: 89%;
+  top: 10%;
+  cursor: pointer;
+  i {
+    color: white;
+    padding: 10px;
+    border: 2px solid white;
+    font-size: 24px;
+    border-radius: 15px;
+
+    transition: 0.3s ease color;
+  }
+  :hover {
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.filters-container__unactive {
+  @extend %filters-container;
+  padding: 0px;
+  width: 0;
+}
+
+.filters-container__active {
+  @extend %filters-container;
+  padding: 20px;
+  width: 300px;
+}
+
+.filters-title {
+  margin-left: 70px;
+}
+
+.filters-content {
+  p {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  div {
+    margin-top: 20px;
+  }
+  button {
+    background-color: $transparent-bg;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+
+    transition: 0.3s ease box-shadow, .3s ease background-color;
+  }
+  button:hover {
+    box-shadow: $defaul-box-shadow;
+    background-color: $button-hover-bg;
+  }
+}

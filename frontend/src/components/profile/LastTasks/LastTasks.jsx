@@ -1,6 +1,5 @@
 import SliderItem from './SliderItem/SliderItem';
 import { useState } from 'react';
-import './LastTasks.css';
 
 function LastTasks() {
     const sliderLineItems = document.querySelectorAll('.last-tasks-slider-line div');

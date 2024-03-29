@@ -1,0 +1,86 @@
+// Menu burger sticks
+%menu-burger-stick {
+  position: absolute;
+  height: 5px;
+  width: 25px;
+  background-color: #d9d9d9;
+  border-radius: 5px;
+  top: 17px;
+
+  transition: 0.3s ease transform, 0.3s ease top, 0.3s ease left,
+    0.3s ease width;
+}
+
+// Student settings modal window
+%student-settings-background {
+  position: absolute;
+  height: 100svh;
+  width: 100svw;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: -89px;
+  left: -30px;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+// Profile slider arrows
+%slider-arrows {
+  top: 500px;
+}
+
+// Profile slider task status
+%last-task-status {
+  top: 0;
+  text-align: center;
+  margin-top: 15px;
+}
+
+// Ratings filter
+%filters-container {
+  position: absolute;
+  background-color: #00674a;
+  border-left: 2px solid black;
+  color: white;
+  height: calc(100svh - 40px);
+  right: 0;
+  top: 0;
+  z-index: 2;
+  overflow: hidden;
+
+  transition: 0.3s ease width, 0.5s ease padding;
+  i {
+    cursor: pointer;
+    transition: 0.3s ease color;
+  }
+  div:first-child {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+  }
+}
+
+// Task card (group tasks)
+%task {
+  position: relative;
+  width: 300px;
+  height: 460px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: $transparent-bg;
+  color: white;
+  font-size: 18px;
+  padding: 25px;
+  box-sizing: content-box;
+
+  transition: 0.3s ease box-shadow, 0.3s ease height, 0.3s ease background-color;
+  .teacher-name {
+    margin-top: 0;
+  }
+}
+
+// Status of task card
+%task-status {
+  position: absolute;
+  top: 500px;
+}

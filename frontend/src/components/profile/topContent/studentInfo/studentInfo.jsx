@@ -1,4 +1,3 @@
-import './StudentInfo.css';
 import StudentSettings from './StudentSettings/StudentSettings';
 
 function StudentInfo() {

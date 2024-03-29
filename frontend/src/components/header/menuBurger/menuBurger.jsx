@@ -1,4 +1,3 @@
-import './MenuBurger.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 function MenuBurger() {
@@ -20,9 +19,9 @@ function MenuBurger() {
                 </ul>
             </div>
             <div onClick={menuToggle} className='menu-burger-icon'>
-                <div className={isOpen ? 'menu-burger-stick menu-burger-arrow-1' : 'menu-burger-stick'}></div>
-                <div className={isOpen ? 'menu-burger-stick menu-burger-arrow-2' : 'menu-burger-stick'}></div>
-                <div className={isOpen ? 'menu-burger-stick menu-burger-arrow-3' : 'menu-burger-stick'}></div>
+                <div className={isOpen ? 'menu-burger__times-element-1' : 'menu-burger-stick'}></div>
+                <div className={isOpen ? 'menu-burger__times-element-2' : 'menu-burger-stick'}></div>
+                <div className={isOpen ? 'menu-burger__times-element-3' : 'menu-burger-stick'}></div>
             </div>
             <Link to='/login'>Выйти</Link>
         </nav>

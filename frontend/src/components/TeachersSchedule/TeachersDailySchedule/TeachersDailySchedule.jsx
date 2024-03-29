@@ -1,5 +1,3 @@
-import './TeachersDailySchedule.css'
-
 function TeachersDailySchedule(props) {
     return (
         <>

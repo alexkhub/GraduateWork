@@ -3,7 +3,6 @@ import axios from 'axios';
 import DailySchedule from './DailySchedule/DailySchedule';
 import DoublePair from './DoublePair/DoublePair';
 import Pair from './Pair/Pair';
-import './Schedule.css';
 
 function Schedule() {
     const [pairs, setPairs] = useState('');

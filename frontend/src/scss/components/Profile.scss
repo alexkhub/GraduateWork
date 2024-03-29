@@ -1,0 +1,359 @@
+.profile-content {
+  padding: 30px 30px 0 30px;
+  height: calc(100svh - (60px + 30px));
+  overflow: hidden;
+}
+
+.top-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+// Student info
+.student-info {
+  position: relative;
+  width: 500px;
+  height: 220px;
+  background-color: $transparent-bg;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+
+  transition: 0.3s ease background-color, 0.3s ease box-shadow;
+  i {
+    position: absolute;
+    left: 90%;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+
+    transition: 0.3s ease color;
+  }
+  i:hover {
+    color: white;
+  }
+}
+
+.student-info:hover {
+  background-color: $block-hover-bg;
+  box-shadow: $defaul-box-shadow;
+}
+
+.student-characteristics {
+  margin-left: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  div {
+    display: flex;
+    align-items: center;
+    p {
+      flex-basis: 90%;
+    }
+    i {
+      flex-basis: 5%;
+      color: white;
+      padding: 11px 20px;
+      margin-top: 5px;
+      background-color: $transparent-bg;
+      border-radius: 15px;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+  }
+}
+
+.characteristics-item {
+  color: white;
+  padding: 10px 20px;
+  background-color: $transparent-bg;
+  margin-top: 10px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+// Last weeks tasks
+.last-weeks-tasks {
+  position: relative;
+}
+
+.last-weeks-tasks-content {
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 15px;
+  width: 430px;
+  margin-top: 30px;
+}
+
+.last-weeks-tasks-title {
+  position: absolute;
+  color: white;
+  left: 40%;
+  transform: translateX(-25%);
+  font-size: 20px;
+}
+
+
+.last-weeks-tasks-item {
+  width: 200px;
+  height: 60px;
+  background-color: $transparent-bg;
+  border-radius: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+
+  transition: 0.3s ease background-color, 0.3s ease box-shadow;
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.last-weeks-tasks-item:hover {
+  background-color: $block-hover-bg;
+  box-shadow: $defaul-box-shadow;
+}
+
+.last-weeks-task-done {
+  top: 0;
+  color: $done-status;
+}
+
+.last-weeks-task-failed {
+  color: $failed-status;
+}
+
+// Last tasks (slider)
+.last-tasks {
+  margin-top: 50px;
+  overflow: hidden;
+  height: 310px;
+  i {
+    position: absolute;
+    color: white;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 100%;
+    background: $transparent-bg;
+    cursor: pointer;
+    z-index: 2;
+  }
+}
+
+.last-tasks-title {
+  font-size: 20px;
+  color: white;
+}
+
+.last-tasks-slider-line {
+  position: relative;
+  display: flex;
+  column-gap: 30px;
+  margin-top: 10px;
+
+  transition: 0.3s ease left;
+}
+
+.fa-chevron-right {
+  @extend %slider-arrows;
+  right: 30px;
+}
+
+.fa-chevron-left {
+  @extend %slider-arrows;
+  left: 50px;
+}
+
+.last-tasks-item {
+  width: 300px;
+  height: 200px;
+  border-radius: 20px;
+  background: $transparent-bg;
+  flex-shrink: 0;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  font-size: 20px;
+
+  transition: 0.3s ease transform, 0.3s ease box-shadow,
+    0.3s ease background-color;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-size: 20px;
+  }
+  .task-data {
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 20px;
+  }
+  a {
+    display: block;
+    text-align: center;
+    width: calc(100% - 20px);
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 17px;
+    background: $transparent-bg;
+    outline: none;
+    font-size: 18px;
+    border: none;
+    color: white;
+  }
+}
+
+.last-tasks-item:hover {
+  transform: scale(1.03);
+  box-shadow: $defaul-box-shadow;
+  background-color: $block-hover-bg;
+}
+
+.last-task-done {
+  @extend %last-task-status;
+  color: $done-status;
+}
+
+.last-task-failed {
+  @extend %last-task-status;
+  color: $failed-status;
+}
+
+// Student settings (modal window)
+.student-settings-background__hidden {
+  @extend %student-settings-background;
+  display: none;
+}
+
+.student-settings-background__show {
+  @extend %student-settings-background;
+  display: flex;
+}
+
+.student-settings {
+  width: 700px;
+  height: 350px;
+  padding: 30px;
+  box-sizing: border-box;
+  background-color: $modal-window-bg;
+  border-radius: 20px;
+  border: 2px solid white;
+  i {
+    position: absolute;
+    left: 1050px;
+    font-size: 24px;
+  }
+  p {
+    font-size: $header-fz;
+    text-align: center;
+    color: white;
+  }
+}
+
+.settings-form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  div {
+    display: flex;
+    column-gap: 30px;
+  }
+}
+
+.settings-buttons {
+  margin-top: 40px;
+  button {
+    a {
+      color: $button-text-color;
+    }
+  }
+  button:hover {
+    background-color: $button-hover-bg;
+  }
+}
+
+// Add form (only for teacher)
+.add-form {
+  padding: 20px;
+  height: auto;
+  width: 430px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: $defaul-box-shadow;
+  background: $transparent-bg;
+  border-radius: 30px;
+  margin-top: 50px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    button {
+      margin-left: 50px;
+      margin-top: 50px;
+    }
+    :hover {
+      background-color: $button-hover-bg;
+    }
+  }
+  div:nth-child(2) {
+    margin-left: 10px;
+  }
+  textarea {
+    resize: none;
+    height: 50px;
+    width: 200px;
+    border-radius: 20px;
+    padding: 10px;
+    outline: none;
+    color: white;
+    background: $transparent-bg;
+    box-shadow: $defaul-box-shadow;
+  }
+  ::placeholder {
+    transition: 0.3s ease transform;
+    color: white;
+  }
+  :focus::placeholder {
+    transform: translateY(-200%);
+  }
+  select {
+    font-size: 16px;
+    width: 150px;
+    text-align: center;
+    margin-left: 50px;
+    background: $transparent-bg;
+    color: white;
+    padding: 5px;
+    border-radius: 20px;
+    box-shadow: $defaul-box-shadow;
+    option {
+      color: black;
+      padding: 3px;
+    }
+  }
+}
+
+#add-form-file-input {
+  display: none;
+  + label {
+    color: white;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    transition: 0.3s ease background-color;
+  }
+  + label:hover {
+    background-color: $button-hover-bg;
+  }
+}

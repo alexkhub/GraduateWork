@@ -1,0 +1,65 @@
+.schedule-content {
+  p {
+    text-align: center;
+    color: white;
+    font-size: 32px;
+    margin-top: 40px;
+  }
+}
+
+.day {
+  text-align: center;
+  font-size: 20px;
+}
+
+.pair {
+  text-align: center;
+  transform: rotate(-90deg);
+}
+
+.audience {
+  text-align: center;
+}
+
+.subject {
+  text-align: left;
+  transition: 0.3s ease background-color;
+}
+
+.subject::first-letter {
+  text-transform: uppercase;
+}
+
+.subject:hover {
+  background-color: $transparent-bg;
+}
+
+// Daily schedule
+table.daily-schedule {
+  margin: 0 auto;
+  margin-top: 60px;
+  color: white;
+  width: 650px;
+  td,
+  th {
+    border-collapse: collapse;
+    min-height: 35px;
+    padding: 10px;
+    width: 30px;
+    height: 35px;
+  }
+  th {
+    color: #fff;
+  }
+  td {
+    border-bottom: 1px solid white;
+    border-left: none;
+    border-right: 1px solid white;
+  }
+  td:last-child {
+    border-right: none;
+  }
+  th:last-child {
+    border-bottom: none;
+  }
+}

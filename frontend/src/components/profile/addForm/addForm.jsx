@@ -1,5 +1,3 @@
-import './AddForm.css';
-
 function AddFrom() {
     return (
         <>

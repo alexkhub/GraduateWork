@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Rating from "./Rating/Rating";
 import Filter from "./Filter/Filter";
-import "./Ratings.css";
 import axios from "axios";
 
 function Ratings() {
@@ -32,7 +31,7 @@ function Ratings() {
   }
   return (
     <>
-      <div className="ratingData-content">
+      <div className="rating-content">
         <Filter key="1" />
         <div className="ratings">{ratings}</div>
       </div>

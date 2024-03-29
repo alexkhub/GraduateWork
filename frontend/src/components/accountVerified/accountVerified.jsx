@@ -1,5 +1,3 @@
-import './AccountVerified.css';
-
 function AccountVerified () {
     return (
         <div className='registration-completed-content'>

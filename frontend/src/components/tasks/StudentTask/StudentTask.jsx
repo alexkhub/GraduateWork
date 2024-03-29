@@ -1,5 +1,3 @@
-import "./StudentTask.css";
-
 function StudentTask(props) {
   return (
     <div className="student-task">

@@ -1,5 +1,3 @@
-import './TeachersPair.css';
-
 function TeachersPair(props) {
     return (
         <tr>

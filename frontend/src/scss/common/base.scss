@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: $default-ff;
+}
+
+#app {
+  background-color: $app-bg;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+button {
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 15px;
+  font-size: 14px;
+  margin-top: 10px;
+  background-color: #d9d9d9;
+  color: $button-text-color;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: 0.3s ease background-color, 1s ease transform;
+}
+
+input {
+  padding: 15px 20px;
+  background-color: white;
+  border-radius: 15px;
+  outline: none;
+  border: none;
+  color: black;
+
+  transition: 0.3s ease background-color;
+}
+input:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+input::placeholder {
+  transition: 0.3s ease transform;
+}
+input:focus::placeholder {
+  transform: translateY(-200%);
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: $app-bg;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #008b64;
+  border-radius: 20px;
+}

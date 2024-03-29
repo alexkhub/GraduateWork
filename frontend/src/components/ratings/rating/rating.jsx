@@ -1,5 +1,3 @@
-import './Rating.css'
-
 function Rating(props) {
     return (
         <div className="rating">

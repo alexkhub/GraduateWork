@@ -1,0 +1,38 @@
+.not-found-content {
+  height: calc(100svh - 56.7px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  a {
+    font-size: 24px;
+    margin-top: 40px;
+    padding: 7px 25px;
+    border-radius: 30px;
+    box-shadow: 0px 1px 1px 0px #000;
+    background: rgba(170, 170, 170, 0.1);
+
+    transition: 0.3s ease box-shadow, 0.3s ease transform,
+      0.3s ease background-color;
+  }
+
+  a:hover {
+    box-shadow: none;
+    transform: translateY(2px);
+    border: none;
+    background-color: $transparent-bg;
+  }
+}
+
+.error-description {
+  font-size: 64px;
+  color: white;
+}
+
+.error-reason {
+  margin-left: 130px;
+}
+
+.error-code {
+  color: red;
+}

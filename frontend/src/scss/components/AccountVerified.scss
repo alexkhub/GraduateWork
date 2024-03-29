@@ -1,0 +1,10 @@
+.registration-completed-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 56.7px);
+  p {
+    color: white;
+    font-size: $header-fz;
+  }
+}

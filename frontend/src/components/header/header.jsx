@@ -1,4 +1,3 @@
-import './Header.css';
 import { Link } from 'react-router-dom';
 import MenuBurger from './MenuBurger/MenuBurger';
 

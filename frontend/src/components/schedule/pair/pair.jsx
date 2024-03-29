@@ -1,5 +1,3 @@
-import './Pair.css';
-
 function Pair(props) {
     return (
         <tr>

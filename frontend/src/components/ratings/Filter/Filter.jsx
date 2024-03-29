@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Discipline from "./Discipline/Discipline";
-import "./Filter.css";
 import axios from "axios";
 
 function Filter() {
@@ -30,7 +29,9 @@ function Filter() {
   }, [user]);
 
   for (let i = 0; i < subjects.length; i++) {
-    disciplines.push(<Discipline disciplineName = {subjects[i].subject} id = {i} key = {i} />)
+    disciplines.push(
+      <Discipline disciplineName={subjects[i].subject} id={i} key={i} />
+    );
   }
 
   return (
@@ -41,8 +42,8 @@ function Filter() {
       <div
         className={
           isOpen
-            ? "filters-container filters-container__unactive"
-            : "filters-container filters-container__active"
+            ? "filters-container__unactive"
+            : "filters-container__active"
         }
       >
         <div>
