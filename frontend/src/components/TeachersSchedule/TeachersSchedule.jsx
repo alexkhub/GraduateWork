@@ -61,7 +61,7 @@ function TeachersSchedule() {
 
     return (
         <>
-            <div className="daily-schedule schedule-content">
+            <div className="teachers-daily-schedule teachers-schedule-content">
                 <p>Расписание на завтра</p>
                 <table className="daily-schedule">
                     <tbody>

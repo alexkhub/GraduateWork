@@ -60,7 +60,7 @@ function Schedule() {
 
     return (
         <>
-            <div className="daily-schedule schedule-content">
+            <div className="students-daily-schedule students-schedule-content">
                 <p>Расписание на завтра</p>
                 <table className="daily-schedule">
                     <tbody>
@@ -69,7 +69,7 @@ function Schedule() {
                 </table>
             </div>
 
-            <div className="weekly-schedule schedule-content">
+            <div className="students-schedule-content">
                 <p>Расписание на неделю</p>
                 <table className="daily-schedule">
                     <tbody>

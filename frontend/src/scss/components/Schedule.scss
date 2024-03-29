@@ -1,5 +1,5 @@
 // Schedule
-.schedule-content {
+.students-schedule-content {
   p {
     text-align: center;
     color: white;
@@ -15,7 +15,6 @@
 
 .pair {
   text-align: center;
-  transform: rotate(-90deg);
 }
 
 .audience {
@@ -34,7 +33,7 @@
 }
 
 // Daily schedule
-table.daily-schedule {
+table.students-daily-schedule {
   margin: 0 auto;
   margin-top: 60px;
   color: white;
