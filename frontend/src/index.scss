@@ -2,6 +2,7 @@
 @import './scss/common/variables';
 @import './scss/common/base';
 @import './scss/common/extends';
+@import './scss/common/fonts';
 
 // Components
 @import './scss/components/Header';
@@ -11,4 +12,4 @@
 @import './scss/components/Profile';
 @import './scss/components/Ratings';
 @import './scss/components/Tasks';
-@import './scss/components/TeachersSchedule';
+@import './scss/components/Schedule';

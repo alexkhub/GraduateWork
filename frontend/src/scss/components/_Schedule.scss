@@ -1,9 +1,9 @@
 // Schedule
-.students-schedule-content {
+.schedule-content {
   p {
     text-align: center;
     color: white;
-    font-size: 32px;
+    font-size: $header-fz;
     margin-top: 40px;
   }
 }
@@ -24,16 +24,18 @@
 .subject {
   text-align: left;
   transition: 0.3s ease background-color;
-  ::first-letter {
-    text-transform: uppercase;
-  }
-  :hover {
-    background-color: $transparent-bg;
-  }
+}
+
+.subject::first-letter {
+  text-transform: uppercase;
+}
+
+.subject:hover {
+  background-color: $transparent-bg;
 }
 
 // Daily schedule
-table.students-daily-schedule {
+table.daily-schedule {
   margin: 0 auto;
   margin-top: 60px;
   color: white;
