@@ -58,6 +58,10 @@
   }
 }
 
+.fa-times:hover {
+  color: rgba(255, 255, 255, 0.4);
+}
+
 .filters-container__unactive {
   @extend %filters-container;
   padding: 0px;
