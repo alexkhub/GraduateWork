@@ -12,6 +12,17 @@ function Schedule() {
   const thursdayPairs = [];
   const fridayPairs = [];
 
+  const daysOfWeek = [
+    "Понедельник",
+    "Вторник",
+    "Среда",
+    "Четверг",
+    "Пятница",
+    "Суббота",
+    "Воскресенье",
+  ];
+  const tommorowDay = daysOfWeek[new Date().getDay()];
+
   let group = "4-1is";
   useEffect(() => {
     axios
@@ -50,25 +61,41 @@ function Schedule() {
         />
       );
     }
-
     switch (pairs[i].day_of_the_week) {
-      case "понедельник" || "Понедельник":
+      case daysOfWeek[0].toLowerCase():
         mondayPairs.push(pair);
         break;
-      case "вторник" || "Вторник":
+      case daysOfWeek[1].toLowerCase():
         tuesdayPairs.push(pair);
         break;
-      case "среда" || "Среда":
+      case daysOfWeek[2].toLowerCase():
         wednesdayPairs.push(pair);
         break;
-      case "четверг" || "Четверг":
+      case daysOfWeek[3].toLowerCase():
         thursdayPairs.push(pair);
         break;
-      case "пятница" || "Пятница":
+      case daysOfWeek[4].toLowerCase():
         fridayPairs.push(pair);
         break;
       default:
         return;
+    }
+  }
+
+  function pairsMatchingOnThisDay() {
+    switch (tommorowDay) {
+      case daysOfWeek[0]:
+        return mondayPairs;
+      case daysOfWeek[1]:
+        return tuesdayPairs;
+      case daysOfWeek[2]:
+        return wednesdayPairs;
+      case daysOfWeek[3]:
+        return thursdayPairs;
+      case daysOfWeek[4]:
+        return fridayPairs;
+      default:
+        return (<Pair subjectName="Пар нет, уходите!" pairNumber = '0' audience = '0' />);
     }
   }
 
@@ -78,7 +105,7 @@ function Schedule() {
         <p>Расписание на завтра</p>
         <table className="daily-schedule">
           <tbody>
-            <DailySchedule day="Понедельник" pairs={mondayPairs} />
+            <DailySchedule day={tommorowDay} pairs={pairsMatchingOnThisDay()} />
           </tbody>
         </table>
       </div>

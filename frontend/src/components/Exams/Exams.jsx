@@ -40,11 +40,6 @@ function Exams() {
           <p className="container-title">Все экзамены</p>
         <div className="all-exams-container">
             {exams}
-            {exams}
-            {exams}
-            {exams}
-            {exams}
-            {exams}
         </div>
       </div>
     </>
