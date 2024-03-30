@@ -11,6 +11,7 @@ import Ratings from "./components/Ratings/Ratings";
 import NotFound from "./components/NotFound/NotFound";
 import TeachersSchedule from "./components/TeachersSchedule/TeachersSchedule";
 import Replacements from "./components/Replacements/Replacements";
+import Exams from "./components/Exams/Exams";
 
 function App() {
   return (
@@ -19,13 +20,14 @@ function App() {
         <Header />
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile studentName = 'Хадиков Георгий Сосланович' group = '3-ИС' birthdayDate = '28.03.2004' />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/account-verified" element={<AccountVerified />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/teachers-schedule" element={<TeachersSchedule />} />
           <Route path="/ratings" element={<Ratings />} />
           <Route path="/replacements" element={<Replacements />} />
+          <Route path="/exams" element={<Exams />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="/" element={<Login />} />
         </Routes>

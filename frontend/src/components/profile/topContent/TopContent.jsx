@@ -1,10 +1,10 @@
 import TaskItem from "./LastWeekTaskItem/LastWeekTaskItem";
 import StudentInfo from "./StudentInfo/StudentInfo.jsx";
 
-function ProfileTopContent() {
+function ProfileTopContent(props) {
   return (
     <div className="top-content">
-      <StudentInfo />
+      <StudentInfo  studentName = {props.studentName} group = {props.group} birthdayDate = {props.birthdayDate} />
       <div className="last-weeks-tasks">
         <p className="last-weeks-tasks-title">Последние задания</p>
         <div className="last-weeks-tasks-content">

@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import Rating from "./Rating/Rating";
-import Filter from "./Filter/Filter";
 import axios from "axios";
+import Rating from './Rating/Rating';
+import Filter from "./Filter/Filter";
 
 function Ratings() {
   const [ratingData, setRating] = useState("");
   const ratings = [];
 
   let user = "alexkhub";
+  let ratingsEndpoint = `http://127.0.0.1:8000/api-student_performance/scores/${user}/`;
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api-student_performance/scores/${user}/`)
+      .get(ratingsEndpoint)
       .then((data) => setRating(data.data.measurable_types_control));
-  }, [user]);
+  }, [user, ratingsEndpoint]);
 
   for (let i = 0; i < ratingData.length; i++) {
     ratingData[i].lecturer.user = ratingData[i].lecturer.user

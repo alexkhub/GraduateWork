@@ -1,0 +1,60 @@
+.exams-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 50px;
+  .container-title {
+    font-size: $header-fz;
+    color: white;
+    margin-top: 50px;
+  }
+  .next-exam-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-self: center;
+    .exams-item {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      padding: 20px;
+      border-radius: 20px;
+      background-color: $transparent-bg;
+
+      transition: 0.3s ease background-color, 0.3s ease box-shadow;
+      p {
+        color: white;
+      }
+    }
+    .exams-item:hover {
+      background-color: $block-hover-bg;
+      box-shadow: $defaul-box-shadow;
+    }
+  }
+  .all-exams-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    .exams-item {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      padding: 20px;
+      border-radius: 20px;
+      background-color: $transparent-bg;
+
+      transition: 0.3s ease background-color, 0.3s ease box-shadow;
+      p {
+        color: white;
+      }
+    }
+    .exams-item:hover {
+      background-color: $block-hover-bg;
+      box-shadow: $defaul-box-shadow;
+    }
+  }
+}
