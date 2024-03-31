@@ -48,8 +48,17 @@ class CreateStudentQuestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ProfileQuestDetailSerializer(serializers.ModelSerializer):
+    subject = serializers.SlugRelatedField(slug_field='subject_name', queryset=Subject.objects.all())
+    lecturer = LecturerInformationSerializer()
+
+    class Meta:
+        model = Quest
+        fields = ('quest_name', 'subject', 'lecturer' )
+
+
 class ProfileStudentUserQuestSerializer(serializers.ModelSerializer):
-    quest = serializers.SlugRelatedField('quest_name', read_only=True)
+    quest = ProfileQuestDetailSerializer()
     user = serializers.SlugRelatedField('username', read_only=True)
 
     class Meta:

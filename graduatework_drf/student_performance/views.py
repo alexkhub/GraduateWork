@@ -27,12 +27,12 @@ from timetable.serializers import Study_Plan_SubjectsSerializer
 from timetable.models import Study_Plan
 
 
-
 class StudentPerformanceListView(ListAPIView):
     queryset = Student_Scores.objects.all().prefetch_related(
 
         Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
-    ).order_by('-date').select_related('student', 'subject').only('student__username', 'subject__subject_name', 'cause', 'points', 'date', 'lecturer')
+    ).order_by('-date').select_related('student', 'subject').only('student__username', 'subject__subject_name', 'cause',
+                                                                  'points', 'date', 'lecturer')
     serializer_class = Student_ScoresSerializer
     authentication_classes = (JWTAuthentication,)
     # permission_classes = [IsAuthenticated]
@@ -46,12 +46,13 @@ class StudentPerformanceListView(ListAPIView):
         queryset = self.filter_queryset(self.get_queryset())
         measurable_types_control_serializer = self.serializer_class(queryset, many=True)
         user = Users.objects.get(slug=self.kwargs['slug'])
-        subjects = Study_Plan.objects.filter(Q(plan_name=user.group.study_plan_name) & Q(term=user.term)).select_related('subject')
+        subjects = Study_Plan.objects.filter(
+            Q(plan_name=user.group.study_plan_name) & Q(term=user.term)).select_related('subject')
         subjects_serializer = Study_Plan_SubjectsSerializer(subjects, many=True)
         return Response(
             {
                 'measurable_types_control': measurable_types_control_serializer.data,
-                'subjects' : subjects_serializer.data
+                'subjects': subjects_serializer.data
             },
             status=status.HTTP_200_OK
         )
@@ -69,9 +70,10 @@ class StudentProfileRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     def retrieve(self, request, *args, **kwargs):
         obj = self.get_object()
         profile_serializer = self.serializer_class(obj)
-        user_quests = UserQuest.objects.filter(user=obj).select_related('quest', 'user').only('status', 'date_added',
-                                                                                              'quest__quest_name',
-                                                                                              'user__username').order_by(
+        user_quests = UserQuest.objects.filter(user=obj).select_related('quest', 'user', 'quest__subject', 'quest__lecturer__user').only(
+            'status', 'date_added',
+            'quest__quest_name',
+            'user__username', 'quest__subject__subject_name', 'quest__lecturer__user__username').order_by(
             '-date_added')[:10]
         user_quests_serializer = ProfileStudentUserQuestSerializer(user_quests, many=True)
         quests = Quest.objects.filter(group=obj.group).prefetch_related(
