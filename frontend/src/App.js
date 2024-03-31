@@ -15,6 +15,7 @@ import Replacements from "./components/Replacements/Replacements";
 import Exams from "./components/Exams/Exams";
 
 function App() {
+  // Get data for profile
   const [userData, setUser] = useState("");
   let user = "alexkhub";
 
@@ -23,6 +24,7 @@ function App() {
       .get(`http://localhost:8000/api-student_performance/profile/${user}/`)
       .then((data) => setUser(data.data.profile));
   }, [user]);
+
   return (
     <div>
       <BrowserRouter>

@@ -10,7 +10,7 @@ function Profile(props) {
         group={props.group}
         username={props.username}
       />
-      <LastTasks />
+      <LastTasks username = {props.username} />
       {/* <AddFrom />  */}
     </div>
   );
