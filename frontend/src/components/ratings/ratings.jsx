@@ -3,11 +3,11 @@ import axios from "axios";
 import Rating from './Rating/Rating';
 import Filter from "./Filter/Filter";
 
-function Ratings() {
+function Ratings(props) {
   const [ratingData, setRating] = useState("");
   const ratings = [];
 
-  let user = "alexkhub";
+  let user = props.username;
   let ratingsEndpoint = `http://127.0.0.1:8000/api-student_performance/scores/${user}/`;
   useEffect(() => {
     axios

@@ -227,12 +227,18 @@
 // Student settings (modal window)
 .student-settings-background__hidden {
   @extend %student-settings-background;
-  display: none;
+  display: flex;
+  opacity: 0;
+  z-index: -1;
+  transform: translateY(50px)
 }
 
 .student-settings-background__show {
   @extend %student-settings-background;
   display: flex;
+  z-index: 1;
+  opacity: 100;
+  transform: translateY(0)
 }
 
 .student-settings {

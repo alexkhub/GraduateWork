@@ -33,14 +33,10 @@ function Exams() {
   return (
     <>
       <div className="exams-content">
-          <p className="container-title">Следующий экзамен</p>
-        <div className="next-exam-container">
-          {exams}
-        </div>
-          <p className="container-title">Все экзамены</p>
-        <div className="all-exams-container">
-            {exams}
-        </div>
+        <p className="container-title">Следующий экзамен</p>
+        <div className="next-exam-container">{exams}</div>
+        <p className="container-title">Все экзамены</p>
+        <div className="all-exams-container">{exams}</div>
       </div>
     </>
   );

@@ -4,7 +4,11 @@ import StudentInfo from "./StudentInfo/StudentInfo.jsx";
 function ProfileTopContent(props) {
   return (
     <div className="top-content">
-      <StudentInfo  studentName = {props.studentName} group = {props.group} birthdayDate = {props.birthdayDate} />
+      <StudentInfo
+        name={props.name}
+        group={props.group}
+        username={props.username}
+      />
       <div className="last-weeks-tasks">
         <p className="last-weeks-tasks-title">Последние задания</p>
         <div className="last-weeks-tasks-content">

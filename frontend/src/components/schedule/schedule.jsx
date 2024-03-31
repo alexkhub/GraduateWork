@@ -12,6 +12,7 @@ function Schedule() {
   const thursdayPairs = [];
   const fridayPairs = [];
 
+  // Tommorow's schedule
   const daysOfWeek = [
     "Понедельник",
     "Вторник",
@@ -21,8 +22,27 @@ function Schedule() {
     "Суббота",
     "Воскресенье",
   ];
+
   const tommorowDay = daysOfWeek[new Date().getDay()];
 
+  function pairsMatchingOnThisDay() {
+    switch (tommorowDay) {
+      case daysOfWeek[0]:
+        return mondayPairs;
+      case daysOfWeek[1]:
+        return tuesdayPairs;
+      case daysOfWeek[2]:
+        return wednesdayPairs;
+      case daysOfWeek[3]:
+        return thursdayPairs;
+      case daysOfWeek[4]:
+        return fridayPairs;
+      default:
+        return (<Pair subjectName="Пар нет, уходите!" pairNumber = '0' audience = '0' />);
+    }
+  }
+
+  // Weekly schedule
   let group = "4-1is";
   useEffect(() => {
     axios
@@ -79,23 +99,6 @@ function Schedule() {
         break;
       default:
         return;
-    }
-  }
-
-  function pairsMatchingOnThisDay() {
-    switch (tommorowDay) {
-      case daysOfWeek[0]:
-        return mondayPairs;
-      case daysOfWeek[1]:
-        return tuesdayPairs;
-      case daysOfWeek[2]:
-        return wednesdayPairs;
-      case daysOfWeek[3]:
-        return thursdayPairs;
-      case daysOfWeek[4]:
-        return fridayPairs;
-      default:
-        return (<Pair subjectName="Пар нет, уходите!" pairNumber = '0' audience = '0' />);
     }
   }
 
