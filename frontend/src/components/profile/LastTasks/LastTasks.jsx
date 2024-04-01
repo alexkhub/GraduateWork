@@ -20,6 +20,7 @@ function LastTasks(props) {
         subjectName={sliderItemsData[i].subject}
         taskDate={sliderItemsData[i].date_added}
         taskStatus={true}
+        key = {i}
       />
     );
   }

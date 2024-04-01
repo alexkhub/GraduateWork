@@ -6,7 +6,7 @@ function Login() {
     const loginInput = document.querySelector("#login-input").value;
     const passwordInput = document.querySelector("#password-input").value;
 
-    if (localStorage.getItem("JWT") === null) {
+    if (!localStorage.getItem("JWT")) {
       axios
         .post("http://127.0.0.1:8000/auth/jwt/create/", {
           username: passwordInput,
@@ -14,12 +14,16 @@ function Login() {
         })
         .then((data) => {
           localStorage.setItem("JWT", data.data.access);
+          localStorage.setItem("Refresh", data.data.refresh);
+
+          if (data.status === 200) {
+            window.location.href = "/profile";
+          }
         });
+    } else {
+      window.location.href = "/profile";
     }
   }
-  axios.defaults.headers.common.Authorization = `JWT ${localStorage.getItem(
-    "JWT"
-  )}`;
 
   return (
     <div className="content">
@@ -30,7 +34,7 @@ function Login() {
         </div>
         <div className="form-content">
           <div>
-            <input type="text" id="login-input" placeholder="Логин" />
+            <input type="text" id="login-input" placeholder="Логин" required />
           </div>
           <div>
             <input
@@ -38,13 +42,14 @@ function Login() {
               id="password-input"
               placeholder="Пароль"
               autoComplete="false"
+              required
             />
           </div>
           <button onClick={login} type="button">
             Войти
           </button>
           <div className="login-links">
-            <Link to="/" type="button" className="link-button">
+            <Link to="/404" className="link-button">
               Сбросить пароль
             </Link>
           </div>

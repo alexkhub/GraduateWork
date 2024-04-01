@@ -51,7 +51,7 @@ function MenuBurger() {
           }
         ></div>
       </div>
-      <Link to="/login">Выйти</Link>
+      <Link to="/login" onClick={() => localStorage.clear()}>Выйти</Link>
     </nav>
   );
 }

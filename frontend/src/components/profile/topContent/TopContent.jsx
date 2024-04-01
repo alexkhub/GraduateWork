@@ -9,18 +9,28 @@ function ProfileTopContent(props) {
 
   let user = props.username;
   useEffect(() => {
-    axios.get(`http://localhost:8000/api-student_performance/profile/${user}/`)
-    .then (data => setTasksData(data.data.user_quests))
+    axios
+      .get(`http://localhost:8000/api-student_performance/profile/${user}/`)
+      .then((data) => setTasksData(data.data.user_quests));
   }, [user]);
 
   for (let i = 0; i < tasksData.length; i++) {
+    if (!tasksData[i].quest) {
+      continue;
+    }
+
+    tasksData[i].quest.lecturer.user = tasksData[i].quest.lecturer.user
+      .replace("-", " ")
+      .replace("_", " ");
+      
     lastWeekTasksItems.push(
       <LastWeekTaskItem
-            teacherName='Преподаватель'
-            subjectName='Предмет'
-            taskStatus={tasksData[i].status}
-          />
-    )
+        teacherName={tasksData[i].quest.lecturer.user}
+        subjectName={tasksData[i].quest.subject}
+        taskStatus={tasksData[i].status}
+        key = {i}
+      />
+    );
   }
 
   return (
@@ -32,9 +42,7 @@ function ProfileTopContent(props) {
       />
       <div className="last-weeks-tasks">
         <p className="last-weeks-tasks-title">Последние задания</p>
-        <div className="last-weeks-tasks-content">
-          {lastWeekTasksItems}
-        </div>
+        <div className="last-weeks-tasks-content">{lastWeekTasksItems}</div>
       </div>
     </div>
   );

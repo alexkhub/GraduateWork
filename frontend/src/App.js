@@ -17,8 +17,8 @@ import Exams from "./components/Exams/Exams";
 function App() {
   // Get data for profile
   const [userData, setUser] = useState("");
-  let user = "alexkhub";
 
+  let user = "alexkhub";
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api-student_performance/profile/${user}/`)
@@ -35,7 +35,7 @@ function App() {
             path="/profile"
             element={
               <Profile
-                username={userData.username}
+                username={user}
                 group={userData.group}
                 name={`${userData.first_name} ${userData.last_name}`}
               />
@@ -45,7 +45,10 @@ function App() {
           <Route path="/account-verified" element={<AccountVerified />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/teachers-schedule" element={<TeachersSchedule />} />
-          <Route path="/ratings" element={<Ratings username={userData.username}/>} />
+          <Route
+            path="/ratings"
+            element={<Ratings username={userData.username} />}
+          />
           <Route path="/replacements" element={<Replacements />} />
           <Route path="/exams" element={<Exams />} />
           <Route path="/404" element={<NotFound />} />
