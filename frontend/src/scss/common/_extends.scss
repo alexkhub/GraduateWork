@@ -14,6 +14,7 @@
 // Student settings modal window
 %student-settings-background {
   position: absolute;
+  display: flex;
   height: 100svh;
   width: 100svw;
   background-color: rgba(0, 0, 0, 0.4);
@@ -41,7 +42,7 @@
 // Ratings filter
 %filters-container {
   position: absolute;
-  background-color: #00674a;
+  background-color: $modal-window-bg;
   border-left: 2px solid black;
   color: white;
   height: calc(100svh - 40px);

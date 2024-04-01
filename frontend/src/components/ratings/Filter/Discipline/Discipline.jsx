@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './Discipline.css'
 
 function Discipline(props) {
 

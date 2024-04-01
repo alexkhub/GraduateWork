@@ -49,7 +49,7 @@ function Login() {
             Войти
           </button>
           <div className="login-links">
-            <Link to="/404" className="link-button">
+            <Link to="/404" className="reset-password-link">
               Сбросить пароль
             </Link>
           </div>

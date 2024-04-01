@@ -12,13 +12,13 @@ function MenuBurger() {
       >
         <ul>
           <li>
+            <Link to="/teachers-schedule">Расписание для преподавателей</Link>
+          </li>
+          <li>
             <Link to="/404">Успеваемость</Link>
           </li>
           <li>
             <Link to="/schedule">Расписание</Link>
-          </li>
-          <li>
-            <Link to="/teachers-schedule">Расписание для преподавателей</Link>
           </li>
           <li>
             <Link to="/exams">Экзамены</Link>
@@ -51,7 +51,9 @@ function MenuBurger() {
           }
         ></div>
       </div>
-      <Link to="/login" onClick={() => localStorage.clear()}>Выйти</Link>
+      <Link to="/login" onClick={() => localStorage.clear()}>
+        Выйти
+      </Link>
     </nav>
   );
 }

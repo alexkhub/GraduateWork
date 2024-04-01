@@ -9,7 +9,7 @@
   flex-wrap: wrap;
   align-content: flex-start;
   gap: 50px;
-  height: calc(100svh - 60px);
+  height: 100svh;
 }
 
 // Rating card
@@ -53,12 +53,9 @@
 
     transition: 0.3s ease color;
   }
-  :hover {
-    color: rgba(255, 255, 255, 0.4);
-  }
 }
 
-.fa-times:hover {
+.fa-times:hover, .fa-filter:hover {
   color: rgba(255, 255, 255, 0.4);
 }
 
@@ -86,20 +83,25 @@
   div {
     margin-top: 20px;
   }
-  button {
-    background-color: $transparent-bg;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 20px;
-    border: none;
+  .clear-filter {
+    margin-top: 30px;
+  }
+}
 
-    transition: 0.3s ease box-shadow, .3s ease background-color;
-  }
-  button:hover {
-    box-shadow: $defaul-box-shadow;
-    background-color: $button-hover-bg;
-  }
+.discipline-input-label {
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 7px 10px;
+  border-radius: 5px;
+
+  transition: .3s ease background-color;
+}
+
+.discipline-input-label::first-letter {
+  text-transform: uppercase;
+}
+
+.discipline-input-label:hover {
+  background-color: $transparent-20;
 }

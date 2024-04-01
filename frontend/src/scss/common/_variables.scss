@@ -8,13 +8,16 @@ $done-status: #00DA23;
 $failed-status: #FF3C3C;
 
 // Backgrounds
-$app-bg: #00674A;
+$app-bg: #171717;
 $transparent-bg: rgba(170, 170, 170, 0.1);
-$modal-window-bg: #003425;
+$transparent-30: #aaaaaa30;
+$transparent-20: #aaaaaa20;
+$modal-window-bg: #202020;
+$before-bg: #00b884;
 
 // Box shadows
-$defaul-box-shadow: 0px 4px 20px 2px rgba(0, 0, 0, 0.25);
+$defaul-box-shadow: 0 0 20px 1px rgba(101, 101, 101, 0.25);
 
 // Hovers
 $button-hover-bg: #d9d9d982;
-$block-hover-bg: #008a63;
+$block-hover-bg: #AAAAAA30;

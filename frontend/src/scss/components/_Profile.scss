@@ -97,14 +97,13 @@
   font-size: 20px;
 }
 
-
 .last-weeks-tasks-item {
   width: 200px;
-  height: 60px;
   background-color: $transparent-bg;
   border-radius: 15px;
   padding: 10px;
   box-sizing: border-box;
+  font-size: 16px;
 
   transition: 0.3s ease background-color, 0.3s ease box-shadow;
   div {
@@ -227,18 +226,16 @@
 // Student settings (modal window)
 .student-settings-background__hidden {
   @extend %student-settings-background;
-  display: flex;
   opacity: 0;
   z-index: -1;
-  transform: translateY(50px)
+  transform: translateY(50px);
 }
 
 .student-settings-background__show {
   @extend %student-settings-background;
-  display: flex;
-  z-index: 1;
   opacity: 100;
-  transform: translateY(0)
+  z-index: 1;
+  transform: translateY(0);
 }
 
 .student-settings {
@@ -259,29 +256,25 @@
     text-align: center;
     color: white;
   }
-}
-
-.settings-form {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  div {
+  .settings-form {
+    margin-top: 30px;
     display: flex;
-    column-gap: 30px;
-  }
-}
-
-.settings-buttons {
-  margin-top: 40px;
-  button {
-    a {
-      color: $button-text-color;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    div {
+      display: flex;
+      column-gap: 30px;
     }
-  }
-  button:hover {
-    background-color: $button-hover-bg;
+    .settings-buttons {
+      margin-top: 20px;
+      button {
+        transition: 0.3s ease background-color;
+      }
+      button:hover {
+        background-color: $before-bg;
+      }
+    }
   }
 }
 
@@ -305,9 +298,6 @@
     button {
       margin-left: 50px;
       margin-top: 50px;
-    }
-    :hover {
-      background-color: $button-hover-bg;
     }
   }
   div:nth-child(2) {

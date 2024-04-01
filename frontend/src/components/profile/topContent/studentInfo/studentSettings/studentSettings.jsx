@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 function StudentSettings() {
@@ -30,13 +29,9 @@ function StudentSettings() {
               <input type="tel" placeholder="Новый номер телефона" />
             </div>
             <div className="settings-buttons">
-              <button>
-                <Link to="/404">Сменить пароль</Link>
-              </button>
+              <button>Сменить пароль</button>
               <button>Применить</button>
-              <button>
-                <Link to="/404">Сменить почту</Link>
-              </button>
+              <button>Сменить почту</button>
             </div>
           </form>
         </div>
