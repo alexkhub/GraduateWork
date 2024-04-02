@@ -8,7 +8,7 @@ function Ratings(props) {
   const ratings = [];
 
   let user = props.username;
-  let ratingsEndpoint = `http://127.0.0.1:8000/api-student_performance/scores/${user}/`;
+  const ratingsEndpoint = `http://127.0.0.1:8000/api-student_performance/scores/${user}/`;
   useEffect(() => {
     axios
       .get(ratingsEndpoint)

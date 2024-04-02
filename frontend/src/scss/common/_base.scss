@@ -62,7 +62,7 @@ button:before {
 }
 
 button:hover::before {
-  border-radius: 5px;
+  border-radius: 0;
   top: 0;
 }
 
@@ -73,7 +73,7 @@ input {
   outline: none;
   border: none;
   font-size: 18px;
-  color: black;
+  color: white;
 
   transition: 0.3s ease background-color;
 }

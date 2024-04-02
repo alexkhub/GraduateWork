@@ -8,11 +8,12 @@ function ProfileTopContent(props) {
   const lastWeekTasksItems = [];
 
   let user = props.username;
+  const userQuestsEndpoint = `http://localhost:8000/api-student_performance/profile/${user}/`;
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api-student_performance/profile/${user}/`)
+      .get(userQuestsEndpoint)
       .then((data) => setTasksData(data.data.user_quests));
-  }, [user]);
+  }, [user, userQuestsEndpoint]);
 
   for (let i = 0; i < tasksData.length; i++) {
     if (!tasksData[i].quest) {

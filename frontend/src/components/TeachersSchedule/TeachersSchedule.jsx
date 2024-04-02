@@ -23,11 +23,12 @@ function TeachersSchedule() {
   ];
   const tommorowDay = daysOfWeek[new Date().getDay()];
 
+  const teachersScheduleEndpoint = `http://127.0.0.1:8000/api-timetable/timetable_lector/`;
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api-timetable/timetable_lector/`)
+      .get(teachersScheduleEndpoint)
       .then((data) => setPairs(data.data.lector_timetable));
-  }, []);
+  }, [teachersScheduleEndpoint]);
 
   for (let i = 0; i < pairs.length; i++) {
     pairs[i].lecturer.user = pairs[i].lecturer.user
@@ -95,7 +96,13 @@ function TeachersSchedule() {
       case daysOfWeek[4]:
         return fridayPairs;
       default:
-        return (<TeachersPair subjectName="Пар нет, уходите!" pairNumber = '0' audience = '0'  />);
+        return (
+          <TeachersPair
+            subjectName="Пар нет, уходите!"
+            pairNumber="0"
+            audience="0"
+          />
+        );
     }
   }
 

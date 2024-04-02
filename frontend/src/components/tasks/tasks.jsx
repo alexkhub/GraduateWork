@@ -10,14 +10,13 @@ function Tasks() {
   const studentTasks = [];
 
   let group = "4-1is";
+  const studentQuestsEndpoint = `http://127.0.0.1:8000/api-student_work/group_quest/${group}/`;
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/api-student_work/group_quest/${group}/`)
-      .then((data) => {
-        setGroupTasks(data.data.group_quests);
-        setStudentTasks(data.data.student_quests);
-      });
-  }, [group]);
+    axios.get(studentQuestsEndpoint).then((data) => {
+      setGroupTasks(data.data.group_quests);
+      setStudentTasks(data.data.student_quests);
+    });
+  }, [group, studentQuestsEndpoint]);
 
   for (let i = 0; i < groupTasksData.length; i++) {
     groupTasks.push(

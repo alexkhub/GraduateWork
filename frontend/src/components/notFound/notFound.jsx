@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function NotFound() {
   return (
-    <div className="not-found-content">
+    <div className="error-content">
       <div className="error-description">
         <p>
           Ошибка <span className="error-code">404</span>

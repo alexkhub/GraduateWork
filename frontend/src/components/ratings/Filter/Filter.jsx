@@ -22,11 +22,12 @@ function Filter() {
   }
 
   let user = "alexkhub";
+  const subjectsEndpoint = `http://127.0.0.1:8000/api-student_performance/scores/${user}/`;
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api-student_performance/scores/${user}/`)
+      .get(subjectsEndpoint)
       .then((data) => setSubject(data.data.subjects));
-  }, [user]);
+  }, [user, subjectsEndpoint]);
 
   for (let i = 0; i < subjects.length; i++) {
     disciplines.push(

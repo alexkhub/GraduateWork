@@ -38,17 +38,18 @@ function Schedule() {
       case daysOfWeek[4]:
         return fridayPairs;
       default:
-        return (<Pair subjectName="Пар нет, уходите!" pairNumber = '0' audience = '0' />);
+        return (
+          <Pair subjectName="Пар нет, уходите!" pairNumber="0" audience="0" />
+        );
     }
   }
 
   // Weekly schedule
   let group = "4-1is";
+  const scheduleEndpoint = `http://127.0.0.1:8000/api-timetable/timetable/${group}/`;
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/api-timetable/timetable/${group}/`)
-      .then((data) => setPairs(data.data.timetable));
-  }, [group]);
+    axios.get(scheduleEndpoint).then((data) => setPairs(data.data.timetable));
+  }, [group, scheduleEndpoint]);
 
   for (let i = 0; i < pairs.length; i++) {
     pairs[i].lecturer.user = pairs[i].lecturer.user

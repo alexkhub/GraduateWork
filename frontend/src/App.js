@@ -13,45 +13,81 @@ import NotFound from "./components/NotFound/NotFound";
 import TeachersSchedule from "./components/TeachersSchedule/TeachersSchedule";
 import Replacements from "./components/Replacements/Replacements";
 import Exams from "./components/Exams/Exams";
+import Unauthorized from "./components/Unauthorized/Unauthorized";
 
 function App() {
   // Get data for profile
   const [userData, setUser] = useState("");
+  const [isAuthorized, setAuthorized] = useState(false);
+
+  function authCheck() {
+    localStorage.getItem("JWT") ? setAuthorized(true) : setAuthorized(false);
+  }
 
   let user = "alexkhub";
+  const profileEndpoint = `http://localhost:8000/api-student_performance/profile/${user}/`;
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api-student_performance/profile/${user}/`)
-      .then((data) => setUser(data.data.profile));
-  }, [user]);
+    axios.get(profileEndpoint).then((data) => setUser(data.data.profile));
+
+    authCheck();
+  }, [user, profileEndpoint]);
 
   return (
     <div>
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login isAuthorized={isAuthorized} />}
+          />
           <Route
             path="/profile"
             element={
-              <Profile
-                username={user}
-                group={userData.group}
-                name={`${userData.first_name} ${userData.last_name}`}
-              />
+              isAuthorized ? (
+                <Profile
+                  username={user}
+                  group={userData.group}
+                  name={`${userData.first_name} ${userData.last_name}`}
+                />
+              ) : (
+                <Unauthorized />
+              )
             }
           />
-          <Route path="/tasks" element={<Tasks />} />
+          <Route
+            path="/tasks"
+            element={isAuthorized ? <Tasks /> : <Unauthorized />}
+          />
           <Route path="/account-verified" element={<AccountVerified />} />
-          <Route path="/schedule" element={<Schedule />} />
-          <Route path="/teachers-schedule" element={<TeachersSchedule />} />
+          <Route
+            path="/schedule"
+            element={isAuthorized ? <Schedule /> : <Unauthorized />}
+          />
+          <Route
+            path="/teachers-schedule"
+            element={isAuthorized ? <TeachersSchedule /> : <Unauthorized />}
+          />
           <Route
             path="/ratings"
-            element={<Ratings username={userData.username} />}
+            element={
+              isAuthorized ? (
+                <Ratings username={userData.username} />
+              ) : (
+                <Unauthorized />
+              )
+            }
           />
-          <Route path="/replacements" element={<Replacements />} />
-          <Route path="/exams" element={<Exams />} />
+          <Route
+            path="/replacements"
+            element={isAuthorized ? <Replacements /> : <Unauthorized />}
+          />
+          <Route
+            path="/exams"
+            element={isAuthorized ? <Exams /> : <Unauthorized />}
+          />
           <Route path="/404" element={<NotFound />} />
+          <Route path="/401" element={<Unauthorized />} />
           <Route path="/" element={<Login />} />
         </Routes>
       </BrowserRouter>

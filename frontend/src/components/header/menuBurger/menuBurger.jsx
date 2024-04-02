@@ -51,7 +51,7 @@ function MenuBurger() {
           }
         ></div>
       </div>
-      <Link to="/login" onClick={() => localStorage.clear()}>
+      <Link to="/login" onClick={() => {localStorage.clear(); window.location.href = '/login';}}>
         Выйти
       </Link>
     </nav>

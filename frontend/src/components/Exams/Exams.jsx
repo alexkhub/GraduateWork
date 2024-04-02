@@ -7,11 +7,12 @@ function Exams() {
   const exams = [];
 
   let group = "4-1is";
+  let examsEndpoint = `http://localhost:8000/api-timetable/exam/${group}/`;
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api-timetable/exam/${group}/`)
+      .get(examsEndpoint)
       .then((data) => setExamsData(data.data.exams));
-  }, [group]);
+  }, [group, examsEndpoint]);
 
   for (let i = 0; i < examsData.length; i++) {
     examsData[i].lecturer.user = examsData[i].lecturer.user
