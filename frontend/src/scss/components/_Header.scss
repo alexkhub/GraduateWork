@@ -93,3 +93,7 @@ header {
   @extend %menu-burger-stick;
   transform: rotate(45deg);
 }
+
+.logout-button__hidden {
+  display: none;
+}

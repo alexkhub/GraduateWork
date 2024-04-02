@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-function MenuBurger() {
+
+function MenuBurger(props) {
   const [isOpen, openMenu] = useState(false);
   function menuToggle() {
     openMenu(!isOpen);
@@ -51,7 +52,14 @@ function MenuBurger() {
           }
         ></div>
       </div>
-      <Link to="/login" onClick={() => {localStorage.clear(); window.location.href = '/login';}}>
+      <Link
+        className={props.isAuthorized ? "" : "logout-button__hidden"}
+        to="/login"
+        onClick={() => {
+          localStorage.clear();
+          window.location.href = "/login";
+        }}
+      >
         Выйти
       </Link>
     </nav>

@@ -2,7 +2,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Login(props) {
-
   function login() {
     const loginInput = document.querySelector("#login-input").value;
     const passwordInput = document.querySelector("#password-input").value;
@@ -26,8 +25,8 @@ function Login(props) {
     }
   }
 
-  if (localStorage.getItem('JWT')) {
-    window.location.href = '/profile'
+  if (localStorage.getItem("JWT")) {
+    window.location.href = "/profile";
   }
 
   return (

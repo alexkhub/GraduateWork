@@ -35,7 +35,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header />
+        <Header isAuthorized = {isAuthorized} />
         <Routes>
           <Route
             path="/login"
@@ -88,7 +88,7 @@ function App() {
           />
           <Route path="/404" element={<NotFound />} />
           <Route path="/401" element={<Unauthorized />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
