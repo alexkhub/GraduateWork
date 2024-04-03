@@ -4,7 +4,7 @@ import DailySchedule from "./DailySchedule/DailySchedule";
 import DoublePair from "./DoublePair/DoublePair";
 import Pair from "./Pair/Pair";
 
-function Schedule() {
+function Schedule(props) {
   const [pairs, setPairs] = useState("");
   const mondayPairs = [];
   const tuesdayPairs = [];
@@ -45,11 +45,10 @@ function Schedule() {
   }
 
   // Weekly schedule
-  let group = "4-1is";
-  const scheduleEndpoint = `http://127.0.0.1:8000/api-timetable/timetable/${group}/`;
+  const scheduleEndpoint = `http://127.0.0.1:8000/api-timetable/timetable/${props.groupSlug}/`;
   useEffect(() => {
     axios.get(scheduleEndpoint).then((data) => setPairs(data.data.timetable));
-  }, [group, scheduleEndpoint]);
+  }, [scheduleEndpoint]);
 
   for (let i = 0; i < pairs.length; i++) {
     pairs[i].lecturer.user = pairs[i].lecturer.user

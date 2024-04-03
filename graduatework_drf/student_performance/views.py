@@ -60,13 +60,13 @@ class StudentPerformanceListView(ListAPIView):
 
 class StudentProfileRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = Users.objects.all().select_related('group').only('group__name', 'username', 'first_name', 'last_name',
-                                                                'email', 'term', 'phone')
+                                                                'email', 'term', 'phone', 'slug')
     serializer_class = StudentProfileSerializer
     lookup_field = 'slug'
     http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options', 'trace']
 
-    # permission_classes = [IsAuthenticated, DeleteUserPermissions]
-    @method_decorator(cache_page(60 * 60 * 2, key_prefix='profile'), )
+    permission_classes = [IsAuthenticated, DeleteUserPermissions]
+    # @method_decorator(cache_page(60 * 60 * 2, key_prefix='profile'), )
     def retrieve(self, request, *args, **kwargs):
         obj = self.get_object()
         profile_serializer = self.serializer_class(obj)
@@ -81,7 +81,7 @@ class StudentProfileRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         ).select_related('subject', 'group').only('quest_name', 'date_added', 'slug', 'group__name',
                                                   'subject__subject_name', 'lecturer').order_by('-date_added')[:10]
         quests_serializer = ProfileStudentQuestSerializer(quests, many=True)
-
+        print(request.user)
         return Response({
             'profile': profile_serializer.data,
             'user_quests': user_quests_serializer.data,

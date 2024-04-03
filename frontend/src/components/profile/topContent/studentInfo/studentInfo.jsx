@@ -7,10 +7,10 @@ function StudentInfo(props) {
       <div className="student-characteristics">
         <p className="characteristics-item student-name">{props.name}</p>
         <p className="characteristics-item student-username">
-          {props.username}
+          {props.userName}
         </p>
         <div>
-          <p className="characteristics-item student-group">{props.group}</p>
+          <p className="characteristics-item student-group">{props.userGroup}</p>
         </div>
       </div>
     </div>

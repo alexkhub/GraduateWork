@@ -7,13 +7,12 @@ function ProfileTopContent(props) {
   const [tasksData, setTasksData] = useState("");
   const lastWeekTasksItems = [];
 
-  let user = props.username;
-  const userQuestsEndpoint = `http://localhost:8000/api-student_performance/profile/${user}/`;
+  const userQuestsEndpoint = `http://localhost:8000/api-student_performance/profile/${props.userSlug}/`;
   useEffect(() => {
     axios
       .get(userQuestsEndpoint)
       .then((data) => setTasksData(data.data.user_quests));
-  }, [user, userQuestsEndpoint]);
+  }, [userQuestsEndpoint]);
 
   for (let i = 0; i < tasksData.length; i++) {
     if (!tasksData[i].quest) {
@@ -23,13 +22,13 @@ function ProfileTopContent(props) {
     tasksData[i].quest.lecturer.user = tasksData[i].quest.lecturer.user
       .replace("-", " ")
       .replace("_", " ");
-      
+
     lastWeekTasksItems.push(
       <LastWeekTaskItem
         teacherName={tasksData[i].quest.lecturer.user}
         subjectName={tasksData[i].quest.subject}
         taskStatus={tasksData[i].status}
-        key = {i}
+        key={i}
       />
     );
   }
@@ -38,8 +37,8 @@ function ProfileTopContent(props) {
     <div className="top-content">
       <StudentInfo
         name={props.name}
-        group={props.group}
-        username={props.username}
+        userGroup={props.userGroup}
+        userName={props.userName}
       />
       <div className="last-weeks-tasks">
         <p className="last-weeks-tasks-title">Последние задания</p>

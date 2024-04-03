@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { jwtDecode } from "jwt-decode";
 
 import Header from "./components/Header/Header";
 import Login from "./components/Login/Login";
@@ -16,21 +16,23 @@ import Exams from "./components/Exams/Exams";
 import Unauthorized from "./components/Unauthorized/Unauthorized";
 
 function App() {
-  // Get data for profile
-  const [userData, setUser] = useState("");
+  const [userGroupData, setUserGroupData] = useState("");
+  let groupSlug = userGroupData.replace("ИС", "is");
+  let userSlug = "";
+  localStorage.getItem("JWT")
+    ? (userSlug = "alexkhub")
+    : // ? (userSlug = jwtDecode(localStorage.getItem("JWT")).user_slug)
+      (userSlug = null);
+
   // Get auth status
   const [isAuthorized, setAuthorized] = useState(false);
   function authCheck() {
     localStorage.getItem("JWT") ? setAuthorized(true) : setAuthorized(false);
   }
 
-  let user = "alexkhub";
-  const profileEndpoint = `http://localhost:8000/api-student_performance/profile/${user}/`;
   useEffect(() => {
-    axios.get(profileEndpoint).then((data) => setUser(data.data.profile));
-
     authCheck();
-  }, [user, profileEndpoint]);
+  }, []);
 
   return (
     <div>
@@ -46,9 +48,9 @@ function App() {
             element={
               isAuthorized ? (
                 <Profile
-                  username={user}
-                  group={userData.group}
-                  name={`${userData.first_name} ${userData.last_name}`}
+                  userSlug={userSlug}
+                  userGroupData={userGroupData}
+                  setUserGroupData={setUserGroupData}
                 />
               ) : (
                 <Unauthorized />
@@ -62,7 +64,13 @@ function App() {
           <Route path="/account-verified" element={<AccountVerified />} />
           <Route
             path="/schedule"
-            element={isAuthorized ? <Schedule /> : <Unauthorized />}
+            element={
+              isAuthorized ? (
+                <Schedule groupSlug={groupSlug} />
+              ) : (
+                <Unauthorized />
+              )
+            }
           />
           <Route
             path="/teachers-schedule"
@@ -71,11 +79,7 @@ function App() {
           <Route
             path="/ratings"
             element={
-              isAuthorized ? (
-                <Ratings username={user} />
-              ) : (
-                <Unauthorized />
-              )
+              isAuthorized ? <Ratings userSlug={userSlug} /> : <Unauthorized />
             }
           />
           <Route

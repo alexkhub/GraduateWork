@@ -6,13 +6,12 @@ function LastTasks(props) {
   const [sliderItemsData, setSliderItemsData] = useState("");
   const sliderItems = [];
 
-  let user = props.username;
-  const questsEndpoint = `http://localhost:8000/api-student_performance/profile/${user}/`;
+  const questsEndpoint = `http://localhost:8000/api-student_performance/profile/${props.userSlug}/`;
   useEffect(() => {
     axios
       .get(questsEndpoint)
       .then((data) => setSliderItemsData(data.data.quests));
-  }, [user, questsEndpoint]);
+  }, [questsEndpoint]);
 
   for (let i = 0; i < sliderItemsData.length; i++) {
     sliderItems.push(

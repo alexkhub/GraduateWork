@@ -27,7 +27,7 @@ class StudentProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Users
-        fields = ('group', 'username', 'first_name', 'email', 'term', 'phone', 'last_name')
+        fields = ('group', 'username', 'first_name', 'email', 'term', 'phone', 'last_name', 'slug')
 
     def update(self, instance, validated_data):
         instance.phone = validated_data.get('phone', instance.phone)

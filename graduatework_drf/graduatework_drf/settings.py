@@ -114,7 +114,7 @@ INTERNAL_IPS = [
 
 SIMPLE_JWT = {
     # Устанавливаем срок жизни токена
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=50),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=12),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
@@ -126,8 +126,8 @@ SIMPLE_JWT = {
     'ISSUER': None,
 
     'AUTH_HEADER_TYPES': ('Bearer', 'JWT',),
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
+    'USER_ID_FIELD': 'slug',
+    'USER_ID_CLAIM': 'user_slug',
 
     'AUTH_TOKEN_CLASSES': (
         'rest_framework_simplejwt.tokens.AccessToken',

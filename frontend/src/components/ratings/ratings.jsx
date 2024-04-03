@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Rating from './Rating/Rating';
+import Rating from "./Rating/Rating";
 import Filter from "./Filter/Filter";
 
 function Ratings(props) {
   const [ratingData, setRating] = useState("");
   const ratings = [];
 
-  let user = props.username;
-  const ratingsEndpoint = `http://127.0.0.1:8000/api-student_performance/scores/${user}/`;
+  const ratingsEndpoint = `http://127.0.0.1:8000/api-student_performance/scores/${props.userSlug}/`;
   useEffect(() => {
     axios
       .get(ratingsEndpoint)
       .then((data) => setRating(data.data.measurable_types_control));
-  }, [user, ratingsEndpoint]);
+  }, [ratingsEndpoint]);
+
   for (let i = 0; i < ratingData.length; i++) {
     ratingData[i].lecturer.user = ratingData[i].lecturer.user
       .replace("-", " ")
