@@ -18,8 +18,8 @@ import Unauthorized from "./components/Unauthorized/Unauthorized";
 function App() {
   // Get data for profile
   const [userData, setUser] = useState("");
+  // Get auth status
   const [isAuthorized, setAuthorized] = useState(false);
-
   function authCheck() {
     localStorage.getItem("JWT") ? setAuthorized(true) : setAuthorized(false);
   }
@@ -35,7 +35,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header isAuthorized = {isAuthorized} />
+        <Header isAuthorized={isAuthorized} />
         <Routes>
           <Route
             path="/login"
@@ -72,7 +72,7 @@ function App() {
             path="/ratings"
             element={
               isAuthorized ? (
-                <Ratings username={userData.username} />
+                <Ratings username={user} />
               ) : (
                 <Unauthorized />
               )

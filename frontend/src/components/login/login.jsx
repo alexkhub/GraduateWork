@@ -1,16 +1,17 @@
 import axios from "axios";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Login(props) {
-  function login() {
-    const loginInput = document.querySelector("#login-input").value;
-    const passwordInput = document.querySelector("#password-input").value;
+  const [passwordValue, setPasswordValue] = useState("");
+  const [loginValue, setLoginValue] = useState("");
 
+  function login() {
     if (!localStorage.getItem("JWT")) {
       axios
         .post("http://127.0.0.1:8000/auth/jwt/create/", {
-          username: passwordInput,
-          password: loginInput,
+          username: passwordValue,
+          password: loginValue,
         })
         .then((data) => {
           localStorage.setItem("JWT", data.data.access);
@@ -18,10 +19,10 @@ function Login(props) {
 
           if (data.status === 200) {
             window.location.href = "/profile";
+          } else if (data.status === 400) {
+            alert("Заполните все поля");
           }
         });
-    } else {
-      window.location.href = "/401";
     }
   }
 
@@ -38,7 +39,14 @@ function Login(props) {
         </div>
         <div className="form-content">
           <div>
-            <input type="text" id="login-input" placeholder="Логин" required />
+            <input
+              type="text"
+              id="login-input"
+              placeholder="Логин"
+              autoComplete="false"
+              onChange={(event) => setLoginValue(event.target.value)}
+              required
+            />
           </div>
           <div>
             <input
@@ -46,6 +54,7 @@ function Login(props) {
               id="password-input"
               placeholder="Пароль"
               autoComplete="false"
+              onChange={(event) => setPasswordValue(event.target.value)}
               required
             />
           </div>
