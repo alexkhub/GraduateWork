@@ -4,6 +4,8 @@ import Rating from "./Rating/Rating";
 import Filter from "./Filter/Filter";
 
 function Ratings(props) {
+  // This state changes in <Filter/>
+  const [subjects, setSubject] = useState("");
   const [ratingData, setRating] = useState("");
   const ratings = [];
 
@@ -12,7 +14,7 @@ function Ratings(props) {
     axios
       .get(ratingsEndpoint)
       .then((data) => setRating(data.data.measurable_types_control));
-  }, [ratingsEndpoint]);
+  }, [ratingsEndpoint, props]);
 
   for (let i = 0; i < ratingData.length; i++) {
     ratingData[i].lecturer.user = ratingData[i].lecturer.user
@@ -32,7 +34,7 @@ function Ratings(props) {
   return (
     <>
       <div className="rating-content">
-        <Filter key="1" />
+        <Filter key="1" subjects = {subjects} setSubject = {setSubject} userSlug = {props.userSlug} />
         <div className="ratings">{ratings}</div>
       </div>
     </>

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Discipline from "./Discipline/Discipline";
 import axios from "axios";
 
-function Filter() {
+function Filter(props) {
   const inputs = document.querySelectorAll(".discipline input");
   const ratings = document.querySelectorAll(".rating");
-  const [subjects, setSubject] = useState("");
+
   const [isOpen, toggleOpen] = useState(true);
   const disciplines = [];
 
@@ -21,17 +21,18 @@ function Filter() {
     });
   }
 
-  let user = "alexkhub";
-  const subjectsEndpoint = `http://127.0.0.1:8000/api-student_performance/scores/${user}/`;
+  const subjectsEndpoint = `http://127.0.0.1:8000/api-student_performance/scores/${props.userSlug}/`;
   useEffect(() => {
     axios
       .get(subjectsEndpoint)
-      .then((data) => setSubject(data.data.subjects));
-  }, [user, subjectsEndpoint]);
+      .then((data) => props.setSubject(data.data.subjects));
+      
+      // eslint-disable-next-line
+  }, [props.subject, subjectsEndpoint]);
 
-  for (let i = 0; i < subjects.length; i++) {
+  for (let i = 0; i < props.subjects.length; i++) {
     disciplines.push(
-      <Discipline disciplineName={subjects[i].subject} id={i} key={i} />
+      <Discipline disciplineName={props.subjects[i].subject} id={i} key={i} />
     );
   }
 

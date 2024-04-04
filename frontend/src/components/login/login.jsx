@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Login(props) {
   const [passwordValue, setPasswordValue] = useState("");
   const [loginValue, setLoginValue] = useState("");
 
@@ -24,10 +24,6 @@ function Login() {
           }
         });
     }
-  }
-
-  if (localStorage.getItem("JWT")) {
-    window.location.href = "/profile";
   }
 
   return (
