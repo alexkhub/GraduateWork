@@ -22,7 +22,7 @@ class GroupQuestListCreateView(ListCreateAPIView):
     ).select_related('subject', 'group')
 
     serializer_class = GroupQuestSerializer
-    # permission_classes = (DetailStudentQuestPermission, IsAuthenticated)
+    permission_classes = (DetailStudentQuestPermission, IsAuthenticated)
     authentication_classes = (JWTAuthentication,)
     filter_backends = (DjangoFilterBackend,)
     filterset_class = QuestFilter
@@ -60,7 +60,7 @@ class DetailStudentQuestRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     queryset = UserQuest.objects.all()
     serializer_class = StudentQuestSerializer
     lookup_field = 'id'
-    # permission_classes = (DetailStudentQuestPermission, IsAuthenticated)
+    permission_classes = (DetailStudentQuestPermission, IsAuthenticated)
     authentication_classes = (JWTAuthentication,)
 
     def retrieve(self, request, *args, **kwargs):
@@ -84,8 +84,8 @@ class CreateStudentQuestCreateView(CreateAPIView):
     queryset = UserQuest.objects.all()
     serializer_class = CreateStudentQuestSerializer
 
-    # permission_classes = (IsAuthenticated,)
-    # authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (JWTAuthentication,)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

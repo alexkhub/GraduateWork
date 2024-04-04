@@ -3,8 +3,10 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from rest_framework import status
 from rest_framework.generics import ListAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from .service import *
 from .models import *
 from .serializers import *
@@ -18,7 +20,8 @@ class TimetableListView(ListAPIView):
         Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
     ).select_related('subject', 'group', 'classroom')
     serializer_class = TimetableSerializer
-    permission_classes = (AllowAny,)
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
@@ -38,6 +41,8 @@ class ExamListView(ListAPIView):
         Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
     ).select_related('subject', 'group')
     serializer_class = ExamSerializer
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
@@ -57,6 +62,8 @@ class TimetableChangesListView(ListAPIView):
         Prefetch('lecturer', queryset=Lecturer.objects.all())
     ).select_related('subject', 'group').order_by('date', 'group', 'lesson_number')
     serializer_class = TimetableChangesSerializer
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
@@ -77,6 +84,8 @@ class LectorTimeTableListView(ListAPIView):
         Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
     ).select_related('subject', 'group')
     serializer_class = TimetableSerializer
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return self.queryset.filter(lecturer__user__slug=self.request.user.slug)
@@ -100,6 +109,8 @@ class JournalRetrieveView(RetrieveAPIView):
         'subject__subject_name', 'group__name', 'lecturer', 'lessons', 'date', 'number_of_lesson', 'slug')
     serializer_class = JournalSerializer
     lookup_field = 'id'
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
     @method_decorator(cache_page(60 * 60 * 2, key_prefix='journal'), )
     def retrieve(self, request, *args, **kwargs):
@@ -116,6 +127,8 @@ class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         'group__name', 'quest__quest_name', 'type_of_lesson', 'lesson_topic', 'lesson_number', 'date')
     serializer_class = LessonDetailSerializer
     lookup_field = 'id'
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -138,5 +151,3 @@ class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         send_destroy_lesson.delay(email_body=email_body)
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
