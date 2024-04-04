@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
 // import { jwtDecode } from "jwt-decode";
 
 import Header from "./components/Header/Header";
@@ -16,13 +17,20 @@ import Exams from "./components/Exams/Exams";
 import Unauthorized from "./components/Unauthorized/Unauthorized";
 
 function App() {
-  const [userGroupData, setUserGroupData] = useState("");
-  let groupSlug = userGroupData.replace("ИС", "is");
+  let isStuff = false;
+  
   let userSlug = "";
   localStorage.getItem("JWT")
-    ? (userSlug = "alexkhub")
-    : // ? (userSlug = jwtDecode(localStorage.getItem("JWT")).user_slug)
-      (userSlug = null);
+  ? (userSlug = "alexkhub")
+  : // ? (userSlug = jwtDecode(localStorage.getItem("JWT")).user_slug)
+  (userSlug = null);
+
+  axios.defaults.headers.common["Authorization"] = `JWT ${localStorage.getItem(
+    "JWT"
+  )}`;
+  
+  const [userGroupData, setUserGroupData] = useState("");
+  let groupSlug = userGroupData.replace("ИС", "is");
 
   // Get auth status
   const [isAuthorized, setAuthorized] = useState(false);
@@ -37,7 +45,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header isAuthorized={isAuthorized} />
+        <Header isAuthorized={isAuthorized} isStuff = {isStuff} />
         <Routes>
           <Route
             path="/login"

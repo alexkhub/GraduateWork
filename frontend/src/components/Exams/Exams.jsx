@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Exam from "./Exam/Exam";
+import NextExam from "./NextExam/NextExam";
 
 function Exams() {
   const [examsData, setExamsData] = useState("");
@@ -9,9 +10,7 @@ function Exams() {
   let group = "4-1is";
   let examsEndpoint = `http://localhost:8000/api-timetable/exam/${group}/`;
   useEffect(() => {
-    axios
-      .get(examsEndpoint)
-      .then((data) => setExamsData(data.data.exams));
+    axios.get(examsEndpoint).then((data) => setExamsData(data.data.exams));
   }, [group, examsEndpoint]);
 
   for (let i = 0; i < examsData.length; i++) {
@@ -31,11 +30,11 @@ function Exams() {
       />
     );
   }
+
   return (
     <>
       <div className="exams-content">
-        <p className="container-title">Следующий экзамен</p>
-        <div className="next-exam-container">{exams}</div>
+        <NextExam examsData = {examsData} />
         <p className="container-title">Все экзамены</p>
         <div className="all-exams-container">{exams}</div>
       </div>

@@ -22,12 +22,14 @@ header {
 }
 
 .menu-burger {
-  display: flex;
+  display: grid;
   align-items: center;
-  width: 830px;
+  justify-content: space-between;
   overflow: hidden;
   height: 40px;
-  transition: 0.3s ease width;
+  max-width: 760px;
+
+  transition: 0.3s ease max-width;
   ul {
     display: flex;
     align-items: center;
@@ -46,7 +48,7 @@ header {
 }
 
 .menu-burger__hidden {
-  width: 0;
+  max-width: 0;
 }
 
 .menu-burger-icon {
@@ -94,6 +96,6 @@ header {
   transform: rotate(45deg);
 }
 
-.logout-button__hidden {
+.menu-item__hidden {
   display: none;
 }

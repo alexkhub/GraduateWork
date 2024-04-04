@@ -13,13 +13,23 @@ function MenuBurger(props) {
       >
         <ul>
           <li>
-            <Link to="/teachers-schedule">Расписание для преподавателей</Link>
+            <Link
+              to="/teachers-schedule"
+              className={props.isStuff ? "menu-item__hidden" : null}
+            >
+              Расписание для преподавателей
+            </Link>
           </li>
           <li>
             <Link to="/404">Успеваемость</Link>
           </li>
           <li>
-            <Link to="/schedule">Расписание</Link>
+            <Link
+              to="/schedule"
+              className={props.isStuff ? null : "menu-item__hidden"}
+            >
+              Расписание
+            </Link>
           </li>
           <li>
             <Link to="/exams">Экзамены</Link>
@@ -53,7 +63,7 @@ function MenuBurger(props) {
         ></div>
       </div>
       <Link
-        className={props.isAuthorized ? "" : "logout-button__hidden"}
+        className={props.isAuthorized ? "" : "menu-item__hidden"}
         to="/login"
         onClick={() => {
           localStorage.clear();

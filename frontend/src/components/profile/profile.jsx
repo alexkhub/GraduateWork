@@ -6,10 +6,6 @@ import LastTasks from "./LastTasks/LastTasks";
 
 function Profile(props) {
   const [userData, setUserData] = useState("");
-  
-  axios.defaults.headers.common["Authorization"] = `JWT ${localStorage.getItem(
-    "JWT"
-  )}`;
 
   useEffect(() => {
     axios
