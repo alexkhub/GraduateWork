@@ -17,20 +17,19 @@ import Exams from "./components/Exams/Exams";
 import Unauthorized from "./components/Unauthorized/Unauthorized";
 
 function App() {
-  let isStuff = false;
-  
+  let isStuff = true;
+
   let userSlug = "";
   localStorage.getItem("JWT")
-  ? (userSlug = "alexkhub")
-  : // ? (userSlug = jwtDecode(localStorage.getItem("JWT")).user_slug)
-  (userSlug = null);
+    ? (userSlug = "alexkhub")
+    : // ? (userSlug = jwtDecode(localStorage.getItem("JWT")).user_slug)
+      (userSlug = null);
 
   axios.defaults.headers.common["Authorization"] = `JWT ${localStorage.getItem(
     "JWT"
   )}`;
-  
+
   const [userGroupData, setUserGroupData] = useState("");
-  let groupSlug = userGroupData.replace("ИС", "is");
 
   // Get auth status
   const [isAuthorized, setAuthorized] = useState(false);
@@ -45,7 +44,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header isAuthorized={isAuthorized} isStuff = {isStuff} />
+        <Header isAuthorized={isAuthorized} isStuff={isStuff} />
         <Routes>
           <Route
             path="/login"
@@ -59,6 +58,7 @@ function App() {
                   userSlug={userSlug}
                   userGroupData={userGroupData}
                   setUserGroupData={setUserGroupData}
+                  groupName={userGroupData.name}
                 />
               ) : (
                 <Unauthorized />
@@ -67,14 +67,20 @@ function App() {
           />
           <Route
             path="/tasks"
-            element={isAuthorized ? <Tasks /> : <Unauthorized />}
+            element={
+              isAuthorized ? (
+                <Tasks groupSlug={userGroupData.slug} />
+              ) : (
+                <Unauthorized />
+              )
+            }
           />
           <Route path="/account-verified" element={<AccountVerified />} />
           <Route
             path="/schedule"
             element={
               isAuthorized ? (
-                <Schedule groupSlug={groupSlug} />
+                <Schedule groupSlug={userGroupData.slug} />
               ) : (
                 <Unauthorized />
               )
@@ -92,11 +98,23 @@ function App() {
           />
           <Route
             path="/replacements"
-            element={isAuthorized ? <Replacements /> : <Unauthorized />}
+            element={
+              isAuthorized ? (
+                <Replacements groupSlug={userGroupData.slug} />
+              ) : (
+                <Unauthorized />
+              )
+            }
           />
           <Route
             path="/exams"
-            element={isAuthorized ? <Exams /> : <Unauthorized />}
+            element={
+              isAuthorized ? (
+                <Exams groupSlug={userGroupData.slug} />
+              ) : (
+                <Unauthorized />
+              )
+            }
           />
           <Route path="/404" element={<NotFound />} />
           <Route path="/401" element={<Unauthorized />} />

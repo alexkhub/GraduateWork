@@ -3,20 +3,19 @@ import axios from "axios";
 import Task from "./Task/Task";
 import StudentTask from "./StudentTask/StudentTask";
 
-function Tasks() {
+function Tasks(props) {
   const [groupTasksData, setGroupTasks] = useState("");
   const [studentTasksData, setStudentTasks] = useState("");
   const groupTasks = [];
   const studentTasks = [];
 
-  let group = "4-1is";
-  const studentQuestsEndpoint = `http://127.0.0.1:8000/api-student_work/group_quest/${group}/`;
+  const studentQuestsEndpoint = `http://127.0.0.1:8000/api-student_work/group_quest/${props.groupSlug}/`;
   useEffect(() => {
     axios.get(studentQuestsEndpoint).then((data) => {
       setGroupTasks(data.data.group_quests);
       setStudentTasks(data.data.student_quests);
     });
-  }, [group, studentQuestsEndpoint]);
+  }, [studentQuestsEndpoint]);
 
   for (let i = 0; i < groupTasksData.length; i++) {
     groupTasks.push(

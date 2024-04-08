@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Pair from "../Schedule/Pair/Pair";
 import DailySchedule from "../Schedule/DailySchedule/DailySchedule";
-function Replacements() {
+
+function Replacements(props) {
   const [replacements, setReplacements] = useState("");
   const todayReplacements = [];
   const tomorrowReplacements = [];
 
-  let group = "4-1is";
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api-timetable/timetable_changes/${group}/`)
+      .get(`http://127.0.0.1:8000/api-timetable/timetable_changes/${props.groupSlug}/`)
       .then((data) => setReplacements(data.data.timetable_changes));
-  }, [group]);
+  }, [props.groupSlug]);
 
   for (let i = 0; i < replacements.length; i++) {
     replacements[i].lecturer.user = replacements[i].lecturer.user

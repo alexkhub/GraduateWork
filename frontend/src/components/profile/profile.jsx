@@ -6,7 +6,7 @@ import LastTasks from "./LastTasks/LastTasks";
 
 function Profile(props) {
   const [userData, setUserData] = useState("");
-
+  
   useEffect(() => {
     axios
       .get(
@@ -24,7 +24,7 @@ function Profile(props) {
         userSlug={props.userSlug}
         name={`${userData.first_name} ${userData.last_name}`}
         userName = {userData.username}
-        userGroup={userData.group}
+        groupName={props.groupName}
       />
       <LastTasks userSlug={props.userSlug} key="1" />
       {/* <AddFrom />  */}

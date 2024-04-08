@@ -37,7 +37,7 @@ function ProfileTopContent(props) {
     <div className="top-content">
       <StudentInfo
         name={props.name}
-        userGroup={props.userGroup}
+        groupName={props.groupName}
         userName={props.userName}
       />
       <div className="last-weeks-tasks">

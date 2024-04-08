@@ -10,7 +10,7 @@ function StudentInfo(props) {
           {props.userName}
         </p>
         <div>
-          <p className="characteristics-item student-group">{props.userGroup}</p>
+          <p className="characteristics-item student-group">{props.groupName}</p>
         </div>
       </div>
     </div>

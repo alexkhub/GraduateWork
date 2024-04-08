@@ -3,15 +3,14 @@ import axios from "axios";
 import Exam from "./Exam/Exam";
 import NextExam from "./NextExam/NextExam";
 
-function Exams() {
+function Exams(props) {
   const [examsData, setExamsData] = useState("");
   const exams = [];
 
-  let group = "4-1is";
-  let examsEndpoint = `http://localhost:8000/api-timetable/exam/${group}/`;
+  let examsEndpoint = `http://localhost:8000/api-timetable/exam/${props.groupSlug}/`;
   useEffect(() => {
     axios.get(examsEndpoint).then((data) => setExamsData(data.data.exams));
-  }, [group, examsEndpoint]);
+  }, [examsEndpoint]);
 
   for (let i = 0; i < examsData.length; i++) {
     examsData[i].lecturer.user = examsData[i].lecturer.user
