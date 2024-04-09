@@ -21,7 +21,7 @@ function MenuBurger(props) {
             </Link>
           </li>
           <li>
-            <Link to="/404">Успеваемость</Link>
+            <Link to="/404">Журнал</Link>
           </li>
           <li>
             <Link
