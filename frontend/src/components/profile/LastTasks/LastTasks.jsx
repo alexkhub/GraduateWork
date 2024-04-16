@@ -20,16 +20,14 @@ function LastTasks(props) {
         subjectName={sliderItemsData[i].subject}
         taskDate={sliderItemsData[i].date_added}
         taskStatus={true}
-        key = {i}
+        key={i}
       />
     );
   }
 
   // Slider logic
-  const sliderLineItems = document.querySelectorAll(
-    ".last-tasks-slider-line div"
-  );
-  let maxOffset = (sliderLineItems.length - 6) * 330;
+  const sliderLineItems = document.querySelectorAll(".last-tasks-item");
+  let maxOffset = sliderLineItems.length * 330 - 4 * 330;
 
   let [left, leftOffset] = useState(20);
 
