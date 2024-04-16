@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
-// import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 import Header from "./components/Header/Header";
 import Login from "./components/Login/Login";
@@ -20,10 +20,7 @@ function App() {
   let isStuff = true;
 
   let userSlug = "";
-  localStorage.getItem("JWT")
-    ? (userSlug = "alexkhub")
-    : // ? (userSlug = jwtDecode(localStorage.getItem("JWT")).user_slug)
-      (userSlug = null);
+  localStorage.getItem("JWT") ? (userSlug = jwtDecode(localStorage.getItem("JWT")).user_slug) : (userSlug = null);
 
   axios.defaults.headers.common["Authorization"] = `JWT ${localStorage.getItem(
     "JWT"

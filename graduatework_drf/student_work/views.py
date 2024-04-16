@@ -36,10 +36,8 @@ class GroupQuestListCreateView(ListCreateAPIView):
 
         serializer = self.get_serializer(queryset, many=True)
 
-
         student_quest = UserQuest.objects.filter(date_added__gte=date_filter_sq()).select_related('quest', 'user')
         student_quest_serializer = StudentQuestSerializer(student_quest, many=True)
-
 
         return Response({
             'group_quests': serializer.data,
@@ -69,7 +67,6 @@ class DetailStudentQuestRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         return Response({
             'detail_student_quest': serializer.data
         }, status=status.HTTP_200_OK)
-
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)

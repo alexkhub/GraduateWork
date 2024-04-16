@@ -21,18 +21,19 @@ class Student_ScoresSerializer(serializers.ModelSerializer):
         exclude = ('description',)
         read_only = ('owner.username',)
 
-class ProfileGroupSerializer(serializers.ModelSerializer):
 
+class ProfileGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ('name', 'slug')
+
 
 class StudentProfileSerializer(serializers.ModelSerializer):
     group = ProfileGroupSerializer()
 
     class Meta:
         model = Users
-        fields = ('group', 'username', 'first_name', 'email', 'term', 'phone', 'last_name', 'slug')
+        fields = ('group', 'username', 'first_name', 'email', 'term', 'phone', 'last_name', 'slug', 'is_staff')
 
     def update(self, instance, validated_data):
         instance.phone = validated_data.get('phone', instance.phone)
@@ -48,5 +49,3 @@ class UsernameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ('id', 'username',)
-
-
