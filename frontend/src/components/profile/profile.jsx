@@ -6,24 +6,26 @@ import LastTasks from "./LastTasks/LastTasks";
 
 function Profile(props) {
   const [userData, setUserData] = useState("");
-  
+
   useEffect(() => {
     axios
       .get(
         `http://localhost:8000/api-student_performance/profile/${props.userSlug}/`
       )
       .then((data) => {
-        setUserData(data.data.profile)
-        props.setUserGroupData(data.data.profile.group)
+        setUserData(data.data.profile);
+        props.setUserGroupData(data.data.profile.group);
+        localStorage.setItem("groupSlug", data.data.profile.group.slug);
       });
-  }, [props]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="profile-content">
       <ProfileTopContent
         userSlug={props.userSlug}
         name={`${userData.first_name} ${userData.last_name}`}
-        userName = {userData.username}
+        userName={userData.username}
         groupName={props.groupName}
       />
       <LastTasks userSlug={props.userSlug} key="1" />

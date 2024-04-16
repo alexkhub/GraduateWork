@@ -29,7 +29,9 @@ function App() {
     "JWT"
   )}`;
 
+  // Get group slug
   const [userGroupData, setUserGroupData] = useState("");
+  let groupSlug = localStorage.getItem("groupSlug");
 
   // Get auth status
   const [isAuthorized, setAuthorized] = useState(false);
@@ -68,11 +70,7 @@ function App() {
           <Route
             path="/tasks"
             element={
-              isAuthorized ? (
-                <Tasks groupSlug={userGroupData.slug} />
-              ) : (
-                <Unauthorized />
-              )
+              isAuthorized ? <Tasks groupSlug={groupSlug} /> : <Unauthorized />
             }
           />
           <Route path="/account-verified" element={<AccountVerified />} />
@@ -80,7 +78,7 @@ function App() {
             path="/schedule"
             element={
               isAuthorized ? (
-                <Schedule groupSlug={userGroupData.slug} />
+                <Schedule groupSlug={groupSlug} />
               ) : (
                 <Unauthorized />
               )
@@ -100,7 +98,7 @@ function App() {
             path="/replacements"
             element={
               isAuthorized ? (
-                <Replacements groupSlug={userGroupData.slug} />
+                <Replacements groupSlug={groupSlug} />
               ) : (
                 <Unauthorized />
               )
@@ -109,11 +107,7 @@ function App() {
           <Route
             path="/exams"
             element={
-              isAuthorized ? (
-                <Exams groupSlug={userGroupData.slug} />
-              ) : (
-                <Unauthorized />
-              )
+              isAuthorized ? <Exams groupSlug={groupSlug} /> : <Unauthorized />
             }
           />
           <Route path="/404" element={<NotFound />} />
