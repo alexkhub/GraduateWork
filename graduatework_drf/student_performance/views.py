@@ -59,18 +59,21 @@ class StudentPerformanceListView(ListAPIView):
 
 
 class StudentProfileRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    queryset = Users.objects.all().select_related('group').only('group__name',  'group__slug', 'username', 'first_name', 'last_name',
-                                                                'email', 'term', 'phone')
+    queryset = Users.objects.all().select_related('group').only('group__name', 'group__slug', 'username', 'first_name',
+                                                                'last_name',
+                                                                'email', 'term', 'phone', 'is_staff')
     serializer_class = StudentProfileSerializer
     lookup_field = 'slug'
     http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options', 'trace']
     authentication_classes = (JWTAuthentication,)
     permission_classes = [IsAuthenticated, DeleteUserPermissions]
+
     @method_decorator(cache_page(60 * 60 * 2, key_prefix='profile'), )
     def retrieve(self, request, *args, **kwargs):
         obj = self.get_object()
         profile_serializer = self.serializer_class(obj)
-        user_quests = UserQuest.objects.filter(user=obj).select_related('quest', 'user', 'quest__subject', 'quest__lecturer__user').only(
+        user_quests = UserQuest.objects.filter(user=obj).select_related('quest', 'user', 'quest__subject',
+                                                                        'quest__lecturer__user').only(
             'status', 'date_added',
             'quest__quest_name',
             'user__username', 'quest__subject__subject_name', 'quest__lecturer__user__username').order_by(
@@ -123,6 +126,7 @@ class MyGroupView(ListAPIView):
     serializer_class = UsernameSerializer
     authentication_classes = (JWTAuthentication,)
     permission_classes = [IsAuthenticated]
+
     def get_queryset(self):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['slug'])
         return self.queryset

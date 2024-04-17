@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import *
 from import_export.admin import ImportExportActionModelAdmin
 
+
 # Register your models here.
 class ExamAdmin(admin.ModelAdmin):
     list_display = ('id', 'group', 'subject', 'lecturer', 'start_time', 'end_time', 'classroom')
@@ -56,10 +57,10 @@ class NonWorkingDayAdmin(ImportExportActionModelAdmin):
 
 
 class PracticeTimetableAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'group', 'industrial_practice', 'start_date', 'end_date', )
+    list_display = ('id', 'name', 'group', 'industrial_practice', 'start_date', 'end_date',)
     list_display_links = ('id', 'name')
     list_filter = ('group', 'industrial_practice',)
-    search_fields = ('name', )
+    search_fields = ('name',)
     list_editable = ('industrial_practice',)
 
 
@@ -68,7 +69,6 @@ class Study_PlanAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'plan_name')
     list_filter = ('term', 'last_work', 'plan_name', 'subject__subject_name')
     search_fields = ('plan_name', 'subject__subject_name')
-
 
 
 admin.site.register(Exam, ExamAdmin)
