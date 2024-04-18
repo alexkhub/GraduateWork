@@ -15,18 +15,18 @@ function MenuBurger(props) {
           <li>
             <Link
               to="/teachers-schedule"
-              className={props.isStuff ? "menu-item__hidden" : null}
+              className={props.isStaff ? "menu-item__hidden" : null}
             >
               Расписание для преподавателей
             </Link>
           </li>
           <li>
-            <Link to="/404">Журнал</Link>
+            <Link to="/journal">Журнал</Link>
           </li>
           <li>
             <Link
               to="/schedule"
-              className={props.isStuff ? null : "menu-item__hidden"}
+              className={props.isStaff ? null : "menu-item__hidden"}
             >
               Расписание
             </Link>

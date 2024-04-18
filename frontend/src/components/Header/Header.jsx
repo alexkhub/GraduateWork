@@ -8,7 +8,7 @@ function Header(props) {
         <i className="fas fa-book"></i>
         <p>Fin Manager</p>
       </Link>
-      <MenuBurger isAuthorized = {props.isAuthorized} isStuff = {props.isStuff} />
+      <MenuBurger isAuthorized={props.isAuthorized} isStaff={props.isStaff} />
     </header>
   );
 }

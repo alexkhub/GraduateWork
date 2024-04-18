@@ -15,12 +15,17 @@ import TeachersSchedule from "./components/TeachersSchedule/TeachersSchedule";
 import Replacements from "./components/Replacements/Replacements";
 import Exams from "./components/Exams/Exams";
 import Unauthorized from "./components/Unauthorized/Unauthorized";
+import Journal from "./components/Journal/Journal";
 
 function App() {
-  let isStuff = true;
+  // Get is staff
+  let isStaff = localStorage.getItem("isStaff");
 
+  // Get user slug
   let userSlug = "";
-  localStorage.getItem("JWT") ? (userSlug = jwtDecode(localStorage.getItem("JWT")).user_slug) : (userSlug = null);
+  localStorage.getItem("JWT")
+    ? (userSlug = jwtDecode(localStorage.getItem("JWT")).user_slug)
+    : (userSlug = null);
 
   axios.defaults.headers.common["Authorization"] = `JWT ${localStorage.getItem(
     "JWT"
@@ -43,7 +48,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header isAuthorized={isAuthorized} isStuff={isStuff} />
+        <Header isAuthorized={isAuthorized} isStaff={isStaff} />
         <Routes>
           <Route
             path="/login"
@@ -58,6 +63,7 @@ function App() {
                   userGroupData={userGroupData}
                   setUserGroupData={setUserGroupData}
                   groupName={userGroupData.name}
+                  isStaff={isStaff}
                 />
               ) : (
                 <Unauthorized />
@@ -106,6 +112,10 @@ function App() {
             element={
               isAuthorized ? <Exams groupSlug={groupSlug} /> : <Unauthorized />
             }
+          />
+          <Route
+            path="/journal"
+            element={isAuthorized ? <Journal /> : <Unauthorized />}
           />
           <Route path="/404" element={<NotFound />} />
           <Route path="/401" element={<Unauthorized />} />

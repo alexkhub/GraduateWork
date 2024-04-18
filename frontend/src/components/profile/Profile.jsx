@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ProfileTopContent from "./TopContent/ProfileTopContent";
 import LastTasks from "./LastTasks/LastTasks";
-// import AddFrom from './AddForm/AddForm';
+import AddFrom from "./AddForm/AddForm";
 
 function Profile(props) {
   const [userData, setUserData] = useState("");
@@ -16,6 +16,7 @@ function Profile(props) {
         setUserData(data.data.profile);
         props.setUserGroupData(data.data.profile.group);
         localStorage.setItem("groupSlug", data.data.profile.group.slug);
+        localStorage.setItem("isStaff", data.data.profile.is_staff);
       });
     // eslint-disable-next-line
   }, []);
@@ -28,8 +29,11 @@ function Profile(props) {
         userName={userData.username}
         groupName={props.groupName}
       />
-      <LastTasks userSlug={props.userSlug} key="1" />
-      {/* <AddFrom />  */}
+      {props.isStaff ? (
+        <LastTasks userSlug={props.userSlug} key="1" />
+      ) : (
+        <AddFrom />
+      )}
     </div>
   );
 }
