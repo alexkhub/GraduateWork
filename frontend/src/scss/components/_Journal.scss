@@ -1,9 +1,101 @@
-h2 {
+.journal-title {
   text-align: center;
   margin-top: 30px;
   color: white;
+  .journal-title-arrow {
+    @extend %journal-title-arrow;
+    .journal-title-arrow-stick {
+      position: absolute;
+      width: 17px;
+      border-radius: 30px;
+      height: 3px;
+      background-color: gray;
+      transition: 0.3s ease background-color;
+    }
+    .journal-title-arrow-stick:first-child {
+      transform: rotate(45deg);
+      left: 11px;
+      top: 5px;
+    }
+    .journal-title-arrow-stick:nth-child(2) {
+      width: 25px;
+      top: 10px;
+    }
+    .journal-title-arrow-stick:last-child {
+      transform: rotate(-45deg);
+      left: 11px;
+      top: 15px;
+    }
+  }
+  .journal-title-arrow__closed {
+    @extend %journal-title-arrow;
+  }
+  .journal-title-arrow__opened {
+    @extend %journal-title-arrow;
+    transform: rotate(180deg);
+  }
+  .journal-title-arrow:hover .journal-title-arrow-stick {
+    background-color: white;
+  }
 }
-.journal-content {
+
+.list1-container {
+  padding: 0 50px;
+  max-width: 1980px;
+}
+
+table {
+  margin-top: 30px;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  height: auto;
+  color: white;
+  td,
+  th {
+    border: 1px solid white;
+    border-top: none;
+  }
+  td {
+    padding: 10px;
+    text-align: center;
+  }
+  td:last-child {
+    border-right: 0;
+  }
+  .student-scores:last-child td {
+    border-bottom: 0;
+  }
+  .days {
+    border-top: 0;
+    td {
+      position: relative;
+      text-align: center;
+    }
+  }
+  .columns-names {
+    height: 70px;
+    width: 100px;
+    border-left: 0;
+    #columns-names-students {
+      position: absolute;
+      left: 20px;
+      bottom: 0;
+    }
+    #columns-names-days {
+      position: absolute;
+      transform: rotate(90deg);
+      left: 75%;
+      top: 35px;
+    }
+  }
+  .student-name {
+    max-width: 140px;
+    border-left: 0;
+  }
+}
+
+.list2-container {
   padding: 0 50px;
   max-width: 1980px;
   table {
@@ -20,6 +112,7 @@ h2 {
     }
     td {
       padding: 10px;
+      border-left: 0;
       text-align: center;
     }
     td:last-child {
@@ -39,15 +132,9 @@ h2 {
       height: 70px;
       width: 100px;
       border-left: 0;
-      #columns-names-students {
-        position: absolute;
-        left: 20px;
-        bottom: 0;
-      }
       #columns-names-days {
         position: absolute;
-        transform: rotate(90deg);
-        left: 75%;
+        left: 40px;
         top: 35px;
       }
     }
