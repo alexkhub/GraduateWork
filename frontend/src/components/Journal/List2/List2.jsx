@@ -1,24 +1,31 @@
-function List2() {
+import Lesson from "../List1/Lesson/Lesson";
+
+function List2(props) {
+  const journalData = props.journalData.lessons;
+  const lessons = [];
+
+  for (let i = 0; i < journalData.length; i++) {
+    lessons.push(
+      <Lesson
+        pairNumber={journalData[i].id}
+        pairType={journalData[i].type_of_lesson}
+        theme={journalData[i].lesson_topic}
+        homework={journalData[i].quest}
+        key={journalData[i].id}
+      />
+    );
+  }
   return (
     <div className="list2-container">
       <table>
         <tbody>
           <tr className="days">
-            <td className="columns-names">
-              <p>
-                <span id="columns-names-days">Число</span>{" "}
-              </p>
-            </td>
+            <td className="columns-names">Номер пары</td>
             <td>Тип занятия</td>
             <td>Тема</td>
             <td>Д/З</td>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>Семинар</td>
-            <td>Тема</td>
-            <td>Домашнее задание</td>
-          </tr>
+          {lessons}
         </tbody>
       </table>
     </div>

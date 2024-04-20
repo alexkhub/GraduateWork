@@ -2,11 +2,8 @@ import React from "react";
 import Student from "../Student/Student";
 
 function List1(props) {
-
-
   return (
     <div className="list1-container">
-     
       <table>
         <tbody>
           <tr className="days">
