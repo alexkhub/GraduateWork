@@ -5,7 +5,7 @@ function AddFrom() {
         <div>
           <textarea placeholder="Описание задания" />
           <input type="file" id="add-form-file-input" />
-          <label for="add-form-file-input">Выберите файл</label>
+          <label htmlFor="add-form-file-input">Выберите файл</label>
         </div>
         <div>
           <select>

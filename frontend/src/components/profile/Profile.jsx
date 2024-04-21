@@ -15,8 +15,15 @@ function Profile(props) {
       .then((data) => {
         setUserData(data.data.profile);
         props.setUserGroupData(data.data.profile.group);
-        localStorage.setItem("groupSlug", data.data.profile.group.slug);
         localStorage.setItem("isStaff", data.data.profile.is_staff);
+
+        // if isStaff === true -> groupSlug = staff
+        localStorage.setItem(
+          "groupSlug",
+          localStorage.getItem("isStaff")
+            ? "staff"
+            : data.data.profile.group.slug
+        );
       });
     // eslint-disable-next-line
   }, []);
