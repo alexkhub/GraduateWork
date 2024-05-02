@@ -32,9 +32,8 @@ class Users(AbstractUser):
 class Group(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название группы')
     curs = models.IntegerField(default=1, verbose_name='Курс', blank=True, null=True)
-    study_plan_name = models.CharField(max_length=200 , verbose_name='Учебный план', blank=True, null=True)
+    study_plan_name = models.CharField(max_length=200, verbose_name='Учебный план', blank=True, null=True)
     slug = models.SlugField(max_length=100, unique=True, db_index=True, verbose_name='URL', )
-
 
     class Meta:
         verbose_name = 'Группа'
@@ -75,9 +74,10 @@ class Lecturer(models.Model):
 class Student_Scores(models.Model):
     student = models.ForeignKey('Users', on_delete=models.PROTECT, verbose_name='Студент')
     subject = models.ForeignKey('Subject', on_delete=models.CASCADE, verbose_name='Предмет', blank=True, null=True)
-    lecturer = models.ForeignKey('Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель', blank=True, null=True)
+    lecturer = models.ForeignKey('Lecturer', on_delete=models.SET_NULL, verbose_name='Преподаватель', blank=True,
+                                 null=True)
     cause = models.CharField(max_length=70, verbose_name='Причина', )
-    points = models.PositiveIntegerField(verbose_name='Баллы', default=0)
+    points = models.CharField(verbose_name='Баллы/Пропуск', max_length=2)
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
     date = models.DateField(auto_now_add=True, verbose_name="Дата")
 
@@ -87,6 +87,10 @@ class Student_Scores(models.Model):
 
     def __str__(self):
         return f"{self.student}-{self.subject}-{self.date}"
+
+    def save(self, *args, **kwargs):
+        self.points = self.points.lower()
+        super().save(*args, **kwargs)
 
 
 class Exam_Grades(models.Model):

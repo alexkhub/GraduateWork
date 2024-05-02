@@ -14,7 +14,10 @@ from .permissions import *
 from .utils import *
 from .service import *
 from .tasks import *
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 class GroupQuestListCreateView(ListCreateAPIView):
     queryset = Quest.objects.all().prefetch_related(
@@ -29,6 +32,7 @@ class GroupQuestListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
+
         return self.queryset
 
     def list(self, request, *args, **kwargs):

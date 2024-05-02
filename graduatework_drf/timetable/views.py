@@ -12,6 +12,9 @@ from .models import *
 from .serializers import *
 from student_performance.models import Subject, Lecturer, Group, Users
 from .tasks import *
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class TimetableListView(ListAPIView):
@@ -29,7 +32,7 @@ class TimetableListView(ListAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-
+        logger.debug('я тут')
         serializer = self.get_serializer(queryset, many=True)
         return Response({
             'timetable': serializer.data
@@ -109,6 +112,7 @@ class JournalRetrieveView(RetrieveAPIView):
         'subject__subject_name', 'group__name', 'lecturer', 'lessons', 'date', 'number_of_lesson', 'slug')
     serializer_class = JournalSerializer
     lookup_field = 'id'
+
     # authentication_classes = (JWTAuthentication,)
     # permission_classes = [IsAuthenticated]
 

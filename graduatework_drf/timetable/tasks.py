@@ -3,8 +3,10 @@ from django.db.models import Q
 
 from .models import TimetableOfClasses, TimetableChanges, Journal, Lesson
 from .service import *
+import logging
 
-
+logger = logging.getLogger(__name__)
+from datetime import datetime
 @app.task
 def create_lessons():
     changes = TimetableChanges.objects.filter(date=get_date()).order_by('group', 'lesson_number').select_related(
@@ -36,7 +38,8 @@ def create_lessons():
                 slug=f'{lesson.subject.slug}-{lesson.group.slug}-{lesson.group.curs}').lessons.add(lesson)
 
         except Journal.DoesNotExist:
-            pass
+            logger.critical(msg=f'{lesson.subject}-{datetime.now()} не записан')
+
     return None
 
 
