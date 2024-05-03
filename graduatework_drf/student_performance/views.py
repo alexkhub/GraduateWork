@@ -117,7 +117,7 @@ class DeleteEmailView(APIView):
         token = request.GET.get('token')
         try:
             payload = decode(token, settings.SECRET_KEY, algorithms=['HS256'])
-            user = Users.objects.get(id=payload['user_id'])
+            user = Users.objects.get(id=payload['user_slug'])
             user.delete()
             return Response({'email': 'successfuly activated'}, status=status.HTTP_204_NO_CONTENT)
         # except jwt.ExpiredSignatureError as identifier:

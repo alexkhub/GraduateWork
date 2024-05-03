@@ -49,3 +49,11 @@ class UsernameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ('id', 'username',)
+
+
+class LessonScoresSerializer(serializers.ModelSerializer):
+    student = serializers.SlugRelatedField(slug_field='username', read_only=True)
+
+    class Meta:
+        model = Student_Scores
+        fields = ('id', 'points', 'date', 'student')

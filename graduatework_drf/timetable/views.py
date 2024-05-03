@@ -10,7 +10,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .service import *
 from .models import *
 from .serializers import *
-from student_performance.models import Subject, Lecturer, Group, Users
+from student_performance.models import Subject, Lecturer, Group, Users, Student_Scores
 from .tasks import *
 import logging
 
@@ -105,11 +105,11 @@ class LectorTimeTableListView(ListAPIView):
 class JournalRetrieveView(RetrieveAPIView):
     queryset = Journal.objects.all().select_related('subject', 'group', ).prefetch_related(
         Prefetch('lessons', queryset=Lesson.objects.all().select_related('quest').prefetch_related(
-            Prefetch('student_passes', queryset=Users.objects.all().only('username'))).only(
+            Prefetch('student_scores', queryset=Student_Scores.objects.all().select_related('student'))).only(
             'quest__quest_name', 'lesson_topic', 'lesson_number', 'date', 'type_of_lesson')),
         Prefetch('lecturer', queryset=Lecturer.objects.all().select_related('user').only('user__username'))
-    ).only(
-        'subject__subject_name', 'group__name', 'lecturer', 'lessons', 'date', 'number_of_lesson', 'slug')
+    ).only('subject__subject_name', 'group__name', 'lecturer', 'lessons', 'date', 'number_of_lesson',
+           'slug', )
     serializer_class = JournalSerializer
     lookup_field = 'id'
 
@@ -127,12 +127,13 @@ class JournalRetrieveView(RetrieveAPIView):
 
 class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = Lesson.objects.all().select_related('quest', 'group').prefetch_related(
-        Prefetch('student_passes', queryset=Users.objects.all().only('username'))).only(
-        'group__name', 'quest__quest_name', 'type_of_lesson', 'lesson_topic', 'lesson_number', 'date')
+        Prefetch('student_scores', queryset=Student_Scores.objects.all().select_related('student'))).only(
+        'group__name', 'quest__quest_name', 'type_of_lesson', 'lesson_topic', 'lesson_number', 'date',
+        'student_scores__points', 'student_scores__student__username')
     serializer_class = LessonDetailSerializer
     lookup_field = 'id'
-    authentication_classes = (JWTAuthentication,)
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = (JWTAuthentication,)
+    # permission_classes = [IsAuthenticated]
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()

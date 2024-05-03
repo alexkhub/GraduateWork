@@ -136,6 +136,7 @@ class Lesson(models.Model):
     date = models.DateField(verbose_name='Дата', auto_now_add=True)
     quest = models.ForeignKey('student_work.Quest', on_delete=models.SET_NULL, verbose_name='Задания', blank=True,
                               null=True)
+    student_scores = SortedManyToManyField('student_performance.Student_Scores', verbose_name='Баллы/Пропуски', blank=True)
 
     class Meta:
         verbose_name = 'Пара'
