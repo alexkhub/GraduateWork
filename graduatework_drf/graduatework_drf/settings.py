@@ -299,3 +299,50 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 #импорт данных
 IMPORT_FORMATS = [CSV, JSON]
+
+
+# LOGGING
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+
+    "handlers": {
+
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+        "mail_admins": {
+            "level": "ERROR",
+            "class": "django.utils.log.AdminEmailHandler",
+
+        },
+        "file": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": "logging.log",
+            "formatter": "verbose"
+
+        },
+    },
+    "loggers": {
+        "timetable.views": {
+            "handlers": ['console'],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+
+    },
+}
