@@ -49,3 +49,13 @@ class UsernameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ('id', 'username',)
+
+
+class LessonStudentScoresSerializer(serializers.ModelSerializer):
+    student = serializers.SlugRelatedField(slug_field='full_name', read_only=True)
+
+
+    class Meta:
+        model = Student_Scores
+        exclude = ('description', 'subject', 'lecturer')
+        read_only = ('owner.username',)

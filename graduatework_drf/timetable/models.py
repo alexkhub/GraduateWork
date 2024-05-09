@@ -29,6 +29,7 @@ LAST_WORK_TYPE = (
     ('Зачет', 'Зачет')
 )
 
+
 # Create your models here.
 class ClassRoom(models.Model):
     room_number = models.PositiveIntegerField(verbose_name='Номер аудитории')
@@ -133,7 +134,7 @@ class Lesson(models.Model):
                                   null=True)
     type_of_lesson = models.CharField(max_length=50, verbose_name='Тип занятия', default='лк', choices=TYPE_OF_LESSON)
     date = models.DateField(verbose_name='Дата', auto_now_add=True)
-    student_passes = SortedManyToManyField('student_performance.Users', verbose_name='Пропуски', blank=True)
+    student_scores = SortedManyToManyField('student_performance.Student_Scores', verbose_name='Баллы', blank=True)
     quest = models.ForeignKey('student_work.Quest', on_delete=models.SET_NULL, verbose_name='Задания', blank=True,
                               null=True)
 
@@ -187,7 +188,8 @@ class PracticeTimetable(models.Model):
     group = models.ForeignKey('student_performance.Group', on_delete=models.CASCADE, verbose_name='Группа',
                               related_name='practice_group')
     industrial_practice = models.BooleanField(verbose_name='Производственная практика', default=False)
-    document = models.FileField(upload_to='accompanying_document/%Y/%m/%d/', blank=True, null=True, verbose_name='Сопроводительный документ')
+    document = models.FileField(upload_to='accompanying_document/%Y/%m/%d/', blank=True, null=True,
+                                verbose_name='Сопроводительный документ')
 
     class Meta:
         verbose_name = 'Практика'
@@ -203,7 +205,8 @@ class Study_Plan(models.Model):
                                 related_name='study_plan_subject')
     term = models.PositiveSmallIntegerField(verbose_name='Семестр', default=1)
     number_of_hours = models.PositiveIntegerField(verbose_name='Количество часов')
-    last_work = models.CharField( max_length=50, verbose_name='Экзамен/Зачет', choices=LAST_WORK_TYPE, default='Не предусмотрено')
+    last_work = models.CharField(max_length=50, verbose_name='Экзамен/Зачет', choices=LAST_WORK_TYPE,
+                                 default='Не предусмотрено')
 
     class Meta:
         verbose_name = 'Учебный план'
@@ -211,6 +214,3 @@ class Study_Plan(models.Model):
 
     def __str__(self):
         return f'{self.plan_name}-{self.subject}'
-
-
-    
