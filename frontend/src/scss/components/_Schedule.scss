@@ -1,4 +1,3 @@
-// Schedule
 .schedule-content {
   p {
     text-align: center;
@@ -38,8 +37,8 @@
 table.daily-schedule {
   margin: 0 auto;
   margin-top: 60px;
-  color: white;
   width: 650px;
+  color: white;
   td,
   th {
     border-collapse: collapse;
@@ -53,8 +52,8 @@ table.daily-schedule {
   }
   td {
     border-bottom: 1px solid white;
-    border-left: none;
     border-right: 1px solid white;
+    border-left: none;
   }
   td:last-child {
     border-right: none;

@@ -1,4 +1,4 @@
-import Lesson from "../List1/Lesson/Lesson";
+import Lesson from "./Lesson/Lesson";
 
 function List2(props) {
   const journalData = props.journalData.lessons;
