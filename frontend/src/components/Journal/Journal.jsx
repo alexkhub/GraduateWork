@@ -35,7 +35,11 @@ function Journal() {
           <div className="journal-title-arrow-stick"></div>
         </div>
       </div>
-      {isOpen ? <List2 journalData = {journalData} /> : <List1 isOpen={isOpen} setOpen={setOpen} />}
+      {isOpen ? (
+        <List2 journalData={journalData} />
+      ) : (
+        <List1 journalData={journalData} isOpen={isOpen} setOpen={setOpen} />
+      )}
     </div>
   );
 }

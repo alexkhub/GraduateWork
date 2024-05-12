@@ -1,51 +1,28 @@
-import React from "react";
-import Student from "../Student/Student";
+import Student from "./Student/Student";
+import PairNumber from "./PairNumber/PairNumber";
 
 function List1(props) {
+  const lessonsCopy = Object.assign([], props.journalData.lessons);
+
+  const pairNumbers = [];
+  for (let i = 0; i < lessonsCopy.length; i++) {
+    pairNumbers.push(<PairNumber key={i} pairNumber={lessonsCopy[i].id} />);
+  }
+
   return (
     <div className="list1-container">
       <table>
         <tbody>
-          <tr className="days">
+          <tr className="pairs">
             <td className="columns-names">
               <p>
                 <span id="columns-names-students">Обучающиеся</span>{" "}
-                <span id="columns-names-days">Число</span>
+                <span id="columns-names-days">Пара</span>
               </p>
             </td>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-            <td>13</td>
-            <td>14</td>
-            <td>15</td>
-            <td>16</td>
-            <td>17</td>
-            <td>18</td>
-            <td>19</td>
-            <td>20</td>
-            <td>21</td>
-            <td>22</td>
-            <td>23</td>
-            <td>24</td>
-            <td>25</td>
-            <td>26</td>
-            <td>27</td>
-            <td>28</td>
-            <td>29</td>
-            <td>30</td>
-            <td>31</td>
+            {pairNumbers}
           </tr>
-          <Student studentName="Александр Хубаев" />
-          <Student studentName="Добровольский Дмитрий" />
+          <Student studentName="А Х" journalData={props.journalData} />
         </tbody>
       </table>
     </div>
