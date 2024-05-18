@@ -10,8 +10,8 @@ function Login() {
     if (!localStorage.getItem("JWT")) {
       axios
         .post("http://127.0.0.1:8000/auth/jwt/create/", {
-          username: passwordValue,
-          password: loginValue,
+          username: loginValue,
+          password: passwordValue,
         })
         .then((data) => {
           localStorage.setItem("JWT", data.data.access);
