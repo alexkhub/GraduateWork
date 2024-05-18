@@ -48,7 +48,7 @@ class UsernameSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Users
-        fields = ('id', 'username',)
+        fields = ('id', 'username', 'full_name')
 
 
 class LessonStudentScoresSerializer(serializers.ModelSerializer):

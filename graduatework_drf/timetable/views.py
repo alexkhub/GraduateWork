@@ -12,6 +12,7 @@ from .models import *
 from .serializers import *
 from student_performance.models import Subject, Lecturer, Group, Users , Student_Scores
 from .tasks import *
+from student_performance.serializers import UsernameSerializer
 
 
 class TimetableListView(ListAPIView):
@@ -27,6 +28,7 @@ class TimetableListView(ListAPIView):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['group_slug'])
         return self.queryset
 
+    @method_decorator(cache_page(60 * 60 * 2, key_prefix='timetable'), )
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
@@ -117,9 +119,12 @@ class JournalRetrieveView(RetrieveAPIView):
     @method_decorator(cache_page(60 * 60 * 2, key_prefix='journal'), )
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
+        group = Users.objects.filter(group=instance.group).only('id', 'username', 'full_name')
+        group_serializer = UsernameSerializer(group, many=True)
         serializer = self.get_serializer(instance)
         return Response({
-            'journal': serializer.data
+            'journal': serializer.data,
+            'group': group_serializer.data
         }, status=status.HTTP_200_OK)
 
 

@@ -16,8 +16,8 @@ from .service import *
 from .tasks import *
 import logging
 
-
 logger = logging.getLogger(__name__)
+
 
 class GroupQuestListCreateView(ListCreateAPIView):
     queryset = Quest.objects.all().prefetch_related(
