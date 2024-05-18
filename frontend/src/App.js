@@ -119,7 +119,7 @@ function App() {
           />
           <Route path="/404" element={<NotFound />} />
           <Route path="/401" element={<Unauthorized />} />
-          <Route path="/" element={<NotFound />} />
+          <Route path="/" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
