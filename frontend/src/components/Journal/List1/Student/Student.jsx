@@ -9,7 +9,11 @@ function Student(props) {
     scores.push(students[i].student_scores);
     for (let j = 0; j < scores[i].length; j++) {
       studentScores.push(
-        <Score cause={scores[i][j].cause} score={scores[i][j].points} />
+        <Score
+        cause={scores[i][j].cause}
+        score={scores[i][j].points}
+        key={scores[i][j].id}
+        />
       );
     }
   }

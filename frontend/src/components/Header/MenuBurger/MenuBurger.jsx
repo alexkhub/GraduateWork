@@ -15,7 +15,7 @@ function MenuBurger(props) {
           <li>
             <Link
               to="/teachers-schedule"
-              className={props.isStaff ? "menu-item__hidden" : null}
+              className={props.isStaff ? null : "menu-item__hidden"}
             >
               Расписание для преподавателей
             </Link>
@@ -38,7 +38,12 @@ function MenuBurger(props) {
             <Link to="/tasks">Задания</Link>
           </li>
           <li>
-            <Link to="/ratings">Оценки</Link>
+            <Link
+              to="/ratings"
+              className={props.isStaff ? "menu-item__hidden" : null}
+            >
+              Оценки
+            </Link>
           </li>
           <li>
             <Link to="/replacements">Замены</Link>
