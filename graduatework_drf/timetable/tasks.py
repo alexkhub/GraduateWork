@@ -46,3 +46,9 @@ def create_lessons():
 @app.task
 def send_destroy_lesson(email_body):
     send_destroy_lesson_email(email_body)
+
+
+@app.task
+def inactive_journal():
+    Journal.objects.filter(active=True).update(active=False)
+    return None

@@ -101,3 +101,12 @@ class Study_Plan_SubjectsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Study_Plan
         fields = ('subject', 'plan_name', 'term')
+
+
+class Journal_ListSerializer(serializers.ModelSerializer):
+    group = serializers.SlugRelatedField('name', read_only=True)
+    subject = serializers.SlugRelatedField(slug_field='subject_name', read_only=True)
+    lecturer = LecturerInformationSerializer(read_only=True)
+    class Meta:
+        model = Journal
+        exclude = ('lessons', 'number_of_lesson')

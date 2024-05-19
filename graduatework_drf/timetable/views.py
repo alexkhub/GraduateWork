@@ -134,8 +134,8 @@ class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         'group__name', 'quest__quest_name', 'type_of_lesson', 'lesson_topic', 'lesson_number', 'date', )
     serializer_class = LessonDetailSerializer
     lookup_field = 'id'
-    # authentication_classes = (JWTAuthentication,)
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -158,3 +158,17 @@ class LessonDetailRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         send_destroy_lesson.delay(email_body=email_body)
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class JournalListView(ListAPIView):
+    queryset = Journal.objects.filter(active=True).select_related('subject', 'group', 'lecturer__user').only('id',
+                        'group__name', 'subject__subject_name', 'lecturer__user__username', 'active', 'slug', 'date' )
+    serializer_class = Journal_ListSerializer
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return self.queryset.filter(lecturer__user=self.request.user)
+        return self.queryset.filter(group=self.request.user.group)
+
