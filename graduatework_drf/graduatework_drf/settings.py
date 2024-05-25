@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     'djoser',
     'django_filters',
-    # 'rest_framework.authtoken',
+    'drf_spectacular',
     'corsheaders',
     'sortedm2m',
     'django_celery_results',
@@ -99,7 +99,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',  # OAuth2, JWT
     ),
 
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 REST_USE_JWT = True
 
