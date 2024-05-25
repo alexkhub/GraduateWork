@@ -37,9 +37,9 @@ function Profile(props) {
         groupName={props.groupName}
       />
       {props.isStaff ? (
-        <LastTasks userSlug={props.userSlug} key="1" />
-      ) : (
         <AddFrom />
+      ) : (
+        <LastTasks userSlug={props.userSlug} key="1" />
       )}
     </div>
   );

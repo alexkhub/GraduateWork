@@ -2,16 +2,15 @@ import Student from "./Student/Student";
 import PairNumber from "./PairNumber/PairNumber";
 
 function List1(props) {
-  console.log(props.group);
   const lessonsCopy = Object.assign([], props.journalData.lessons);
 
   const students = [];
   for (let i = 0; i < props.group.length; i++) {
     students.push(
       <Student
-      studentName={props.group[i].full_name}
-      journalData={props.journalData}
-      key={props.group[i].id}
+        studentName={props.group[i].full_name}
+        journalData={props.journalData}
+        key={props.group[i].id}
       />
     );
   }
