@@ -16,13 +16,11 @@ function Journal() {
   let id = 4;
   const endpoint = `http://localhost:8000/api-timetable/journal/${id}/`;
   useEffect(() => {
-    axios.get(endpoint)
-    .then((data) => {
+    axios.get(endpoint).then((data) => {
       setJournalData(data.data.journal);
-      setGroup(data.data.group)
-    })
+      setGroup(data.data.group);
+    });
   }, [endpoint]);
-  
 
   return (
     <div className="journal-content">
@@ -44,7 +42,12 @@ function Journal() {
       {isOpen ? (
         <List2 journalData={journalData} />
       ) : (
-        <List1 journalData={journalData} group = {group} isOpen={isOpen} setOpen={setOpen} />
+        <List1
+          journalData={journalData}
+          group={group}
+          isOpen={isOpen}
+          setOpen={setOpen}
+        />
       )}
     </div>
   );
