@@ -2,40 +2,28 @@ import { useEffect, useState } from "react";
 import Score from "./Score/Score";
 
 function Student(props) {
+  const lessonsCopy = Object.assign([], props.journalData.lessons);
+  const [studentScores, setStudentScores] = useState();
   const scores = [];
-  const studentScores = [];
-  const students = Object.assign([], props.journalData.lessons);
-  const [studentName, setStudentName] = useState("");
 
   useEffect(() => {
-    for (let i = 0; i < students.length; i++) {
-      if (students[i].student_scores[i] === undefined) {
-        return;
-      } else {
-        if (students[i].student_scores[i].student === props.studentName) {
-          setStudentName(props.studentName);
-          console.log(props.studentName);
+    for (let i = 0; i < lessonsCopy.length; i++) {
+      for (let j = 0; j < lessonsCopy[i].student_scores.length; j++) {
+        if (props.studentName === lessonsCopy[i].student_scores[j].student) {
+          scores.push(
+            <Score
+              scores={lessonsCopy[i].student_scores[j].points}
+              cause={lessonsCopy[i].student_scores[j].cause}
+            />
+          );
+          console.log(lessonsCopy[i].student_scores[j].points);
         }
       }
+      setStudentScores(scores);
     }
-  }, [setStudentName, props.studentName, students]);
+    // eslint-disable-next-line
+  }, []);
 
-  for (let i = 0; i < students.length; i++) {
-    scores.push(students[i].student_scores);
-    for (let j = 0; j < scores[i].length; j++) {
-      if (studentName === props.studentName) {
-        studentScores.push(
-          <Score
-            cause={scores[i][j].cause}
-            score={scores[i][j].points}
-            key={scores[i][j].id}
-          />
-        );
-      } else {
-        studentScores.push(<Score cause="" score="" key={scores[i][j].id} />);
-      }
-    }
-  }
   return (
     <>
       <tr className="student-scores">

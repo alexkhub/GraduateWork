@@ -1,6 +1,7 @@
 import Student from "./Student/Student";
 import PairNumber from "./PairNumber/PairNumber";
 
+
 function List1(props) {
   const lessonsCopy = Object.assign([], props.journalData.lessons);
 
