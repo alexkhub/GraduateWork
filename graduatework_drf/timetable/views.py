@@ -113,8 +113,8 @@ class JournalRetrieveView(RetrieveAPIView):
         'subject__subject_name', 'group__name', 'lecturer', 'lessons', 'date', 'number_of_lesson', 'slug')
     serializer_class = JournalSerializer
     lookup_field = 'id'
-    # authentication_classes = (JWTAuthentication,)
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
     @method_decorator(cache_page(60 * 60 * 2, key_prefix='journal'), )
     def retrieve(self, request, *args, **kwargs):

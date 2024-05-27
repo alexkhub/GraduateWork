@@ -19,16 +19,18 @@ from django.conf.urls.static import static
 from django.urls import path, include, re_path
 
 from django.conf import settings
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api-auth/', include('rest_framework.urls')),
     path('auth/', include('djoser.urls')),
     re_path('auth/', include('djoser.urls.jwt')),
     path("__debug__/", include("debug_toolbar.urls")),
     path('api-student_performance/', include('student_performance.urls')),
     path('api-timetable/', include('timetable.urls')),
-    path('api-student_work/', include('student_work.urls'))
+    path('api-student_work/', include('student_work.urls')),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='docs'),
 
 ]
 
