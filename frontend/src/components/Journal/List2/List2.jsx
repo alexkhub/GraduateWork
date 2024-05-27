@@ -8,6 +8,7 @@ function List2(props) {
     lessons.push(
       <Lesson
         pairNumber={journalData[i].id}
+        date = {journalData[i].date}
         pairType={journalData[i].type_of_lesson}
         theme={journalData[i].lesson_topic}
         homework={journalData[i].quest}
@@ -21,6 +22,7 @@ function List2(props) {
         <tbody>
           <tr className="days">
             <td className="columns-names">Номер пары</td>
+            <td>Дата занятия</td>
             <td>Тип занятия</td>
             <td>Тема</td>
             <td>Д/З</td>
