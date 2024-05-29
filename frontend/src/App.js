@@ -15,7 +15,8 @@ import TeachersSchedule from "./components/TeachersSchedule/TeachersSchedule";
 import Replacements from "./components/Replacements/Replacements";
 import Exams from "./components/Exams/Exams";
 import Unauthorized from "./components/Unauthorized/Unauthorized";
-import Journal from "./components/Journal/Journal";
+import Journals from "./components/Journals/Journals";
+import Journal from "./components/Journals/Journal/Journal";
 
 function App() {
   // Get is staff
@@ -114,7 +115,11 @@ function App() {
             }
           />
           <Route
-            path="/journal"
+            path="/journals"
+            element={isAuthorized ? <Journals /> : <Unauthorized />}
+          />
+          <Route
+            path='/journal'
             element={isAuthorized ? <Journal /> : <Unauthorized />}
           />
           <Route path="/404" element={<NotFound />} />

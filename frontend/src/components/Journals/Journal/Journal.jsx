@@ -4,7 +4,7 @@ import axios from "axios";
 import List1 from "./List1/List1";
 import List2 from "./List2/List2";
 
-function Journal() {
+function Journal(props) {
   const [isOpen, setOpen] = useState(false);
   function openExtendedJournal() {
     setOpen(!isOpen);
@@ -12,8 +12,7 @@ function Journal() {
 
   const [journalData, setJournalData] = useState("");
   const [group, setGroup] = useState("");
-
-  let id = 4;
+  const id = localStorage.getItem("journalId");
   const endpoint = `http://localhost:8000/api-timetable/journal/${id}/`;
   useEffect(() => {
     axios.get(endpoint).then((data) => {

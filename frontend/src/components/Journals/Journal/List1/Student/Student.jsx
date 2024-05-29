@@ -16,7 +16,6 @@ function Student(props) {
               cause={lessonsCopy[i].student_scores[j].cause}
             />
           );
-          console.log(lessonsCopy[i].student_scores[j].points);
         }
       }
       setStudentScores(scores);
