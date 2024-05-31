@@ -12,6 +12,7 @@ function Student(props) {
         if (props.studentName === lessonsCopy[i].student_scores[j].student) {
           scores.push(
             <Score
+              key={i}
               scores={lessonsCopy[i].student_scores[j].points}
               cause={lessonsCopy[i].student_scores[j].cause}
             />
