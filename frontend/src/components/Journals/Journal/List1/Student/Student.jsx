@@ -9,14 +9,20 @@ function Student(props) {
   useEffect(() => {
     for (let i = 0; i < lessonsCopy.length; i++) {
       for (let j = 0; j < lessonsCopy[i].student_scores.length; j++) {
+        
         if (props.studentName === lessonsCopy[i].student_scores[j].student) {
-          scores.push(
+          scores.unshift(
             <Score
               key={i}
               scores={lessonsCopy[i].student_scores[j].points}
               cause={lessonsCopy[i].student_scores[j].cause}
             />
           );
+        }
+        if (props.studentName !== lessonsCopy[i].student_scores[j].student) {
+          scores.push(<Score
+            scores=''
+          />)
         }
       }
       setStudentScores(scores);
