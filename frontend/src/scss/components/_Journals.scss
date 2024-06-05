@@ -10,8 +10,9 @@
       gap: 40px;
       .journal {
         display: flex;
+        flex-direction: column;
+        text-align: center;
         justify-content: center;
-        align-items: center;
         font-size: 28px;
         width: 170px;
         height: 170px;
@@ -21,6 +22,12 @@
         cursor: pointer;
   
         transition: 0.3s ease box-shadow, 0.3s ease transform;
+        .journal-subject {
+          font-size: 20px;
+          margin-top: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       .journal:hover {
         transform: translateY(4px);

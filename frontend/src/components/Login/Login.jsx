@@ -19,8 +19,6 @@ function Login() {
 
           if (data.status === 200) {
             window.location.href = "/profile";
-          } else if (data.status === 400) {
-            alert("Заполните все поля");
           }
         });
     }

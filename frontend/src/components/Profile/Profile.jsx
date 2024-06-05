@@ -28,6 +28,7 @@ function Profile(props) {
     // eslint-disable-next-line
   }, []);
 
+
   return (
     <div className="profile-content">
       <ProfileTopContent
@@ -36,11 +37,11 @@ function Profile(props) {
         userName={userData.username}
         groupName={props.groupName}
       />
-      {props.isStaff ? (
+      {JSON.parse(props.isStaff) ? 
         <AddFrom />
-      ) : (
-        <LastTasks userSlug={props.userSlug} key="1" />
-      )}
+        : 
+        null
+      }
     </div>
   );
 }

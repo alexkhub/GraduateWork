@@ -15,7 +15,7 @@ function MenuBurger(props) {
           <li>
             <Link
               to="/teachers-schedule"
-              className={props.isStaff ? null : "menu-item__hidden"}
+              className={JSON.parse(props.isStaff) ? null : "menu-item__hidden"}
             >
               Расписание для преподавателей
             </Link>
@@ -26,7 +26,7 @@ function MenuBurger(props) {
           <li>
             <Link
               to="/schedule"
-              className={props.isStaff ? null : "menu-item__hidden"}
+              className={JSON.parse(props.isStaff) ? "menu-item__hidden" : null}
             >
               Расписание
             </Link>
@@ -40,7 +40,7 @@ function MenuBurger(props) {
           <li>
             <Link
               to="/ratings"
-              className={props.isStaff ? "menu-item__hidden" : null}
+              className={JSON.parse(props.isStaff) ? "menu-item__hidden" : null}
             >
               Оценки
             </Link>

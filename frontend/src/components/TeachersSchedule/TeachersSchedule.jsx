@@ -11,6 +11,7 @@ function TeachersSchedule() {
   const wednesdayPairs = [];
   const thursdayPairs = [];
   const fridayPairs = [];
+  const saturdayPairs = [];
 
   const daysOfWeek = [
     "Понедельник",
@@ -78,6 +79,9 @@ function TeachersSchedule() {
       case daysOfWeek[4].toLowerCase():
         fridayPairs.push(pair);
         break;
+      case daysOfWeek[5].toLowerCase():
+        saturdayPairs.push(pair);
+        break;
       default:
         return;
     }
@@ -95,6 +99,8 @@ function TeachersSchedule() {
         return thursdayPairs;
       case daysOfWeek[4]:
         return fridayPairs;
+      case daysOfWeek[5]:
+        return saturdayPairs;
       default:
         return (
           <TeachersPair
@@ -126,6 +132,7 @@ function TeachersSchedule() {
             <DailySchedule day="Среда" pairs={wednesdayPairs} />
             <DailySchedule day="Четверг" pairs={thursdayPairs} />
             <DailySchedule day="Пятница" pairs={fridayPairs} />
+            <DailySchedule day="Суббота" pairs={saturdayPairs} />
           </tbody>
         </table>
       </div>

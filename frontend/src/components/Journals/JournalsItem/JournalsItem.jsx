@@ -8,6 +8,7 @@ function JournalsItem(props) {
     <>
       <div className="journal" onClick={getJournal}>
         <p className="journal-group">{props.groupName}</p>
+        <p className="journal-subject">{props.subjectName}</p>
       </div>
     </>
   );

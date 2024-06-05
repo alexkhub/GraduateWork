@@ -11,6 +11,7 @@ function Schedule(props) {
   const wednesdayPairs = [];
   const thursdayPairs = [];
   const fridayPairs = [];
+  const saturdayPairs = [];
 
   // Tommorow's schedule
   const daysOfWeek = [
@@ -37,6 +38,8 @@ function Schedule(props) {
         return thursdayPairs;
       case daysOfWeek[4]:
         return fridayPairs;
+      case daysOfWeek[5]:
+        return saturdayPairs;
       default:
         return (
           <Pair subjectName="Пар нет, уходите!" pairNumber="0" audience="0" />
@@ -97,6 +100,9 @@ function Schedule(props) {
       case daysOfWeek[4].toLowerCase():
         fridayPairs.push(pair);
         break;
+      case daysOfWeek[5].toLowerCase():
+        saturdayPairs.push(pair);
+        break;
       default:
         return;
     }
@@ -122,6 +128,7 @@ function Schedule(props) {
             <DailySchedule day="Среда" pairs={wednesdayPairs} />
             <DailySchedule day="Четверг" pairs={thursdayPairs} />
             <DailySchedule day="Пятница" pairs={fridayPairs} />
+            <DailySchedule day="Суббота" pairs={saturdayPairs} />
           </tbody>
         </table>
       </div>
