@@ -5,7 +5,7 @@ import SliderItem from "./SliderItem/SliderItem";
 function LastTasks(props) {
   const [sliderItemsData, setSliderItemsData] = useState("");
   const sliderItems = [];
-
+  
   const questsEndpoint = `http://localhost:8000/api-student_performance/profile/${props.userSlug}/`;
   useEffect(() => {
     axios
