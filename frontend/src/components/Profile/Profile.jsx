@@ -20,14 +20,13 @@ function Profile(props) {
         // if isStaff === true -> groupSlug = staff
         localStorage.setItem(
           "groupSlug",
-          localStorage.getItem("isStaff")
+          JSON.parse(localStorage.getItem("isStaff"))
             ? "staff"
             : data.data.profile.group.slug
         );
       });
     // eslint-disable-next-line
   }, []);
-
 
   return (
     <div className="profile-content">
@@ -37,11 +36,7 @@ function Profile(props) {
         userName={userData.username}
         groupName={props.groupName}
       />
-      {JSON.parse(props.isStaff) ? 
-        <AddFrom />
-        : 
-        null
-      }
+      {JSON.parse(props.isStaff) ? <AddFrom /> : <LastTasks userSlug = {props.userSlug} />}
     </div>
   );
 }

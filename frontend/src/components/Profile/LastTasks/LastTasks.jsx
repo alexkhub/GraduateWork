@@ -16,7 +16,7 @@ function LastTasks(props) {
   for (let i = 0; i < sliderItemsData.length; i++) {
     sliderItems.push(
       <SliderItem
-        teacherName={sliderItemsData[i].lecturer.user}
+        // teacherName={sliderItemsData[i].lecturer.user}
         subjectName={sliderItemsData[i].subject}
         taskDate={sliderItemsData[i].date_added}
         taskStatus={true}
