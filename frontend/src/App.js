@@ -63,7 +63,7 @@ function App() {
                   userSlug={userSlug}
                   userGroupData={userGroupData}
                   setUserGroupData={setUserGroupData}
-                  groupName={isStaff ? "staff" : userGroupData.name}
+                  groupName={JSON.parse(isStaff) ? "staff" : userGroupData.name}
                   isStaff={isStaff}
                 />
               ) : (
