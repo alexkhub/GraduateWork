@@ -13,6 +13,7 @@
 }
 
 .student-settings {
+  position: relative;
   width: 700px;
   height: 350px;
   padding: 30px;
@@ -22,7 +23,7 @@
   border: 2px solid white;
   i {
     position: absolute;
-    left: 1050px;
+    left: 90%;
     font-size: 24px;
   }
   p {
@@ -41,11 +42,23 @@
       column-gap: 30px;
     }
     .settings-buttons {
-      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 15px;
+      .delete-account-button::before {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 0;
+
+        background-color: red !important;
+      }
       button {
+        padding: 7px;
         transition: 0.3s ease background-color;
       }
-      button:hover {
+      :hover {
         background-color: $before-bg;
       }
     }
