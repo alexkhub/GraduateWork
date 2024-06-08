@@ -1,0 +1,58 @@
+.student-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  gap: 15px;
+  width: 450px;
+  height: 180px;
+  font-size: 20px;
+  background-color: $transparent-20;
+  box-sizing: border-box;
+  padding: 0 30px;
+  border-radius: 20px;
+
+  transition: 0.3s ease background-color, 0.3s ease box-shadow;
+}
+
+.student-task:hover {
+  background-color: $block-hover-bg;
+  box-shadow: $defaul-box-shadow;
+}
+
+.student-task-info {
+  display: flex;
+  p:nth-child(1) {
+    padding-right: 10px;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  p:nth-child(2) {
+    padding: 0 10px;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  p:nth-child(3) {
+    padding-left: 10px;
+  }
+}
+
+.student-task-buttons {
+  display: flex;
+  column-gap: 20px;
+  i {
+    cursor: pointer;
+    transition: 0.3s ease color;
+  }
+  i:hover {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.student-task-done {
+  color: $done-status;
+}
+
+.student-task-failed {
+  color: $failed-status;
+}

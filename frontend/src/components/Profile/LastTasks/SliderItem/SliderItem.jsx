@@ -9,15 +9,13 @@ function SliderItem(props) {
       </div>
       <p className="task-data">{props.taskDate}</p>
       <p
-        className={
-          props.taskStatus === "Сдано"
-            ? "task-status last-task-done"
-            : "task-status last-task-failed"
-        }
+        className={`task-status last-task-${
+          props.taskStatus === "Сдано" ? "done" : "failed"
+        }`}
       >
         {props.taskStatus}
       </p>
-      <Link to="/">Посмотреть</Link>
+      <Link to="/tasks">Посмотреть</Link>
     </div>
   );
 }

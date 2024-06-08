@@ -1,0 +1,59 @@
+.add-form {
+  margin-top: 30px;
+  padding: 20px;
+  height: auto;
+  width: 580px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  box-shadow: $defaul-box-shadow;
+  background: $transparent-bg;
+  border-radius: 10px;
+  .add-form-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    div {
+      display: flex;
+      column-gap: 15px;
+      justify-content: center;
+      width: 100%;
+      font-size: 16px;
+      color: white;
+      select {
+        text-align: center;
+        background-color: $transparent-bg;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        option {
+          background-color: #333333;
+          border: none;
+        }
+        :first-child {
+          display: none;
+        }
+      }
+    }
+    #add-form-file-input {
+      display: none;
+      + label {
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        color: white;
+        border: 1px solid white;
+        cursor: pointer;
+        transition: 0.3s ease background-color;
+      }
+    }
+    #add-form-file-input + label:hover {
+      background-color: $transparent-bg;
+    }
+  }
+}

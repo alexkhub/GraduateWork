@@ -1,0 +1,16 @@
+.rating-content {
+  background-color: $transparent-bg;
+}
+
+// Ratings container
+.ratings {
+  padding: 70px 70px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 50px;
+  height: 100svh;
+}
+
+@import "./RatingCard";
+@import "./Filter";

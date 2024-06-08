@@ -1,0 +1,53 @@
+.student-settings-background__hidden {
+  @extend %student-settings-background;
+  opacity: 0;
+  z-index: -1;
+  transform: translateY(50px);
+}
+
+.student-settings-background__show {
+  @extend %student-settings-background;
+  opacity: 100;
+  z-index: 1;
+  transform: translateY(0);
+}
+
+.student-settings {
+  width: 700px;
+  height: 350px;
+  padding: 30px;
+  box-sizing: border-box;
+  background-color: $modal-window-bg;
+  border-radius: 20px;
+  border: 2px solid white;
+  i {
+    position: absolute;
+    left: 1050px;
+    font-size: 24px;
+  }
+  p {
+    font-size: $header-fz;
+    text-align: center;
+    color: white;
+  }
+  .settings-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    div {
+      display: flex;
+      column-gap: 30px;
+    }
+    .settings-buttons {
+      margin-top: 20px;
+      button {
+        transition: 0.3s ease background-color;
+      }
+      button:hover {
+        background-color: $before-bg;
+      }
+    }
+  }
+}

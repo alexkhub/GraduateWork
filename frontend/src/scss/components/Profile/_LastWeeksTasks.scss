@@ -1,0 +1,50 @@
+.last-weeks-tasks {
+  position: relative;
+}
+
+.last-weeks-tasks-content {
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 15px;
+  width: 430px;
+  margin-top: 30px;
+}
+
+.last-weeks-tasks-title {
+  position: absolute;
+  color: white;
+  left: 40%;
+  transform: translateX(-25%);
+  font-size: 20px;
+}
+
+.last-weeks-tasks-item {
+  width: 200px;
+  background-color: $transparent-bg;
+  border-radius: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+
+  transition: 0.3s ease background-color, 0.3s ease box-shadow;
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.last-weeks-tasks-item:hover {
+  background-color: $block-hover-bg;
+  box-shadow: $defaul-box-shadow;
+}
+
+.last-weeks-task-done {
+  top: 0;
+  color: $done-status;
+}
+
+.last-weeks-task-failed {
+  color: $failed-status;
+}

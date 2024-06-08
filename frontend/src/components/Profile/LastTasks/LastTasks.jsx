@@ -5,7 +5,7 @@ import SliderItem from "./SliderItem/SliderItem";
 function LastTasks(props) {
   const [sliderItemsData, setSliderItemsData] = useState("");
   const sliderItems = [];
-  
+
   const questsEndpoint = `http://localhost:8000/api-student_performance/profile/${props.userSlug}/`;
   useEffect(() => {
     axios
@@ -16,7 +16,9 @@ function LastTasks(props) {
   for (let i = 0; i < sliderItemsData.length; i++) {
     sliderItems.push(
       <SliderItem
-        // teacherName={sliderItemsData[i].lecturer.user}
+        teacherName={sliderItemsData[i].lecturer.user
+          .replace("-", " ")
+          .replace("_", " ")}
         subjectName={sliderItemsData[i].subject}
         taskDate={sliderItemsData[i].date_added}
         taskStatus={true}

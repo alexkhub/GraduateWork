@@ -1,0 +1,17 @@
+.profile-content {
+  padding: 30px 30px 0 30px;
+  height: calc(100svh - 100%);
+  overflow: hidden;
+}
+
+.top-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@import "./StudentInfo";
+@import "./LastWeeksTasks";
+@import "./LastTasks";
+@import "./StudentSettings";
+@import "./AddForm";

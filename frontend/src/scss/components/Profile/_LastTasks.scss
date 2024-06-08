@@ -1,0 +1,193 @@
+.last-tasks {
+  margin-top: 50px;
+  overflow: hidden;
+  height: 310px;
+  i {
+    position: absolute;
+    color: white;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 100%;
+    background: $transparent-bg;
+    cursor: pointer;
+    z-index: 2;
+  }
+}
+
+.last-tasks-title {
+  font-size: 20px;
+  color: white;
+}
+
+.last-tasks-slider-line {
+  position: relative;
+  display: flex;
+  column-gap: 30px;
+  margin-top: 10px;
+
+  transition: 0.3s ease left;
+}
+
+.fa-chevron-right {
+  @extend %slider-arrows;
+  right: 30px;
+}
+
+.fa-chevron-left {
+  @extend %slider-arrows;
+  left: 50px;
+}
+
+.last-tasks-item {
+  width: 300px;
+  height: 200px;
+  border-radius: 20px;
+  background: $transparent-bg;
+  flex-shrink: 0;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  font-size: 20px;
+
+  transition: 0.3s ease transform, 0.3s ease box-shadow,
+    0.3s ease background-color;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-size: 20px;
+  }
+  .task-data {
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 20px;
+  }
+  a {
+    display: block;
+    text-align: center;
+    width: calc(100% - 20px);
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 17px;
+    background: $transparent-bg;
+    outline: none;
+    font-size: 18px;
+    border: none;
+    color: white;
+    user-select: none;
+  }
+}
+
+.last-tasks-item:hover {
+  transform: scale(1.03);
+  box-shadow: $defaul-box-shadow;
+  background-color: $block-hover-bg;
+}
+
+.last-task-done {
+  @extend %last-task-status;
+  color: $done-status;
+}
+
+.last-task-failed {
+  @extend %last-task-status;
+  color: $failed-status;
+}
+// Last tasks (slider)
+.last-tasks {
+  margin-top: 50px;
+  overflow: hidden;
+  height: 310px;
+  i {
+    position: absolute;
+    color: white;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 100%;
+    background: $transparent-bg;
+    cursor: pointer;
+    z-index: 2;
+  }
+}
+
+.last-tasks-title {
+  font-size: 20px;
+  color: white;
+}
+
+.last-tasks-slider-line {
+  position: relative;
+  display: flex;
+  column-gap: 30px;
+  margin-top: 10px;
+
+  transition: 0.3s ease left;
+}
+
+.fa-chevron-right {
+  @extend %slider-arrows;
+  right: 30px;
+}
+
+.fa-chevron-left {
+  @extend %slider-arrows;
+  left: 50px;
+}
+
+.last-tasks-item {
+  width: 300px;
+  height: 200px;
+  border-radius: 20px;
+  background: $transparent-bg;
+  flex-shrink: 0;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  font-size: 20px;
+
+  transition: 0.3s ease transform, 0.3s ease box-shadow,
+    0.3s ease background-color;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-size: 20px;
+  }
+  .task-data {
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 20px;
+  }
+  a {
+    display: block;
+    text-align: center;
+    width: calc(100% - 20px);
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 17px;
+    background: $transparent-bg;
+    outline: none;
+    font-size: 18px;
+    border: none;
+    color: white;
+    user-select: none;
+  }
+}
+
+.last-tasks-item:hover {
+  transform: scale(1.03);
+  box-shadow: $defaul-box-shadow;
+  background-color: $block-hover-bg;
+}
+
+.last-task-done {
+  @extend %last-task-status;
+  color: $done-status;
+}
+
+.last-task-failed {
+  @extend %last-task-status;
+  color: $failed-status;
+}

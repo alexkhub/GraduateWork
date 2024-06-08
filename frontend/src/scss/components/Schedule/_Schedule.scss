@@ -1,0 +1,36 @@
+.schedule-content {
+  p {
+    text-align: center;
+    color: white;
+    font-size: $header-fz;
+    margin-top: 40px;
+  }
+}
+
+.day {
+  text-align: center;
+  font-size: 20px;
+}
+
+.pair {
+  text-align: center;
+}
+
+.audience {
+  text-align: center;
+}
+
+.subject {
+  text-align: left;
+  transition: 0.3s ease background-color;
+}
+
+.subject::first-letter {
+  text-transform: uppercase;
+}
+
+.subject:hover {
+  background-color: $transparent-bg;
+}
+
+@import "./DailySchedule";
