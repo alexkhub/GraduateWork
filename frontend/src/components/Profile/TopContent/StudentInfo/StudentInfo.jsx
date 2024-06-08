@@ -3,7 +3,7 @@ import StudentSettings from "./StudentSettings/StudentSettings";
 function StudentInfo(props) {
   return (
     <div className="student-info">
-      <StudentSettings />
+      <StudentSettings userSlug={props.userSlug} />
       <div className="student-characteristics">
         <p className="characteristics-item student-name">{props.name}</p>
         <p className="characteristics-item student-username">

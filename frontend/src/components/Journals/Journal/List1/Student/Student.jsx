@@ -4,28 +4,28 @@ import Score from "./Score/Score";
 function Student(props) {
   const lessonsCopy = Object.assign([], props.journalData.lessons);
   const [studentScores, setStudentScores] = useState();
-  const scores = [];
 
   useEffect(() => {
-    for (let i = 0; i < lessonsCopy.length; i++) {
-      for (let j = 0; j < lessonsCopy[i].student_scores.length; j++) {
-        console.log(lessonsCopy);
-        if (props.studentName === lessonsCopy[i].student_scores[j].student) {
+    const scores = [];
+    lessonsCopy.forEach((lesson, i) => {
+      let studentFound = false;
+      lesson.student_scores.forEach((score, j) => {
+        if (props.studentName === score.student) {
           scores.push(
             <Score
-              key={i}
-              scores={lessonsCopy[i].student_scores[j].points}
-              cause={lessonsCopy[i].student_scores[j].cause}
+              key={`${i}-${j}`}
+              scores={score.points}
+              cause={score.cause}
             />
           );
-        } else if (
-          props.studentName !== lessonsCopy[i].student_scores[j].student
-        ) {
-          scores.push(<Score scores="" />);
+          studentFound = true;
         }
+      });
+      if (!studentFound) {
+        scores.push(<Score key={`${i}-no-student`} scores={""} />);
       }
-      setStudentScores(scores);
-    }
+    });
+    setStudentScores(scores);
     // eslint-disable-next-line
   }, []);
 

@@ -17,10 +17,12 @@ function Journal() {
   const endpoint = `http://localhost:8000/api-timetable/journal/${id}/`;
 
   useEffect(() => {
-    axios.get(endpoint).then((data) => {
-      setJournalData(data.data.journal);
-      setGroup(data.data.group);
-    });
+    axios
+      .get(endpoint)
+      .then((data) => {
+        setJournalData(data.data.journal);
+        setGroup(data.data.group);
+      });
   }, [endpoint]);
 
   return (

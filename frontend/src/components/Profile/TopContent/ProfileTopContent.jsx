@@ -39,6 +39,7 @@ function ProfileTopContent(props) {
         name={props.name}
         groupName={props.groupName}
         userName={props.userName}
+        userSlug={props.userSlug}
       />
       <div className="last-weeks-tasks">
         <p className="last-weeks-tasks-title">Последние задания</p>
