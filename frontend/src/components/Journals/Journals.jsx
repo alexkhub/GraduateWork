@@ -14,7 +14,11 @@ function Journals() {
 
   for (let i = 0; i < journals.length; i++) {
     journalItems.push(
-      <JournalsItem groupName={journals[i].group} subjectName = {journals[i].subject} journalId={journals[i].id} />
+      <JournalsItem
+        groupName={journals[i].group}
+        subjectName={journals[i].subject}
+        journalId={journals[i].id}
+      />
     );
   }
 

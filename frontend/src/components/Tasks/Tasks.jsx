@@ -28,6 +28,7 @@ function Tasks(props) {
         taskDate={groupTasksData[i].date_added}
         taskDescription={groupTasksData[i].description}
         taskStatus={false}
+        fileLink = {groupTasksData[i].file_link}
         key={i}
       />
     );

@@ -7,16 +7,26 @@ function StudentSettings(props) {
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      name: "",
-      surname: "",
+      first_name: "",
+      last_name: "",
       phone: "",
     },
   });
 
   const onSubmit = (data) => {
-    axios.post(``, data);
+    axios.patch(
+      `http://localhost:8000/api-student_performance/profile/${props.userSlug}/`,
+      data
+    );
     console.log(data);
+    changeModalWindow(!modalWindow);
   };
+
+  function deleteAccount() {
+    axios.delete(
+      `http://localhost:8000/api-student_performance/profile/${props.userSlug}/`
+    );
+  }
 
   function openModalWindow() {
     changeModalWindow(!modalWindow);
@@ -40,12 +50,12 @@ function StudentSettings(props) {
               <input
                 type="text"
                 placeholder="Введите новое имя"
-                {...register("name")}
+                {...register("first_name")}
               />
               <input
                 type="text"
                 placeholder="Введите новую фамилию"
-                {...register("surname")}
+                {...register("last_name")}
               />
             </div>
             <div>
@@ -57,8 +67,11 @@ function StudentSettings(props) {
             </div>
             <div className="settings-buttons">
               <button>Сменить пароль</button>
-              <button onClick={handleSubmit(onSubmit)}>Применить</button>
+              <button type="submit" onClick={handleSubmit(onSubmit)}>
+                Применить
+              </button>
               <button>Сменить почту</button>
+              <button onClick={deleteAccount}>Удалить</button>
             </div>
           </form>
         </div>

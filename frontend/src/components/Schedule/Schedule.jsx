@@ -55,14 +55,14 @@ function Schedule(props) {
 
   for (let i = 0; i < pairs.length; i++) {
     console.log(pairs[i]);
-    // pairs[i].lecturer.user = pairs[i].lecturer.user
-    //   .replace("-", " ")
-    //   .replace("_", " ");
+    pairs[i].lecturer.user = pairs[i].lecturer.user
+      .replace("-", " ")
+      .replace("_", " ");
     let pair = (
       <Pair
         pairNumber={pairs[i].lesson_number}
         subjectName={pairs[i].subject}
-        // teacherName={pairs[i].lecturer.user}
+        teacherName={pairs[i].lecturer.user}
         audience={pairs[i].classroom}
         time={`${pairs[i].start_time} - ${pairs[i].end_time}`}
         key={pairs[i].id}

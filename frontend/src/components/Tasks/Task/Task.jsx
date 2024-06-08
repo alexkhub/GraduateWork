@@ -28,7 +28,9 @@ function Task(props) {
           <p>{props.taskDescription}</p>
         </div>
         <div className="task-options">
-          <i className="fas fa-file-download"></i>
+          <a href={props.fileLink}>
+            <i className="fas fa-file-download" download></i>
+          </a>
           <i className="fas fa-file-upload"></i>
         </div>
         <p className={props.taskStatus ? "task-done" : "task-failed"}>

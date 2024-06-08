@@ -1,7 +1,7 @@
 function JournalsItem(props) {
   function getJournal() {
     localStorage.setItem("journalId", props.journalId);
-    window.location.href = "/journal";
+    window.location.href = `/journal`;
   }
   
   return (
