@@ -12,8 +12,7 @@ function Journal() {
 
   const [journalData, setJournalData] = useState("");
   const [group, setGroup] = useState("");
-  // const id = localStorage.getItem("journalId");
-  const id = 4;
+  const id = localStorage.getItem("journalId");
   const endpoint = `http://localhost:8000/api-timetable/journal/${id}/`;
 
   useEffect(() => {
