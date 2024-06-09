@@ -1,79 +1,67 @@
-import { useForm } from "react-hook-form";
-import axios from "axios";
 import React, { useState } from "react";
+
+import PrimarySettings from "./PrimarySettings/PrimarySettings";
+import ChangeEmail from "./ChangeEmail/ChangeEmail";
+import ChangePassword from "./ChangePassword/ChangePassword";
 
 function StudentSettings(props) {
   const [modalWindow, changeModalWindow] = useState(false);
+  const [primarySettingsOpen, setPrimarySettingsOpen] = useState(true);
+  const [changeEmailOpen, setChangeEmailOpen] = useState(false);
+  const [changePasswordOpen, setChangePasswordOpen] = useState(false);
 
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      first_name: "",
-      last_name: "",
-      phone: "",
-    },
-  });
-
-  const onSubmit = (data) => {
-    axios.patch(
-      `http://localhost:8000/api-student_performance/profile/${props.userSlug}/`,
-      data
-    );
-    console.log(data);
-    changeModalWindow(!modalWindow);
-  };
-
-  function deleteAccount() {
-    axios.delete(
-      `http://localhost:8000/api-student_performance/profile/${props.userSlug}/`
-    );
+  function openChangeEmail() {
+    setChangeEmailOpen(!changeEmailOpen);
+    setPrimarySettingsOpen(!primarySettingsOpen);
   }
 
-  function openModalWindow() {
-    changeModalWindow(!modalWindow);
+  function openChangePassword() {
+    setChangePasswordOpen(!changePasswordOpen);
+    setPrimarySettingsOpen(!primarySettingsOpen);
   }
 
   return (
     <>
-      <i onClick={openModalWindow} className="fas fa-cogs"></i>
+      <i
+        onClick={() => {
+          changeModalWindow(!modalWindow);
+        }}
+        className="fas fa-cogs"
+      ></i>
       <div
         className={
           modalWindow
             ? "student-settings-background__show"
-            : "   student-settings-background__hidden"
+            : "student-settings-background__hidden"
         }
       >
         <div className="student-settings">
-          <i onClick={openModalWindow} className="fas fa-times"></i>
+          <i
+            onClick={() => {
+              changeModalWindow(!modalWindow);
+            }}
+            className="fas fa-times"
+          ></i>
           <p>Настройки</p>
-          <form className="settings-form">
-            <div>
-              <input
-                type="text"
-                placeholder="Введите новое имя"
-                {...register("first_name")}
-              />
-              <input
-                type="text"
-                placeholder="Введите новую фамилию"
-                {...register("last_name")}
-              />
-            </div>
-            <div>
-              <input
-                type="tel"
-                placeholder="Новый номер телефона"
-                {...register("phone")}
-              />
-            </div>
-            <div className="settings-buttons">
-              <button>Сменить пароль</button>
-              <button type="submit" onClick={handleSubmit(onSubmit)}>
-                Применить
-              </button>
-              <button>Сменить почту</button>
-              <button onClick={deleteAccount}>Удалить</button>
-            </div>
-          </form>
+          <PrimarySettings
+            changeModalWindow={changeModalWindow}
+            modalWindow={modalWindow}
+            userSlug={props.userSlug}
+            setPrimarySettingsOpen={setPrimarySettingsOpen}
+            primarySettingsOpen={primarySettingsOpen}
+            openChangeEmail={openChangeEmail}
+            openChangePassword={openChangePassword}
+          />
+          <ChangeEmail
+            openChangeEmail={openChangeEmail}
+            setChangeEmailOpen={setChangeEmailOpen}
+            changeEmailOpen={changeEmailOpen}
+          />
+          <ChangePassword
+            openChangePassword={openChangePassword}
+            setChangePasswordOpen={setChangePasswordOpen}
+            changePasswordOpen={changePasswordOpen}
+          />
         </div>
       </div>
     </>

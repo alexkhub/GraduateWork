@@ -27,6 +27,24 @@
   transition: 0.3s ease opacity, 0.3s ease transform;
 }
 
+// Student settings modal window content
+%settings-form {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  transition: 0.3s ease top;
+}
+
+%change-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 // Profile slider arrows
 %slider-arrows {
   top: 500px;

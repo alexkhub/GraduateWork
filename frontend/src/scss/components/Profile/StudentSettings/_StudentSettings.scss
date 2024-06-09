@@ -21,6 +21,7 @@
   background-color: $modal-window-bg;
   border-radius: 20px;
   border: 2px solid white;
+  overflow: hidden;
   i {
     position: absolute;
     left: 90%;
@@ -31,36 +32,38 @@
     text-align: center;
     color: white;
   }
-  .settings-form {
-    margin-top: 30px;
+  div {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    div {
-      display: flex;
-      column-gap: 30px;
+    column-gap: 30px;
+  }
+  .settings-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 15px;
+    .delete-account-button {
+      transition: none;
+      z-index: 1;
     }
-    .settings-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      row-gap: 15px;
-      .delete-account-button::before {
-        position: absolute;
-        content: "";
-        left: 0;
-        top: 0;
-
-        background-color: red !important;
-      }
-      button {
-        padding: 7px;
-        transition: 0.3s ease background-color;
-      }
-      :hover {
-        background-color: $before-bg;
-      }
+    .delete-account-button:hover {
+      background-color: transparent;
+    }
+    .delete-account-button::before {
+      z-index: -1;
+      background-color: red;
+    }
+    .delete-account-button:hover::before {
+      top: 0;
+    }
+    button {
+      padding: 7px;
+      transition: 0.3s ease background-color;
+    }
+    :hover {
+      background-color: $before-bg;
     }
   }
 }
+
+@import "./PrimarySettings";
+@import "./Changes";

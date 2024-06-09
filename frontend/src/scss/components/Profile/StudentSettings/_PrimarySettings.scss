@@ -1,0 +1,11 @@
+.settings-form__hidden {
+  position: absolute;
+  top: 100%;
+  @extend %settings-form;
+}
+
+.settings-form__visible {
+    position: absolute;
+    top: 0;
+    @extend %settings-form;
+}

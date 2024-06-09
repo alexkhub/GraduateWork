@@ -1,0 +1,21 @@
+.change-container__hidden {
+  position: absolute;
+  top: 110%;
+  @extend %change-container;
+}
+
+.change-container__visible {
+  top: 0;
+  @extend %change-container;
+  i {
+    left: 40px;
+    top: 35px;
+  }
+  button {
+    margin-top: 30px;
+    z-index: 1;
+  }
+  #new-password {
+    margin-top: 30px;
+  }
+}
