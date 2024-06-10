@@ -14,10 +14,10 @@ function Login() {
           password: passwordValue,
         })
         .then((data) => {
-          localStorage.setItem("JWT", data.data.access);
-          localStorage.setItem("Refresh", data.data.refresh);
-
+          console.log(data);
           if (data.status === 200) {
+            localStorage.setItem("JWT", data.data.access);
+            localStorage.setItem("Refresh", data.data.refresh);
             window.location.href = "/profile";
           }
         });

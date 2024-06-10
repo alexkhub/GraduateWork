@@ -5,7 +5,7 @@ function ChangePassword(props) {
         props.changePasswordOpen ? "visible" : "hidden"
       }`}
     >
-      <i class="fas fa-arrow-left" onClick={props.openChangePassword}></i>
+      <i className="fas fa-arrow-left" onClick={props.openChangePassword}></i>
       <input type="password" placeholder="Введите новый пароль" />
       <input
         type="password"
