@@ -53,33 +53,39 @@ function Schedule(props) {
     axios.get(scheduleEndpoint).then((data) => setPairs(data.data.timetable));
   }, [scheduleEndpoint]);
 
+  console.log(pairs);
+
   for (let i = 0; i < pairs.length; i++) {
-    console.log(pairs[i]);
     pairs[i].lecturer.user = pairs[i].lecturer.user
       .replace("-", " ")
       .replace("_", " ");
-    let pair = (
-      <Pair
-        pairNumber={pairs[i].lesson_number}
-        subjectName={pairs[i].subject}
-        teacherName={pairs[i].lecturer.user}
-        audience={pairs[i].classroom}
-        time={`${pairs[i].start_time} - ${pairs[i].end_time}`}
-        key={pairs[i].id}
-      />
-    );
+    let pair = "";
 
-    if (pairs[i].evenness === "совмещенная") {
+    if (
+      pairs[i].evenness === "четная" &&
+      pairs[i + 1].evenness === "нечетная"
+    ) {
       pair = (
         <DoublePair
           pairNumber={pairs[i].lesson_number}
           subjectName={pairs[i].subject}
-          // teacherName={pairs[i].lecturer.user}
+          teacherName={pairs[i].lecturer.user}
           audience={pairs[i].classroom}
           time={`${pairs[i].start_time} - ${pairs[i].end_time}`}
-          secondSubjectName=""
-          secondTeacherName=""
-          secondAudience=""
+          secondSubjectName={pairs[i + 1].subject}
+          secondTeacherName={pairs[i + 1].lecturer.user}
+          secondAudience={pairs[i + 1].classroom}
+          key={pairs[i].id}
+        />
+      );
+    } else {
+      pair = (
+        <Pair
+          pairNumber={pairs[i].lesson_number}
+          subjectName={pairs[i].subject}
+          teacherName={pairs[i].lecturer.user}
+          audience={pairs[i].classroom}
+          time={`${pairs[i].start_time} - ${pairs[i].end_time}`}
           key={pairs[i].id}
         />
       );
