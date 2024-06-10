@@ -6,11 +6,11 @@ function ChangePassword(props) {
       }`}
     >
       <i class="fas fa-arrow-left" onClick={props.openChangePassword}></i>
-      <input type="password" placeholder="Введите старый пароль" />
+      <input type="password" placeholder="Введите новый пароль" />
       <input
         type="password"
         id="new-password"
-        placeholder="Введите новый пароль"
+        placeholder="Повторите новый пароль"
       />
       <button>Применить</button>
     </form>

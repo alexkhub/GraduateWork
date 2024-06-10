@@ -13,6 +13,24 @@ Briefly about technology
 
 ---
 
+## Frontend
+
+![](https://img.shields.io/badge/react-v18.2.0-blue)
+![](https://img.shields.io/badge/react--dom-v18.2.0-blue)
+![](https://img.shields.io/badge/react--router--dom-v6.21.2-blue)
+![](https://img.shields.io/badge/react--hook--form-v7.51.5-blue)
+![](https://img.shields.io/badge/sass-v1.72.0-blue)
+![](https://img.shields.io/badge/scss-v0.2.4-blue)
+![](https://img.shields.io/badge/axios-v1.6.7-blue)
+![](https://img.shields.io/badge/jwt--decode-v4.0.0-blue)
+
+```bash
+cd frontend
+npm i
+npm start
+```
+___
+
 ## Backend 
 
 ![PyPI - Version](https://img.shields.io/pypi/v/django?label=django&labelColor=green)
@@ -161,5 +179,3 @@ from .celery import app as celery_app
 
 __all__ = ('celery_app',)
 ```
-
-___
