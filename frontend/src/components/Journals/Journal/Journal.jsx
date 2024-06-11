@@ -4,7 +4,7 @@ import axios from "axios";
 import List1 from "./List1/List1";
 import List2 from "./List2/List2";
 
-function Journal() {
+function Journal(props) {
   const [isOpen, setOpen] = useState(false);
   function openExtendedJournal() {
     setOpen(!isOpen);
@@ -42,7 +42,7 @@ function Journal() {
         </div>
       </div>
       {isOpen ? (
-        <List2 journalData={journalData} />
+        <List2 isStaff = {props.isStaff} journalData={journalData} />
       ) : (
         <List1
           journalData={journalData}

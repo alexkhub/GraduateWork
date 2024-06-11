@@ -120,7 +120,7 @@ function App() {
           />
           <Route
             path='/journal'
-            element={isAuthorized ? <Journal /> : <Unauthorized />}
+            element={isAuthorized ? <Journal isStaff = {isStaff} /> : <Unauthorized />}
           />
           <Route path="/404" element={<NotFound />} />
           <Route path="/401" element={<Unauthorized />} />

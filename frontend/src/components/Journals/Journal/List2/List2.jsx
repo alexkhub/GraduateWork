@@ -1,14 +1,15 @@
+
 import Lesson from "./Lesson/Lesson";
 
 function List2(props) {
   const journalData = props.journalData.lessons;
   const lessons = [];
-
+  
   for (let i = 0; i < journalData.length; i++) {
     lessons.push(
       <Lesson
         pairNumber={journalData[i].id}
-        date = {journalData[i].date}
+        date={journalData[i].date}
         pairType={journalData[i].type_of_lesson}
         theme={journalData[i].lesson_topic}
         homework={journalData[i].quest}

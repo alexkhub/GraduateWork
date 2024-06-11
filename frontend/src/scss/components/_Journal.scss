@@ -120,9 +120,16 @@ table {
       padding: 10px;
       border-left: 0;
       text-align: center;
+      input {
+        background-color: transparent;
+        padding: 0;
+      }
     }
     td:last-child {
       border-right: 0;
+    }
+    button {
+      margin-left: 10px;
     }
     .student-scores:last-child td {
       border-bottom: 0;
