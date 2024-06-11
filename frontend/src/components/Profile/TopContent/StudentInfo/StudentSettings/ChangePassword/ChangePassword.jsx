@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 function ChangePassword(props) {
@@ -14,10 +16,18 @@ function ChangePassword(props) {
     }
   }
 
-  function changePassword() {
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      new_password: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    axios.patch(``, data);
     setNewPassword("");
     setRepeatNewPassword("");
-  }
+  };
+
 
   return (
     <form
@@ -39,9 +49,10 @@ function ChangePassword(props) {
         value={repeatNewPassword}
         placeholder="Повторите новый пароль"
         onInput={validateNewPassword}
+        {...register("new_password")}
       />
       <button
-        onClick={changePassword}
+        onClick={handleSubmit(onSubmit)}
         type="button"
         className={`password-submit-button button__${
           passwordIsValid ? "visible" : "hidden"

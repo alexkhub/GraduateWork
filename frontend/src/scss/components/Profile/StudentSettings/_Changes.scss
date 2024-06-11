@@ -16,7 +16,10 @@
     z-index: 1;
     transition: 0.3s ease top;
   }
-   .button__visible {
+  .new-email-button {
+    top: 70%;
+  }
+  .button__visible {
     top: 80%;
   }
   .button__hidden {

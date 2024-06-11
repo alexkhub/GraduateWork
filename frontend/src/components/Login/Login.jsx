@@ -38,7 +38,12 @@ function Login() {
               id="login-input"
               placeholder="Логин"
               autoComplete="false"
-              onChange={(event) => setLoginValue(event.target.value)}
+              onChange={(e) => setLoginValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  login();
+                }
+              }}
               required
             />
           </div>
@@ -48,7 +53,12 @@ function Login() {
               id="password-input"
               placeholder="Пароль"
               autoComplete="false"
-              onChange={(event) => setPasswordValue(event.target.value)}
+              onChange={(e) => setPasswordValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  login();
+                }
+              }}
               required
             />
           </div>
