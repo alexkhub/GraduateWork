@@ -59,3 +59,10 @@ class LessonStudentScoresSerializer(serializers.ModelSerializer):
         model = Student_Scores
         exclude = ('description', 'subject', 'lecturer')
         read_only = ('owner.username',)
+
+
+class Student_ScoresUpdateDeleteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Student_Scores
+        fields = ('id', 'points')

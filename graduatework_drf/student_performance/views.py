@@ -137,3 +137,12 @@ class MyGroupView(ListAPIView):
     def get_queryset(self):
         self.queryset = self.queryset.filter(group__slug=self.kwargs['slug'])
         return self.queryset
+
+
+class Student_ScoresRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    queryset = Student_Scores.objects.all()
+    serializer_class = Student_ScoresUpdateDeleteSerializer
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
+    http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options', 'trace']

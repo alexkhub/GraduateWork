@@ -116,7 +116,7 @@ class JournalRetrieveView(RetrieveAPIView):
     authentication_classes = (JWTAuthentication,)
     permission_classes = [IsAuthenticated]
 
-    @method_decorator(cache_page(60 * 60 * 2, key_prefix='journal'), )
+    # @method_decorator(cache_page(60 * 60 * 2, key_prefix='journal'), )
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         group = Users.objects.filter(group=instance.group).only('id', 'username', 'full_name')
