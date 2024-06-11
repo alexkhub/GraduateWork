@@ -1,21 +1,29 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 function Lesson(props) {
-  const [pairType, setPairType] = useState(props.pairType);
-  const [theme, setTheme] = useState(props.theme);
+  const [pairType, setPairType] = useState();
+  const [theme, setTheme] = useState();
   const [homework, setHomework] = useState(props.homework);
+
+  useEffect(() => {
+    setPairType(props.pairType);
+    setTheme(props.theme);
+    setHomework(props.homework);
+  }, []);
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      "type_of_lesson": "",
-      "student_scores": [],
-      "lesson_topic": "",
-      "lesson_number": props.pairNumber,
+      type_of_lesson: "",
+      student_scores: [],
+      lesson_topic: "",
+      lesson_number: props.pairNumber,
     },
   });
 
+  const isStaff = JSON.parse(localStorage.getItem("isStaff"));
+  
   const onSubmit = (data) => {
     axios.patch(
       `http://localhost:8000/api-timetable/lesson/${props.id}/`,
@@ -30,7 +38,7 @@ function Lesson(props) {
         <td>{props.pairNumber}</td>
         <td>{props.date}</td>
         <td>
-          {!props.isStaff ? (
+          {isStaff ? (
             <input
               type="text"
               value={pairType}
@@ -42,7 +50,7 @@ function Lesson(props) {
           )}
         </td>
         <td>
-          {!props.isStaff ? (
+          {isStaff ? (
             <input
               type="text"
               value={theme}
@@ -54,20 +62,21 @@ function Lesson(props) {
           )}
         </td>
         <td>
-          {!props.isStaff ? (
+          {isStaff ? (
             <input
               type="text"
               value={homework}
               onInput={(e) => setHomework(e.target.value)}
-              // {...register("quest")}
             />
           ) : (
             homework
           )}
         </td>
-        <button onClick={handleSubmit(onSubmit)}>
-          <i className="fas fa-check"></i>
-        </button>
+        {isStaff && (
+          <button onClick={handleSubmit(onSubmit)}>
+            <i className="fas fa-check"></i>
+          </button>
+        )}
       </tr>
     </>
   );
