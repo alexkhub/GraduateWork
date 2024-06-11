@@ -9,7 +9,7 @@ function ChangePassword(props) {
 
   function validateNewPassword(e) {
     setRepeatNewPassword(e.target.value);
-    if (e.target.value === newPassword && e.target.value !== null) {
+    if (e.target.value === newPassword && e.target.value.length > 7) {
       setPasswordIsValid(true);
     } else {
       setPasswordIsValid(false);

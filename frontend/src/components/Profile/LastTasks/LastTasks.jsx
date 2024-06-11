@@ -16,9 +16,13 @@ function LastTasks(props) {
   for (let i = 0; i < sliderItemsData.length; i++) {
     sliderItems.push(
       <SliderItem
-        teacherName={sliderItemsData[i].lecturer.user
-          .replace("-", " ")
-          .replace("_", " ")}
+        teacherName={
+          sliderItemsData[i].lecturer === null
+            ? ""
+            : sliderItemsData[i].lecturer.user
+                .replace("-", " ")
+                .replace("_", " ")
+        }
         subjectName={sliderItemsData[i].subject}
         taskDate={sliderItemsData[i].date_added}
         taskStatus={true}

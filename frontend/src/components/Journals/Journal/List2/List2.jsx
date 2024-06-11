@@ -4,11 +4,12 @@ import Lesson from "./Lesson/Lesson";
 function List2(props) {
   const journalData = props.journalData.lessons;
   const lessons = [];
-  
+
   for (let i = 0; i < journalData.length; i++) {
     lessons.push(
       <Lesson
-        pairNumber={journalData[i].id}
+        id = {journalData[i].id}
+        pairNumber={journalData[i].lesson_number}
         date={journalData[i].date}
         pairType={journalData[i].type_of_lesson}
         theme={journalData[i].lesson_topic}
