@@ -11,7 +11,7 @@ function Lesson(props) {
     setPairType(props.pairType);
     setTheme(props.theme);
     setHomework(props.homework);
-  }, []);
+  }, [props.pairType, props.theme, props.homework]);
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -23,13 +23,12 @@ function Lesson(props) {
   });
 
   const isStaff = JSON.parse(localStorage.getItem("isStaff"));
-  
+
   const onSubmit = (data) => {
     axios.patch(
       `http://localhost:8000/api-timetable/lesson/${props.id}/`,
       data
     );
-    console.log(data);
   };
 
   return (

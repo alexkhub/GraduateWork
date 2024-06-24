@@ -24,6 +24,12 @@ function Login() {
     }
   }
 
+  function loginOnEnterKey(e) {
+    if (e.key === "Enter") {
+      login();
+    }
+  }
+
   return (
     <div className="content">
       <form className="login-form">
@@ -39,11 +45,7 @@ function Login() {
               placeholder="Логин"
               autoComplete="false"
               onChange={(e) => setLoginValue(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  login();
-                }
-              }}
+              onKeyDown={loginOnEnterKey}
               required
             />
           </div>
@@ -54,11 +56,7 @@ function Login() {
               placeholder="Пароль"
               autoComplete="false"
               onChange={(e) => setPasswordValue(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  login();
-                }
-              }}
+              onKeyDown={loginOnEnterKey}
               required
             />
           </div>
